@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+{% endblock  %}
+  {% block extra-head %}{% endblock %}
+  <body>
+  <!-- <a href="{% url 'student:progress' %}">student progress</a> -->
+    <section id="main">
+      <!-- TOP NAVBAR -->
+    {% block nav %}
+      <section id="nav">
+        <nav class="top-navbar">
+          <div class="profile-picture">
+            <img src="{% static '/img/profile.jpg' %}" />
+          </div>
+          <div class="school-name">
+            <h2>{{ school.school }}</h2>
+            <h5 class="faded">{{ school.city }}</h5>
+          </div>
+        </nav>
+      </section>
+      <!-- school image -->
+      <section class="school-image">
+        <div><img src="{% static '/img/school.jpg' %}" /></div>
+      </section>
+    {% endblock %}
+
+      <!-- Home Menu List -->
+    {% block content %}
+      <section id="home-menu">
+        <div class="home-menu">
+        <div class="home-menu-head">
+            <i class="fas fa-chevron-circle-right"></i>
+            <h2>Quick Links</h2>
+          </div>
+          <div class="menu-list">
+            <h3>Create Exam</h3>
+            <a href="{% url 'exam:teacherExamList' %}"><button class="btn btn-md">Create</button></a>
+          </div>
+          <div class="menu-list">
+            <h3>Start Attendance</h3>
+            <a href="{% url 'attendance:attendance' %}"><button class="btn btn-md">Start</button></a>
+          </div>
+        </div>
+      </section>
+      <!-- Go to section -->
+      <section id="goto">
+        <div class="goto">
+          <div class="goto-head">
+            <i class="fas fa-chevron-circle-right"></i>
+            <h2>Go to</h2>
+          </div>
+          <div class="goto-list">
+            <div class="goto-item">
+              <a href="{% url 'teacher:yourClasses' %}">
+                <div>
+                  <img src="{% static '/img/class.png' %}" alt="" />
+                  <h1>Your Classes</h1>
+                </div>
+              </a>
+            </div>
+            <div class="goto-item">
+              <a href="">
+                <div>
+                  <img src="{% static '/img/discussion (1).png' %}" alt="" />
+                  <h1>Discussion</h1>
+                </div>
+              </a>
+            </div>
+            <div class="goto-item">
+              <a href="">
+                <div>
+                  <img src="{% static '/img/book (1).png' %}" alt="" />
+                  <h1>Syllabus</h1>
+                </div>
+              </a>
+            </div>
+            <div class="goto-item">
+              <a href="{% url 'exam:teacherExamList' %}">
+                <div>
+                  <img src="{% static '/img/test.png' %}" alt="" />
+                  <h1>Exams</h1>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    {% endblock %}
+
+      <!-- BOTTOM NAVBAR -->
+    {% block nav-bottom %}
+      <section id="bottom-nav">
+        <nav class="bottom-navbar">
+          <div class="nav-links">
+            <div class="nav-button">
+              <a href="{% url 'teacher:teacherhome' %}">
+                <img src="{% static '/img/home.png' %}" />
+                <h5 class="faded">Home</h5>
+              </a>
+            </div>
+            <div class="nav-button">
+              <a href="{% url 'teacher:addNotice' %}">
+                <img src="{% static '/img/notice.png' %}" />
+                <h5 class="faded">Notice</h5>
+              </a>
+            </div>
+            <div class="nav-button">
+              <a href="{% url 'homework:homeworkTeacher' %}">
+                <img src="{% static 'img/homework.png' %}" />
+                <h5 class="faded">Homework</h5>
+              </a>
+            </div>
+            <div class="nav-button">
+              <a href="{% url 'attendance:attendance' %}">
+                <img src="{% static '/img/check.png' %}" />
+                <h5 class="faded">Attendance</h5>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </section>
+      {% endblock %}
+    </section>
+    {% block script %}{% endblock  %}
+  </body>
+</html> 

@@ -1,0 +1,144 @@
+#start-att {
+  width: 85%;
+  margin: auto;
+}
+
+.att-date {
+  padding: 0px 16px;
+}
+
+.att-student-list {
+  flex-direction: column;
+}
+
+.att-btns {
+  display: flex;
+  width: 100%;
+  /* justify-content: space-evenly; */
+  justify-content: end;
+}
+
+.att-btns button {
+  margin-left: 10%;
+  width: 20%;
+}
+
+/* means select the div i.e., nth-child(1) of att-student-list */
+
+.att-student-list > div:nth-child(1) {
+  align-self: baseline;
+}
+
+.att-student-list > div > p {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* Add Students Html file addStudents */
+
+.fa-user-edit,
+.fa-user-alt {
+  margin: 0px 10px;
+}
+
+.add-stud-list {
+  background-color: var(--light-grey);
+  /* border: 0.5px solid rgba(182, 182, 182, 0.5); */
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0;
+  /* height: 60px; */
+  padding: 10px 16px;
+}
+
+.add-stud-list > button:hover {
+  color: var(--light-red);
+}
+
+.fa-user-edit:hover {
+  color: var(--dark-red);
+}
+
+.student-list {
+  margin: 20px auto 60px;
+  width: var(--center-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-student {
+  margin: 0 auto 60px;
+  display: flex;
+}
+
+.add-student button {
+  margin: auto;
+}
+
+/* attendance page for student CSS */
+
+.attendance-data {
+  display: flex;
+  /* justify-content: center; */
+  /* flex-wrap: wrap; */
+  margin: auto;
+  width: var(--center-width);
+}
+
+.att-calender {
+  width: 50%;
+}
+
+.attendance-data img {
+  width: 100%;
+  margin: auto;
+}
+
+.attendance-data > div{
+  padding: 10px;
+}
+
+.filter-month {
+  margin-bottom: 30px;
+}
+
+.main-att-Data {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-att-Data .main-data {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  border: 1px solid #6b6b6b;
+  padding: 50px 20px;
+  border-radius: 8px;
+}
+
+.main-att-Data .main-data .data-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* attendance student media query */
+@media screen and (max-width: 800px){
+  .attendance-data{
+    flex-direction: column;
+  }
+  .attendance-data > div{
+    padding: 10px 0px;
+  }
+  .att-calender{
+    width: 100%;
+  }
+  .main-att-Data{
+    width: 100%;
+  }
+}

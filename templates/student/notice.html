@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %}
+{% block nav %}
+<section id="nav">
+        <nav class="top-navbar">
+          <div class="profile-picture">
+            <img src="{% static '/img/profile.jpg' %}" />
+          </div>
+          <div class="school-name">
+            <h2>Sample Sr. Sec. School</h2>
+            <h5 class="faded">Delhi</h5>
+          </div>
+        </nav>
+</section>
+{% endblock nav %}
+{% block content %}
+<section id="main">
+<section id="start-att">
+        <div class="component-back">
+          <div>
+            <h2>Your Notices</h2>
+          </div>
+          <!-- <button class="btn btn-lg">Post</button> -->
+        </div>
+      </section>
+    <section id="home-menu">
+        <div class="home-menu">
+          <div class="menu-list notice-list">
+            <p>16/10/2021 | 9:30am</p>
+            <h2>Regarding upcoming class test on monday</h2>
+            <p>
+              "But I must explain to you how all this mistaken idea of
+              denouncing pleasure and praising pain was born and I will give you
+              a complete account of the system, and expound the actual teachings
+              of the great explorer of the truth, the master-builder of human
+              happiness. No one rejects, dislikes, or avoids pleasure itself,
+              because it is pleasure, but because those who."
+            </p>
+            <p>to Class 9th</p>
+          </div>
+          <div class="menu-list notice-list">
+            <p>16/10/2021 | 9:30am</p>
+            <h2>Regarding upcoming class test on monday</h2>
+            <p>
+              "But I must explain to you how all this mistaken idea of
+              denouncing pleasure and praising pain was born and I will give you
+              a complete account of the system, and expound the actual teachings
+              of the great explorer of the truth, the master-builder of human
+              happiness. No one rejects, dislikes, or avoids pleasure itself,
+              because it is pleasure, but because those who."
+            </p>
+            <p>to Class 9th</p>
+          </div>
+          <div class="menu-list notice-list">
+            <p>16/10/2021 | 9:30am</p>
+            <h2>Regarding upcoming class test on monday</h2>
+            <p>
+              "But I must explain to you how all this mistaken idea of
+              denouncing pleasure and praising pain was born and I will give you
+              a complete account of the system, and expound the actual teachings
+              of the great explorer of the truth, the master-builder of human
+              happiness. No one rejects, dislikes, or avoids pleasure itself,
+              because it is pleasure, but because those who."
+            </p>
+            <p>to Class 9th</p>
+          </div>
+          <div class="menu-list notice-list">
+            <p>16/10/2021 | 9:30am</p>
+            <h2>Regarding upcoming class test on monday</h2>
+            <p>
+              "But I must explain to you how all this mistaken idea of
+              denouncing pleasure and praising pain was born and I will give you
+              a complete account of the system, and expound the actual teachings
+              of the great explorer of the truth, the master-builder of human
+              happiness. No one rejects, dislikes, or avoids pleasure itself,
+              because it is pleasure, but because those who."
+            </p>
+            <p>to Class 9th</p>
+          </div>
+        </div>
+      </section>
+</section>
+{% endblock content %}

@@ -1,0 +1,42 @@
+.exam-list-txt {
+  padding: 0px 16px;
+  align-items: center;
+}
+
+.tech-exam-list {
+  flex-direction: column;
+}
+
+.tech-exam-list > * {
+  margin: 8px 0px;
+}
+
+.tech-exam-list > div:nth-child(1) {
+  align-self: baseline;
+}
+
+.exam-data {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-align: right;
+}
+
+
+.exam-desc > h3:hover {
+  color: var(--dark-green);
+}
+
+/* marks edit html marksEdit.html */
+.marks-stud-list p {
+  font-size: 18px;
+}
+
+.fa-edit {
+  margin: 0px 10px;
+}
+
+.fa-edit:hover {
+  color: var(--dark-green);
+  cursor: pointer;
+}

@@ -1,0 +1,33 @@
+{% extends 'notice.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+    <section id="main">
+    <section id="progress-carousel">
+        <div class="subject-container">
+          <div class="subject-arrow">
+            <i class="fas fa-chevron-circle-left"></i>
+          </div>
+          <div class="subject">
+            <button class="subject-btn btn-black">Maths</button>
+            <button class="subject-btn">English</button>
+            <button class="subject-btn">Physics</button>
+            <button class="subject-btn">Chemistry</button>
+            <button class="subject-btn">SST</button>
+            <button class="subject-btn">Geography</button>
+            <button class="subject-btn">joker</button>
+            <button class="subject-btn">joker</button>
+          </div>
+          <div class="subject-arrow">
+            <i class="fas fa-chevron-circle-right"></i>
+          </div>
+        </div>
+      </section>
+    </section>
+{% endblock content %}
+{% block script %}  <script src="{% static 'js/progress.js' %}"></script> {% endblock script %} 

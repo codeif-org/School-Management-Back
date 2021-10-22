@@ -1,0 +1,169 @@
+.notice-list {
+  flex-direction: column;
+}
+
+.notice-list > p:nth-child(1) {
+  align-self: baseline;
+}
+
+/* .notice-list > h2:nth-child(2){
+    align-self: baseline;
+} */
+
+.notice-list > p:nth-child(4) {
+  align-self: end;
+}
+
+.notice-list > * {
+  margin: 5px 0px;
+}
+
+.notice-list h2 {
+  margin: 10px 0;
+}
+
+.notice-list-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.notice-toggle {
+  margin: auto;
+}
+.notice-buttons {
+  display: flex;
+  justify-content: center;
+}
+.notice-toggle .notice-buttons .btn {
+  margin: 15px 15px 0 15px;
+}
+
+/* create notice page createNotice.html */
+#notice-accor {
+  width: var(--center-width);
+  margin: 25px auto;
+}
+
+#notice-stud-accor {
+  width: var(--center-width);
+  margin: 25px auto;
+}
+
+/* class and student accordion */
+
+.notice-class-elem,
+.notice-stud-elem {
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5em 0;
+  /* height: 60px; */
+  padding: 10px 16px;
+}
+
+.notice-class-accor,
+.notice-stud-accor {
+  cursor: pointer;
+}
+
+.notice-class-list,
+.notice-stud-list {
+  display: block;
+  height: auto;
+  transition: all 0.4s ease;
+}
+
+.notice-class-list.block,
+.notice-stud-list.block {
+  display: none;
+  height: 0;
+}
+
+/* .notice-class-elem > div{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+} */
+
+.notice-class-elem p,
+.notice-stud-elem p {
+  font-size: 18px;
+  margin: 0px 10px;
+}
+
+.notice-class-elem:hover,
+.notice-stud-elem:hover {
+  background-color: var(--dark-grey);
+  cursor: pointer;
+}
+
+/* Content info */
+#content-info {
+  width: var(--center-width);
+  margin: 0px auto;
+  padding: 20px 0px;
+}
+
+.content-topic h2 {
+  margin-bottom: 16px;
+}
+
+.content-topic input[type="text"],
+.content-topic textarea,
+input[type="date"] {
+  outline: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease;
+}
+
+.content-topic input[type="text"]:focus,
+.content-topic textarea:focus,
+input[type="date"]:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
+
+.content-desc {
+  margin: 16px 0px;
+  height: auto;
+}
+
+/* .content-topic input[type="text"]:focus{
+  height: 200px;
+} */
+
+input[type="date"] {
+  width: auto;
+  margin-bottom: 16px;
+}
+
+/* Student Homework */
+#due-compl {
+  width: var(--center-width);
+  margin: auto;
+  margin-top: 30px;
+}
+
+.due-compl {
+  display: flex;
+  justify-content: space-around;
+}
+
+.notice-list-info > p > span:nth-child(1),
+.duedate-submit-btn > p > span:nth-child(1) {
+  color: red;
+}
+
+.duedate-submit-btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 20px 0;
+}

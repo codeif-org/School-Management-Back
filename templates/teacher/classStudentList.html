@@ -1,0 +1,33 @@
+{% extends 'attendance.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+    <section id="main">
+    <!-- Student List -->
+      <section id="start-att">
+        <div class="component-back">
+          <div>
+            <h2>Students</h2>
+            <p>Class {{ class }}th</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="student-list">
+          {% for student in students %} {% for i in l %}
+          {% if forloop.counter == forloop.parentloop.counter %}
+          <div class="add-stud-list">
+            <p>{{ i }}. {{ student.fname }} {% if student.mname %} {{ student.mname }} {% endif %} {% if student.lname %} {{ student.lname }} {% endif %} | {{ student.roll_no }}</p>
+            <button class="btn btn-sm">
+              <i class="fas fa-user-alt"></i>Profile
+            </button>
+          </div>
+          {% endif %}
+          {% endfor %} {% endfor %}
+      </section>
+    </section>
+{% endblock content %}

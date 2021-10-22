@@ -1,0 +1,37 @@
+.class-heading {
+  width: 85%;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+}
+.class-heading h1 {
+  margin-left: 15px;
+}
+
+.class-heading span {
+  font-size: 24px;
+  color: #393939;
+}
+
+.class-teacher,
+.All-classes {
+  width: 85%;
+  margin: 10px auto;
+}
+
+.All-classes .component-back {
+  display: block;
+}
+
+.all-class-heading {
+  margin: 20px 0;
+}
+
+.all-class-buttons {
+  align-items: center;
+}
+
+.class-btn {
+  margin: 0.5em;
+  background: var(#393939);
+}

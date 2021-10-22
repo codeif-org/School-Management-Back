@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HTML Forms</h2>
+
+<form method="POST" action="{% url 'createExam' %}">
+{% csrf_token %}
+    <label for="class" name="class" >Choose class:</label>
+  <select name="class" id="class">
+    {% for class in classes %}
+    <option value="{{ class.Class }}"> {{ class.Class }} </option>
+    {% endfor %}
+  </select>
+  <br>
+  <label for="section" name="section" >Choose section:</label>
+  <select name="section" id="section">
+  {% for class in classes %}
+    <option value="{{ class.section }}">{{ class.section }}</option>
+    {% endfor %}
+  </select>
+  <br>
+  <label for="subject" name="subject" >Choose subject:</label>
+  <select name="subject" id="subject">
+    {% for subject in subjects %}
+    <option value="{{ subject.subject }}">{{ subject.subject }}</option>
+    {% endfor %}
+  </select>
+  <br>
+  <label for="exam" name="exam" type="text">Exam Name:</label>
+  <input type="text" id="exam" name="exam"><br>
+  <label for="marks" name="marks" type="number">Max Marks:</label>
+  <input type="number" id="marks" name="marks"><br>
+  <label for="date">Date:</label>
+<input type="date" id="date" name="date"><br><br>
+  <input type="submit" value="Submit">
+</form> 
+</body>
+</html>
+
