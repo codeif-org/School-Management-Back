@@ -62,7 +62,7 @@
           </div>
           <div class="goto-list">
             <div class="goto-item">
-              <a href="{% url 'progress' %}">
+              <a href="{% url 'student:progress' %}">
                 <div>
                   <img src="{% static '/img/graphic-progression.png' %}" alt="" />
                   <h1>Progress</h1>
@@ -148,9 +148,9 @@
               </a>
             </div>
             <div class="nav-button">
-              <a href="/teacherExamList.html">
-                <img src="{% static '/img/test.png' %}" />
-                <h5 class="faded">Exam</h5>
+              <a href="{% url 'homework:homework' %}">
+                <img src="{% static 'img/homework.png' %}" />
+                <h5 class="faded">Homework</h5>
               </a>
             </div>
             <div class="nav-button">

@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block extra-head %}
+    <!-- css files -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/notice.css' %}" />
+{% endblock extra-head %}
+{% block nav %}
+    <section id="nav">
+        <nav class="top-navbar">
+          <div class="profile-picture">
+            <img src="{% static '/img/profile.jpg' %}" />
+          </div>
+          <div class="school-name">
+            <h2>Sample Sr. Sec. School</h2>
+            <h5 class="faded">Delhi</h5>
+          </div>
+        </nav>
+      </section>
+{% endblock nav %}
+{% block content %}
+    <section id="main">
+         <!-- Start attendance -->
+      <section id="start-att">
+        <div class="component-back">
+          <div>
+            <h2>Your Homework</h2>
+          </div>
+          <!-- <button class="btn btn-lg">Post</button> -->
+        </div>
+      </section>
+
+      <!-- due completed buttons -->
+      <section id="due-compl">
+        <div class="due-compl">
+          <button class="btn btn-black">Due</button>
+          <button class="btn">Completed</button>
+        </div>
+      </section>
+
+      <!-- Student List -->
+      <section id="home-menu">
+        <div class="home-menu">
+        {% for homework in homeworks %} {% for subject in subjects %}
+        {% if forloop.counter == forloop.parentloop.counter %}
+          <div class="menu-list notice-list">
+            <div class="notice-list-info">
+              <p>{{ homework.date.date }} | {{ homework.date.time }}</p>
+              <p>
+                <span>{{ subject }} </span><br />
+                <span>by {{ homework.user.fname }} {% if homework.user.mname %}{{ homework.user.mname }}{% endif %} {% if homework.user.lname %} {{ homework.user.mname }} {% endif %}</span>
+              </p>
+            </div>
+            <h2>Topic : {{ homework.topic }}</h2>
+            <p>
+              {{ homework.desc }}
+            </p>
+            <div class="duedate-submit-btn">
+              <button class="btn btn-green">Submit</button>
+              <p><span>Due On: </span><br /><span>{{ homework.due_date.date }} | {{ homework.due_date.time }}</span></p>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %} {% endfor %}
+        </div>
+      </section>
+    </section>
+{% endblock content %}
