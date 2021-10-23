@@ -11,19 +11,15 @@ def showNotice(request):
     return render(request, 'addNotice.html', {'receivers': receivers})
 
 def createNotice(request):
-    classes = classSection.objects.all()
+    teacherobj = teacher.objects.get(user = request.user)
+    classes = classSection.objects.filter(teacher = teacherobj)
     students = student.objects.all()
-    number = len(students)
-    l = []
-    for i in range(1, number+1):
-        l.append(i)
     if request.method == 'POST':
         topic = request.POST['topic']
         desc = request.POST['desc']
         noticeobj = notice(topic = topic, desc = desc)
         noticeobj.save()
         allclasses = request.POST.getlist('checks[]')
-        print(allclasses)
         if 'all' in allclasses:
             for c in classes:
                 receiverobj = receiver(note = noticeobj, receiver = c)
@@ -34,4 +30,10 @@ def createNotice(request):
                 receiverobj = receiver(note = noticeobj, receiver = classobj)
                 receiverobj.save()
         return redirect('notice:showNotice')
-    return render(request, 'createNotice.html', {'classes': classes, 'students': students, 'l': l})
+    return render(request, 'createNotice.html', {'classes': classes, 'students': students})
+
+def studentNotice(request):
+    studentobj = student.objects.get(user = request.user)
+    classobj = classSection.objects.get(Class = studentobj.Class.Class)
+    notices = receiver.objects.filter(receiver = classobj)
+    return render(request, 'notice.html', {'notices': notices, 'student': studentobj})
