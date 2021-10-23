@@ -29,71 +29,20 @@
       <!-- Student List -->
       <section id="home-menu">
         <div class="home-menu">
+          {% for receiver in receivers %}
+          {% for notice in notices %}
+          {% if forloop.counter == forloop.parentloop.counter %}
           <div class="menu-list notice-list">
-            <p>16/10/2021 | 9:30am</p>
-            <h2>Regarding upcoming class test on monday</h2>
+            <p>{{ notice.date.date }} | {{ notice.date.time }}</p>
+            <h2>{{ notice.topic }}</h2>
             <p>
-              "But I must explain to you how all this mistaken idea of
-              denouncing pleasure and praising pain was born and I will give you
-              a complete account of the system, and expound the actual teachings
-              of the great explorer of the truth, the master-builder of human
-              happiness. No one rejects, dislikes, or avoids pleasure itself,
-              because it is pleasure, but because those who."
+              {{ notice.desc }}
             </p>
-            <p>to Class 9th</p>
+            <p>to Class {{ receiver.receiver.Class }}th</p>
           </div>
-          <div class="menu-list notice-list">
-            <p>16/10/2021 | 9:30am</p>
-            <h2>Regarding upcoming class test on monday</h2>
-            <p>
-              "But I must explain to you how all this mistaken idea of
-              denouncing pleasure and praising pain was born and I will give you
-              a complete account of the system, and expound the actual teachings
-              of the great explorer of the truth, the master-builder of human
-              happiness. No one rejects, dislikes, or avoids pleasure itself,
-              because it is pleasure, but because those who."
-            </p>
-            <p>to Class 9th</p>
-          </div>
-          <div class="menu-list notice-list">
-            <p>16/10/2021 | 9:30am</p>
-            <h2>Regarding upcoming class test on monday</h2>
-            <p>
-              "But I must explain to you how all this mistaken idea of
-              denouncing pleasure and praising pain was born and I will give you
-              a complete account of the system, and expound the actual teachings
-              of the great explorer of the truth, the master-builder of human
-              happiness. No one rejects, dislikes, or avoids pleasure itself,
-              because it is pleasure, but because those who."
-            </p>
-            <p>to Class 9th</p>
-          </div>
-          <div class="menu-list notice-list">
-            <p>16/10/2021 | 9:30am</p>
-            <h2>Regarding upcoming class test on monday</h2>
-            <p>
-              "But I must explain to you how all this mistaken idea of
-              denouncing pleasure and praising pain was born and I will give you
-              a complete account of the system, and expound the actual teachings
-              of the great explorer of the truth, the master-builder of human
-              happiness. No one rejects, dislikes, or avoids pleasure itself,
-              because it is pleasure, but because those who."
-            </p>
-            <p>to Class 9th</p>
-          </div>
-          <div class="menu-list notice-list">
-            <p>16/10/2021 | 9:30am</p>
-            <h2>Regarding upcoming class test on monday</h2>
-            <p>
-              "But I must explain to you how all this mistaken idea of
-              denouncing pleasure and praising pain was born and I will give you
-              a complete account of the system, and expound the actual teachings
-              of the great explorer of the truth, the master-builder of human
-              happiness. No one rejects, dislikes, or avoids pleasure itself,
-              because it is pleasure, but because those who."
-            </p>
-            <p>to Class 9th</p>
-          </div>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
         </div>
       </section>
 </section>
