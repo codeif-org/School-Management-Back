@@ -7,7 +7,7 @@ from student.models import student
 
 def teacherExamList(request):
     exams = exam.objects.all()
-    return render(request, 'teacherExamList.html', {'exams': exams})
+    return render(request, 'teacherExamListTest.html', {'exams': exams})
 
 
 def createExam(request):
