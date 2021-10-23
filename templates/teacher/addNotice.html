@@ -30,18 +30,14 @@
       <section id="home-menu">
         <div class="home-menu">
           {% for receiver in receivers %}
-          {% for notice in notices %}
-          {% if forloop.counter == forloop.parentloop.counter %}
           <div class="menu-list notice-list">
-            <p>{{ notice.date.date }} | {{ notice.date.time }}</p>
-            <h2>{{ notice.topic }}</h2>
+            <p>{{ receiver.note.date.date }} | {{ receiver.note.date.time }}</p>
+            <h2>{{ receiver.note.topic }}</h2>
             <p>
-              {{ notice.desc }}
+              {{ receiver.note.desc }}
             </p>
             <p>to Class {{ receiver.receiver.Class }}th</p>
           </div>
-          {% endif %}
-          {% endfor %}
           {% endfor %}
         </div>
       </section>

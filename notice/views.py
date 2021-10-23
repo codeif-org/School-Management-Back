@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import notice, receiver
-from teacher.models import classSection
+from teacher.models import classSection, teacher
 from student.models import student
 # Create your views here.
 
 def showNotice(request):
-    notices = notice.objects.all().order_by('-date')
-    receivers = receiver.objects.all()
-    return render(request, 'addNotice.html', {'notices': notices, 'receivers': receivers})
+    teacherobj = teacher.objects.get(user = request.user)
+    classobj = classSection.objects.get(teacher = teacherobj)
+    receivers = receiver.objects.filter(receiver = classobj)
+    return render(request, 'addNotice.html', {'receivers': receivers})
 
 def createNotice(request):
     classes = classSection.objects.all()
