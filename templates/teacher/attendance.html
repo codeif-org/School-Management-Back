@@ -2,7 +2,7 @@
 {% load static %}
 {% block extra-head %}
     <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
-{% endblock %}
+{% endblock extra-head %}
 {% block nav %}
     <section id="nav">
         <nav class="top-navbar">
@@ -15,10 +15,8 @@
           </div>
         </nav>
       </section>
-{% endblock  %}
+{% endblock nav %}
 {% block content %}
-  <body>
-    <section id="main">
       <!-- Start attendance -->
       <section id="start-att">
         <div class="component-back">
@@ -51,9 +49,7 @@
           {% endif %}
           {% endfor %} {% endfor %}
       </section>
-    </section>
-  </body>
-{% endblock %}
+{% endblock content %}
 {% block script %}
     <script src="{% static 'js/main.js' %}"></script>
-{% endblock  %}
+{% endblock script %}

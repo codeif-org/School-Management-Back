@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% block head %}
+  {% block head %}
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,46 +23,51 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra-head %}{% endblock extra-head %}
   </head>
-{% endblock  %}
-  {% block extra-head %}{% endblock %}
+  {% endblock head %}
+
   <body>
-  <!-- <a href="{% url 'student:progress' %}">student progress</a> -->
+    <!-- <a href="{% url 'student:progress' %}">student progress</a> -->
     <section id="main">
       <!-- TOP NAVBAR -->
-    {% block nav %}
+      {% block nav %}
       <section id="nav">
         <nav class="top-navbar">
           <div class="profile-picture">
             <img src="{% static '/img/profile.jpg' %}" />
           </div>
           <div class="school-name">
-            <h2>{{ school.school }}</h2>
-            <h5 class="faded">{{ school.city }}</h5>
+            <h2>Sample Sr. Sec. School</h2>
+            <h5 class="faded">Delhi</h5>
           </div>
         </nav>
       </section>
+
       <!-- school image -->
       <section class="school-image">
         <div><img src="{% static '/img/school.jpg' %}" /></div>
       </section>
-    {% endblock %}
-
+      {% endblock nav %} 
+      {% block content %}
       <!-- Home Menu List -->
-    {% block content %}
       <section id="home-menu">
         <div class="home-menu">
-        <div class="home-menu-head">
+          <div class="home-menu-head">
             <i class="fas fa-chevron-circle-right"></i>
             <h2>Quick Links</h2>
           </div>
           <div class="menu-list">
             <h3>Create Exam</h3>
-            <a href="{% url 'exam:teacherExamList' %}"><button class="btn btn-md">Create</button></a>
+            <a href="{% url 'exam:teacherExamList' %}"
+              ><button class="btn btn-md">Create</button></a
+            >
           </div>
           <div class="menu-list">
             <h3>Start Attendance</h3>
-            <a href="{% url 'attendance:attendance' %}"><button class="btn btn-md">Start</button></a>
+            <a href="{% url 'attendance:attendance' %}"
+              ><button class="btn btn-md">Start</button></a
+            >
           </div>
         </div>
       </section>
@@ -109,11 +114,10 @@
           </div>
         </div>
       </section>
-
-    {% endblock %}
+      {% endblock content %}
 
       <!-- BOTTOM NAVBAR -->
-    {% block nav-bottom %}
+      {% block nav-bottom %}
       <section id="bottom-nav">
         <nav class="bottom-navbar">
           <div class="nav-links">
@@ -144,8 +148,9 @@
           </div>
         </nav>
       </section>
-      {% endblock %}
+      {% endblock nav-bottom %}
     </section>
-    {% block script %}{% endblock  %}
+    <!-- for variable scripts -->
+    {% block script %}{% endblock script %}
   </body>
-</html> 
+</html>
