@@ -37,21 +37,17 @@
             <img src="{% static '/img/profile.jpg' %}" />
           </div>
           <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
+            <h2>{{ student.school.school }}</h2>
+            <h5 class="faded">{{ student.school.city }}</h5>
           </div>
         </nav>
-        
       </section>
       <!-- school image -->
       <section class="school-image">
         <div><img src="{% static '/img/school.jpg' %}" /></div>
       </section>
       {% endblock nav %}
-
       <!-- Home Menu List -->
-      
-
       <!-- Go to section -->
       {% block content %}
       <section id="goto">
@@ -142,7 +138,7 @@
               </a>
             </div>
             <div class="nav-button">
-              <a href="{% url 'student:notice' %}">
+              <a href="{% url 'notice:studentNotice' %}">
                 <img src="{% static '/img/notice.png' %}" />
                 <h5 class="faded">Notice</h5>
               </a>

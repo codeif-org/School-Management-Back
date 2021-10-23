@@ -8,7 +8,6 @@ from .serializers import homeworkSerializer
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import serializers, status
-from django.utils import timezone
 # Create your views here.
 
 def homeworkTeacher(request):

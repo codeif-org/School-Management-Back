@@ -30,7 +30,7 @@
           <div class="all-class-buttons">
           {% for class in classes %}
             <a href="{% url 'teacher:classStudentList' class.Class.id %}"
-              ><button class="btn btn-md class-btn">{{ class.Class.Class }}th class</button></a
+              ><button class="btn btn-md class-btn">{{ class.Class.Class }}th {% if class.Class.section %}{{ class.Class.section }} class{% endif %}</button></a
             >
           {% endfor %}
           </div>
