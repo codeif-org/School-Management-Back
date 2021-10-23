@@ -1,17 +1,28 @@
 {% extends 'attendance.html' %}
 {% load static %}
 {% block extra-head %}
-    <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/notice.css' %}" />
-{% endblock  %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %}
 {% block content %}
-    <section id='main'>
-        <section id="start-att">
+<section id="main">
+    <!-- Start attendance -->
+      <section id="start-att">
         <div class="component-back">
           <div>
             <h2>New Notice</h2>
           </div>
-          <button class="btn btn-lg">Post</button>
+          <a href="{% url 'notice:createNotice' %}"
+            ><button class="btn btn-lg">Post</button></a
+          >
+        </div>
+      </section>
+
+      <section class="notice-toggle">
+        <div class="notice-buttons">
+          <button class="btn btn-md">All</button>
+          <button class="btn btn-md">Sent</button>
         </div>
       </section>
 
@@ -85,5 +96,5 @@
           </div>
         </div>
       </section>
-    </section>
-{% endblock %}
+</section>
+{% endblock content %}

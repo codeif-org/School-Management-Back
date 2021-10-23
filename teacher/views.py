@@ -12,8 +12,6 @@ def teacherhome(request):
     return render(request, 'home.html', {'school': s})
 
 
-def addNotice(request):
-    return render(request, 'addNotice.html')
 
 def addStudent(request, class_name):
     classobj = classSection.objects.get(teacher = request.user.id)
