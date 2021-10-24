@@ -25,12 +25,12 @@
 <section id="home-menu">
   <div class="home-menu">
       {% for exam in exam_lst %}
-      <div class="menu-list tech-exam-list">
+      <div id="exam#{{ exam.id }}" class="menu-list tech-exam-list">
         <div>
           <p>{{ exam.date }}</p>
         </div>
         <div class="exam-data">
-          <a href="/marksEdit.html">
+          <a href="{% url 'exam:marksEdit' exam.id %}">
             <div class="exam-desc">
               <h3 class="text-underline">{{ exam.name }}</h3>
               <p>Class {{ exam.classSection.Class }}th | {{ exam.subject.subject }}</p>
