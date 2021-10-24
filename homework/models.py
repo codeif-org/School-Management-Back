@@ -1,7 +1,6 @@
 from django.db import models
 
 from teacher.models import classSection, subject,  teacher
-from student.models import student
 
 # Create your models here.
 class Homework(models.Model):
@@ -11,5 +10,6 @@ class Homework(models.Model):
     date = models.DateTimeField(auto_now=True)
 
 class Student_Homework(models.Model):
+    subject = models.ForeignKey(subject, on_delete=models.CASCADE)
     homework = models.ForeignKey(Homework, on_delete=models.CASCADE)
     Class = models.ForeignKey(classSection, on_delete=models.CASCADE)

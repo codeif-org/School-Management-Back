@@ -7,4 +7,4 @@ class HomeworkAdmin(admin.ModelAdmin):
 
 @admin.register(Student_Homework)
 class Student_HomeworkAdmin(admin.ModelAdmin):
-    list_display = ('homework', 'Class')
+    list_display = ('subject', 'homework', 'Class')

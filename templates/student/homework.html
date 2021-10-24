@@ -42,27 +42,25 @@
       <!-- Student List -->
       <section id="home-menu">
         <div class="home-menu">
-        {% for homework in homeworks %} {% for subject in subjects %}
-        {% if forloop.counter == forloop.parentloop.counter %}
+        {% for homework in homeworks %} 
           <div class="menu-list notice-list">
             <div class="notice-list-info">
-              <p>{{ homework.date.date }} | {{ homework.date.time }}</p>
+              <p>{{ homework.homework.date.date }} | {{ homework.homework.date.time }}</p>
               <p>
-                <span>{{ subject }} </span><br />
-                <span>by {{ homework.user.fname }} {% if homework.user.mname %}{{ homework.user.mname }}{% endif %} {% if homework.user.lname %} {{ homework.user.mname }} {% endif %}</span>
+                <span>{{ homework.subject.subject }} </span><br />
+                <span>by {{ homework.subject.teacher.fname }} {% if homework.subject.teacher.mname %}{{ homework.subject.teacher.mname }}{% endif %} {% if homework.subject.teacher.lname %} {{ homework.subject.teacher.mname }} {% endif %}</span>
               </p>
             </div>
-            <h2>Topic : {{ homework.topic }}</h2>
+            <h2>Topic : {{ homework.homework.topic }}</h2>
             <p>
-              {{ homework.desc }}
+              {{ homework.homework.desc }}
             </p>
             <div class="duedate-submit-btn">
               <button class="btn btn-green">Submit</button>
-              <p><span>Due On: </span><br /><span>{{ homework.due_date.date }} | {{ homework.due_date.time }}</span></p>
+              <p><span>Due On: </span><br /><span>{{ homework.homework.due_date.date }} | {{ homework.homework.due_date.time }}</span></p>
             </div>
           </div>
-          {% endif %}
-          {% endfor %} {% endfor %}
+          {% endfor %}
         </div>
       </section>
     </section>
