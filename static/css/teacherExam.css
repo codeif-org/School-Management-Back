@@ -27,6 +27,10 @@
   color: var(--dark-green);
 }
 
+.exam-desc {
+  text-align: left;
+}
+
 /* marks edit html marksEdit.html */
 .marks-stud-list p {
   font-size: 18px;
