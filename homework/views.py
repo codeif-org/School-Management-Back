@@ -1,40 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from student.models import student
 from teacher.models import classSection, teacher, subject
-from .models import homework
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .serializers import homeworkSerializer
-from django.http.response import JsonResponse
-from rest_framework.parsers import JSONParser 
-from rest_framework import serializers, status
+from .models import Homework, Student_Homework
 # Create your views here.
 
 def homeworkTeacher(request):
-    return render(request, 'homeworkTeacher.html')
+    subjects = subject.objects.filter(teacher = teacher.objects.get(user = request.user))
+    return render(request, 'homeworkTeacher.html', {'subjects': subjects})
 
 def createHomework(request):
     teacherobj = teacher.objects.get(user = request.user)
     schoolobj = teacherobj.school
-    classes = subject.objects.filter(teacher = request.user.id)
+    classes = subject.objects.filter(teacher = teacherobj)
+    if request.method == 'POST':
+        Class = request.POST['Class']
+        topic = request.POST['topic']
+        desc = request.POST['description']
+        due_date = request.POST['due-date']
+        classobj = classSection.objects.get(Class = Class)
+        homework = Homework(topic = topic, desc = desc, due_date = due_date)
+        homework.save()
+        hw = Student_Homework(homework = homework, Class = classobj)
+        hw.save()
+        return redirect('homework:homeworkTeacher')
     return render(request, 'createHomework.html', {'classes': classes})
 
-@api_view(['POST'])
-def homeworkAPI(request):
-    if request.method == 'POST':
-        request.data['user'] = request.user
-        homework_serializer = homeworkSerializer(data = request.data)
-        if homework_serializer.is_valid():
-            homework_serializer.save()
-            return JsonResponse(homework_serializer.data, status=status.HTTP_201_CREATED) 
-        return JsonResponse(homework_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def homeworkStudent(request):
-    studentobj = student.objects.get(user = request.user)
-    homeworks = homework.objects.all()
-    subjects = []
-    for hw in homeworks:
-        cs = classSection.objects.get(Class = studentobj.Class.Class)
-        subjectobj = subject.objects.get(Class = cs, teacher = teacher.objects.get(user = hw.user))
-        subjects.append(subjectobj.subject)
-    return render(request, 'homework.html', {'homeworks': homeworks, 'student': studentobj, 'subjects': subjects})
+    # studentobj = student.objects.get(user = request.user)
+    # homeworks = homework.objects.all()
+    # subjects = []
+    # for hw in homeworks:
+    #     cs = classSection.objects.get(Class = studentobj.Class.Class)
+    #     subjectobj = subject.objects.get(Class = cs, teacher = teacher.objects.get(user = hw.user))
+    #     subjects.append(subjectobj.subject)
+    # return render(request, 'homework.html', {'homeworks': homeworks, 'student': studentobj, 'subjects': subjects})
+    return render(request, 'homework.html')

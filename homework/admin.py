@@ -1,6 +1,10 @@
 from django.contrib import admin
-from .models import homework
+from .models import Homework, Student_Homework
 # Register your models here.
-@admin.register(homework)
-class homeworkAdmin(admin.ModelAdmin):
-    list_display = ('Class', 'topic', 'desc', 'due_date', 'date', 'user')
+@admin.register(Homework)
+class HomeworkAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'desc', 'due_date', 'date')
+
+@admin.register(Student_Homework)
+class Student_HomeworkAdmin(admin.ModelAdmin):
+    list_display = ('homework', 'Class')
