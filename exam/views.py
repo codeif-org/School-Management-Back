@@ -3,6 +3,13 @@ from .models import exam, score
 from superadmin.models import school
 from teacher.models import teacher, classSection, subject
 from student.models import student
+
+# rest
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from exam.serializers import ScoreSerializer
+
 # Create your views here.
 
 def teacherExamList(request):
@@ -55,3 +62,19 @@ def marksEdit(request, id):
     return render(request, 'marksEdit.html', {'students': students, 'exam': test})
     # return render(request, 'marksEditTest.html')
     # return HttpResponse(f"This is marksEdit page {id}")
+
+# exam_id-student_id 
+@api_view(['GET', 'POST'])
+def marksUpdate(request):
+    if request.method == "GET":
+        print(request)
+        scores = score.objects.all()
+        serializer = ScoreSerializer(scores, many=True)
+        # return Response({"msg":"api is being baked"})
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = ScoreSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()    
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

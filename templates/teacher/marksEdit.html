@@ -35,7 +35,7 @@
 <section>
   <div class="student-list">
     {% for student in students %}
-    <div class="add-stud-list marks-stud-list">
+    <div id="{{ exam.id }}-{{ student.id }}" class="add-stud-list marks-stud-list">
       <p>
         {{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %} {% if student.lname %} 
         {{ student.lname }} {% endif %}| {{ student.roll_no }}
