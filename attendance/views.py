@@ -54,8 +54,4 @@ def Attendance(request):
     t = teacher.objects.get(username=user.username)
     Class = classSection.objects.get(teacher=t)
     students = student.objects.filter(school=t.school, Class=Class)
-    number = len(students)
-    l = []
-    for i in range(1, number+1):
-        l.append(i)
-    return render(request, 'attendance.html', {'students': students, 'l': l})
+    return render(request, 'attendance.html', {'students': students})
