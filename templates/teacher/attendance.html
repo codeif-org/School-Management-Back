@@ -1,55 +1,53 @@
-{% extends 'home.html' %}
-{% load static %}
-{% block extra-head %}
-    <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
-{% endblock extra-head %}
-{% block nav %}
-    <section id="nav">
-        <nav class="top-navbar">
-          <div class="profile-picture">
-            <img src="{% static '/img/profile.jpg' %}" />
-          </div>
-          <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
-          </div>
-        </nav>
-      </section>
-{% endblock nav %}
-{% block content %}
-      <!-- Start attendance -->
-      <section id="start-att">
-        <div class="component-back">
-          <div>
-            <h2>Start Attendance</h2>
-            <p>Class 9th</p>
-          </div>
-          <button class="btn btn-lg">Start</button>
-        </div>
-        <div class="att-date flex">
-          <button class="btn btn-black">16/10/2021</button>
-          <button class="btn btn-black">Present All</button>
-        </div>
-      </section>
+{% extends 'home.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
+{% endblock extra-head %} {% block nav %}
+<section id="nav">
+  <nav class="top-navbar">
+    <div class="profile-picture">
+      <img src="{% static '/img/profile.jpg' %}" />
+    </div>
+    <div class="school-name">
+      <h2>Sample Sr. Sec. School</h2>
+      <h5 class="faded">Delhi</h5>
+    </div>
+  </nav>
+</section>
+{% endblock nav %} {% block content %}
+<!-- Start attendance -->
+<section id="start-att">
+  <div class="component-back">
+    <div>
+      <h2>Start Attendance</h2>
+      <p>Class 9th</p>
+    </div>
+    <button class="btn btn-lg">Start</button>
+  </div>
+  <div class="att-date flex">
+    <button class="btn btn-black">16/10/2021</button>
+    <button class="btn btn-black">Present All</button>
+  </div>
+</section>
 
-      <!-- Student List -->
-      <section id="home-menu">
-        <div class="home-menu">
-            {% for student in students %} {% for i in l %}
-            {% if forloop.counter == forloop.parentloop.counter %}
-          <div class="menu-list att-student-list">
-            <div>
-              <p>{{ student.roll_no }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %} {% if student.lname %} {{ student.lname }} {% endif %} | {{ student.roll_no }}</p>
-            </div>
-            <div class="att-btns">
-              <button href="#" class="btn btn-md btn-red">Absent</button>
-              <button class="btn btn-md">Present</button>
-            </div>
-          </div>
-          {% endif %}
-          {% endfor %} {% endfor %}
-      </section>
-{% endblock content %}
-{% block script %}
-    <script src="{% static 'js/main.js' %}"></script>
+<!-- Student List -->
+<section id="home-menu">
+  <div class="home-menu">
+    {% for student in students %}
+    <div class="menu-list att-student-list">
+      <div>
+        <p>
+          {{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{
+          student.mname }}{% endif %} {% if student.lname %} {{ student.lname }}
+          {% endif %} | {{ student.roll_no }}
+        </p>
+      </div>
+      <div class="att-btns">
+        <button href="#" class="btn btn-md btn-red">Absent</button>
+        <button class="btn btn-md">Present</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %} {% block script %}
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock script %}
