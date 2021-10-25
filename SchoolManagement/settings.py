@@ -139,3 +139,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
+
+CSRF_COOKIE_NAME = "csrftoken"
