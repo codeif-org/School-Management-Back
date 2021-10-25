@@ -1,6 +1,7 @@
-axios.defaults.xsrfHeaderName = "X-CSRFToken"
-axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfCookieName = "csrftoken";
 console.log("exam.js added");
+var student_elems = document.querySelectorAll(".marks-stud-list");
 // var student_elems = document.querySelectorAll(".edit-student-marks");
 
 // console.log(student_elems);
@@ -47,48 +48,64 @@ var marks_done = function (even) {
   console.log(elem);
   let done_elem = document.querySelector(".student-marks-input");
   elem.parentNode.innerHTML = `${done_elem.value}<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i>`;
-  console.log(done_elem.value);
-  updateMarks(elem);
+  // console.log("done elem typeof", typeof(done_elem.value));
+  let marks = parseInt(done_elem.value)
+  updateMarks(elem, marks);
 };
 
-var updateMarks = function (elem) {
+var updateMarks = function (elem, marks) {
+  console.log(marks)
   console.log("GET Request");
   // axios
   //   .post("http://localhost:8000/exam/api/marksupdate/")
   //   .then((res) => console.log(res))
   //   .catch((err) => console.log(err));
+  console.log(student_elems);
+  student_elems.forEach((elem) => {
+    elem.addEventListener("click", function () {
+      // console.log(elem)
+      let id_str = elem.getAttribute("id");
+      let ids = id_str.split("-");
+      // exam_id - student_id
+      // console.log(typeof parseInt(ids[0]));
+      axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/exam/api/marksupdate/",
+        data: {
+          score: marks,
+          exam: parseInt(ids[0]),
+          stu: parseInt(ids[1]),
+        },
+        // xsrfHeaderName: "X-CSRFToken",
+        // headers: { "X-CSRFToken": CSRF_TOKEN },
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  });
 };
 
-var student_elems = document.querySelectorAll(".marks-stud-list");
-console.log(student_elems);
-student_elems.forEach((elem) => {
-  elem.addEventListener("click", function () {
-    // console.log(elem)
-    let id_str = elem.getAttribute("id");
-    let ids = id_str.split("-");
-    // exam_id - student_id
-    console.log(typeof parseInt(ids[0]));
-    // axios
-    //   .post("http://localhost:8000/exam/api/marksupdate/", {
-    //     score: 21,
-    //     exam: parseInt(ids[0]),
-    //     stu: parseInt(ids[1])
-    //   },)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-    // var CSRF_TOKEN=getCookie('csrftoken');
-    axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/exam/api/marksupdate/",
-      data: {
-        score: 21,
-        exam: parseInt(ids[0]),
-        stu: parseInt(ids[1]),
-      },
-      // xsrfHeaderName: "X-CSRFToken",
-      // headers: { "X-CSRFToken": CSRF_TOKEN },
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  });
-});
+// var student_elems = document.querySelectorAll(".marks-stud-list");
+// console.log(student_elems);
+// student_elems.forEach((elem) => {
+//   elem.addEventListener("click", function () {
+//     // console.log(elem)
+//     let id_str = elem.getAttribute("id");
+//     let ids = id_str.split("-");
+//     // exam_id - student_id
+//     console.log(typeof parseInt(ids[0]));
+//     axios({
+//       method: "post",
+//       url: "http://127.0.0.1:8000/exam/api/marksupdate/",
+//       data: {
+//         score: 21,
+//         exam: parseInt(ids[0]),
+//         stu: parseInt(ids[1]),
+//       },
+//       // xsrfHeaderName: "X-CSRFToken",
+//       // headers: { "X-CSRFToken": CSRF_TOKEN },
+//     })
+//       .then((res) => console.log(res))
+//       .catch((err) => console.log(err));
+//   });
+// });
