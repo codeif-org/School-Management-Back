@@ -14,18 +14,32 @@
             <i class="fas fa-chevron-circle-left"></i>
           </div>
           <div class="subject">
-            <button class="subject-btn btn-black">Maths</button>
-            <button class="subject-btn">English</button>
-            <button class="subject-btn">Physics</button>
-            <button class="subject-btn">Chemistry</button>
-            <button class="subject-btn">SST</button>
-            <button class="subject-btn">Geography</button>
-            <button class="subject-btn">joker</button>
-            <button class="subject-btn">joker</button>
+            {% for subject in subjects %}
+            <button class="subject-btn btn-black">{{ subject.subject }}</button>
+            {% endfor %}
           </div>
           <div class="subject-arrow">
             <i class="fas fa-chevron-circle-right"></i>
           </div>
+        </div>
+      </section>
+      <!-- table and graphs -->
+
+      <section class="progress">
+        <div class="progress-graph"></div>
+        <div class="progress-table">
+          <table>
+            <tr>
+              <th>Exam</th>
+              <th>Marks</th>
+            </tr>
+            {% for score in scores %}
+            <tr>
+              <td>{{ score.exam.name }}</td>
+              <td>{{ score.score }}/{{ score.exam.max_marks }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
       </section>
     </section>

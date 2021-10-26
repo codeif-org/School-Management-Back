@@ -1,0 +1,49 @@
+{% extends 'notice.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+<section id="main">
+    <section id="progress-carousel">
+        <div class="subject-container">
+          <div class="subject-arrow">
+            <i class="fas fa-chevron-circle-left"></i>
+          </div>
+          <div class="subject">
+            {% for subject in subjects %}
+            <button class="subject-btn btn-black">{{ subject.subject }}</button>
+            {% endfor %}
+          </div>
+          <div class="subject-arrow">
+            <i class="fas fa-chevron-circle-right"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- student list -->
+
+      <section id="start-att">
+        <div class="component-back">
+          <h2>Class {{ class.Class }} {% if class.section %}{{ class.section }}{% endif %}</h2>
+          <h2>Overall Score</h2>
+        </div>
+      </section>
+
+      <section>
+        <div class="student-list">
+          {% for student in students %} {% for mark in marks %}
+          {% if forloop.counter == forloop.parentloop.counter %}
+          <div class="add-stud-list">
+            <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %}{% if student.lname %} {{ student.lname }}{% endif %} | {{ student.roll_no }}</p>
+            <h2>{{ mark }}</h2>
+          </div>
+          {% endif %}
+          {% endfor %}{% endfor %}
+        </div>
+      </section>
+
+</section>
+{% endblock content %}

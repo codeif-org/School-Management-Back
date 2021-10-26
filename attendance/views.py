@@ -43,3 +43,6 @@ def Attendance(request):
     for i in range(1, number+1):
         l.append(i)
     return render(request, 'attendance.html', {'students': students, 'l': l})
+
+def studentAttendance(request):
+    return render(request, 'studentAttendance.html')

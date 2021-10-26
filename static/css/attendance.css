@@ -97,7 +97,7 @@
   margin: auto;
 }
 
-.attendance-data > div{
+.attendance-data > div {
   padding: 10px;
 }
 
@@ -126,19 +126,19 @@
   justify-content: space-between;
 }
 
-
 /* attendance student media query */
-@media screen and (max-width: 800px){
-  .attendance-data{
+
+@media screen and (max-width: 800px) {
+  .attendance-data {
     flex-direction: column;
   }
-  .attendance-data > div{
+  .attendance-data > div {
     padding: 10px 0px;
   }
-  .att-calender{
+  .att-calender {
     width: 100%;
   }
-  .main-att-Data{
+  .main-att-Data {
     width: 100%;
   }
 }

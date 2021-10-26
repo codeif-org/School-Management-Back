@@ -78,3 +78,38 @@ def marksUpdate(request):
             serializer.save()    
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def leaderboard(request, subject_id):
+    studentobj = student.objects.get(user = request.user)
+    classobj = studentobj.Class
+    subjects = subject.objects.filter(Class = classobj)
+    exams = exam.objects.filter(subject = subject.objects.get(id = subject_id))
+    students = student.objects.filter(Class = classobj)
+    print(students)
+    marks = []
+    for s in students:
+        m = 0
+        for e in exams:
+            print(e, s)
+            try:
+                mark = score.objects.get(exam = e, stu = s)
+                m = m + mark.score
+            except:
+                m = 0
+        marks.append(m)
+    print(marks)
+    return render(request, 'leaderboard.html', {'subjects': subjects, 'sub': subjects[0], 'students': students, 'class': classobj, 'marks': marks})
+
+def progress(request, subject_id):
+    studentobj = student.objects.get(user = request.user)
+    classobj = studentobj.Class
+    subjects = subject.objects.filter(Class = classobj)
+    subjectobj = subject.objects.get(Class = classobj, id = subject_id)
+    exams = exam.objects.filter(classSection = classobj, subject = subjectobj)
+    scores = []
+    for e in exams:
+        print(e)
+        print(studentobj)
+        scoreobj = score.objects.get(exam = e, stu = studentobj)
+        scores.append(scoreobj)
+    return render(request, 'progress.html', {'scores': scores, 'subjects': subjects})
