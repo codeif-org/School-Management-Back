@@ -1,3 +1,6 @@
+// above two lines are most important for the axios post request
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfCookieName = "csrftoken";
 console.log("main js added");
 
 // var elems = document.querySelectorAll(".att-student-list button");
@@ -33,20 +36,47 @@ console.log("main js added");
 // //   }
 // };
 
+var requestHandler = function (req, value, student_id) {
+  console.log("inside request handler");
+  console.log(typeof req);
+  axios({
+    method: req,
+    url: "http://127.0.0.1:8000/attendance/teacher/api/saveAttendance/",
+    data: {
+      present: value,
+      student: student_id,
+      date: "2021-10-16",
+    },
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
 var btnHandler = function (event) {
   //   console.log(event);
   var elem = event.target;
   console.log(elem);
-  elem.classList.toggle("btn-clicked");
-  if (elem.previousElementSibling) {
-    if (elem.previousElementSibling.classList.contains("btn-clicked")) {
-      elem.previousElementSibling.classList.toggle("btn-clicked");
-    }
+  let value = elem.value;
+  let student_id = elem.parentNode.id;
+  //   to find the sibling element and check if it is clicked or not
+
+  if (
+    elem.previousElementSibling &&
+    elem.previousElementSibling.classList.contains("btn-clicked")
+  ) {
+    elem.previousElementSibling.classList.toggle("btn-clicked");
+    elem.classList.toggle("btn-clicked");
+    requestHandler("patch", value, student_id);
+  } else if (
+    elem.nextElementSibling &&
+    elem.nextElementSibling.classList.contains("btn-clicked")
+  ) {
+    elem.nextElementSibling.classList.toggle("btn-clicked");
+    elem.classList.toggle("btn-clicked");
+    requestHandler("patch", value, student_id);
   } else {
-    if (elem.nextElementSibling) {
-      if (elem.nextElementSibling.classList.contains("btn-clicked")) {
-        elem.nextElementSibling.classList.toggle("btn-clicked");
-      }
-    }
+    elem.classList.toggle("btn-clicked");
+    console.log("nothing");
+    requestHandler("post", value, student_id);
   }
 };

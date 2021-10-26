@@ -32,7 +32,7 @@
 <section id="home-menu">
   <div class="home-menu">
     {% for student in students %}
-    <div id="{{ student.id }}" class="menu-list att-student-list">
+    <div class="menu-list att-student-list">
       <div>
         <p>
           {{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{
@@ -40,14 +40,24 @@
           {% endif %} | {{ student.roll_no }}
         </p>
       </div>
-      <div class="att-btns">
-        <button class="btn btn-md" onclick="btnHandler(event)">Absent</button>
-        <button class="btn btn-md" onclick="btnHandler(event)">Present</button>
+      <div id="{{ student.id }}" class="att-btns">
+        <button class="btn btn-md" onclick="btnHandler(event)" value="false">
+          Absent
+        </button>
+        <button class="btn btn-md" onclick="btnHandler(event)" value="true">
+          Present
+        </button>
       </div>
     </div>
     {% endfor %}
   </div>
 </section>
 {% endblock content %} {% block script %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
+  integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
 <script src="{% static 'js/main.js' %}"></script>
 {% endblock script %}
