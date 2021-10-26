@@ -35,8 +35,8 @@ def saveAttendance(request):
         attendance_serializer = attendanceSerializer(data=request.data)
         if attendance_serializer.is_valid():
             attendance_serializer.save()
-            return JsonResponse(attendance_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(attendance_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(attendance_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(attendance_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'PATCH':
         date = request.data['date']
         stu = request.data['student']
@@ -45,8 +45,8 @@ def saveAttendance(request):
             obj, data=request.data, partial=True)
         if attendance_serializer.is_valid():
             attendance_serializer.save()
-            return JsonResponse(attendance_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(attendance_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(attendance_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(attendance_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def Attendance(request):
