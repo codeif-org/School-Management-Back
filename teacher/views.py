@@ -33,8 +33,8 @@ def classStudentList(request, class_id):
     teacherobj = teacher.objects.get(user = request.user)
     schoolobj = teacherobj.school
     students = student.objects.filter(school = schoolobj, Class = Class)
-    number = len(students)
-    l = []
-    for i in range(1, number+1):
-        l.append(i)
-    return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class, 'l': l})
+    # number = len(students)
+    # l = []
+    # for i in range(1, number+1):
+    #     l.append(i)
+    return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class})
