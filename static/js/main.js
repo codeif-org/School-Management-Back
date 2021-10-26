@@ -35,6 +35,9 @@ console.log("main js added");
 // //     console.log("yes");
 // //   }
 // };
+var attChanged = function (event) {
+  console.log("hello inside attChanged");
+};
 
 var requestHandler = function (req, value, student_id) {
   console.log("inside request handler");
@@ -66,6 +69,8 @@ var btnHandler = function (event) {
   ) {
     elem.previousElementSibling.classList.toggle("btn-clicked");
     elem.classList.toggle("btn-clicked");
+    elem.setAttribute("onclick", "attChanged(event)");
+    elem.previousElementSibling.setAttribute("onclick", "btnHandler(event)");
     requestHandler("patch", value, student_id);
   } else if (
     elem.nextElementSibling &&
@@ -73,9 +78,14 @@ var btnHandler = function (event) {
   ) {
     elem.nextElementSibling.classList.toggle("btn-clicked");
     elem.classList.toggle("btn-clicked");
+    elem.setAttribute("onclick", "attChanged");
+    elem.nextElementSibling.setAttribute("onclick", "btnHandler(event)");
     requestHandler("patch", value, student_id);
   } else {
     elem.classList.toggle("btn-clicked");
+    // console.log(elem.getAttribute("onclick"))
+    elem.setAttribute("onclick", "attChanged");
+    // console.log(elem.getAttribute("onclick"))
     console.log("nothing");
     requestHandler("post", value, student_id);
   }
