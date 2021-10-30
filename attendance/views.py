@@ -54,4 +54,5 @@ def Attendance(request):
     t = teacher.objects.get(username=user.username)
     Class = classSection.objects.get(teacher=t)
     students = student.objects.filter(school=t.school, Class=Class)
+    print(students)
     return render(request, 'attendance.html', {'students': students})

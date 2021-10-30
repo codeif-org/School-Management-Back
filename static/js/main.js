@@ -35,6 +35,29 @@ console.log("main js added");
 // //     console.log("yes");
 // //   }
 // };
+
+
+// onload logic
+var attDate = document.querySelector(".att-date > button:nth-child(1)")
+
+window.onload = function(event) {
+  console.log("window on log")
+  let dateStr = attDate.textContent
+  let dateList = dateStr.split("/")
+  dateList.reverse()
+  let correctDate = dateList.join("-")
+  // console.log(correctDate)
+
+  
+
+}
+
+
+
+
+
+
+
 var attChanged = function (event) {
   console.log("hello inside attChanged");
 };
