@@ -1,0 +1,64 @@
+{% extends 'adminhome.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/teacherExam.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/adminList.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+    <section id="main">
+        <!-- List Hero and Filter -->
+      <section id="list-hero">
+        <div class="menu-list list-hero">
+          <div class="list-hero-search">
+            <h2>Search Student:</h2>
+            <div class="list-search-box">
+              <input
+                type="text"
+                placeholder="Type Student Name here..."
+                onchange="submitHandler(event)"
+              />
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+          <div class="list-hero-filter">
+            <p>Select Class:</p>
+            <select name="select-class" id="" onchange="submitHandler(event)">
+              <option value="all" selected>All</option>
+              {% for class in classes %}
+              <option value="{{class.id}}">{{ class.Class }} {% if class.section %}{{ class.section }}{% endif %}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin-stud-list">
+        <div class="admin-stud-list">
+          <h2>Click on any student to view info:</h2>
+          {% for student in students %}
+          <div class="stud-list-elem">
+            <div>
+              <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %} {% if student.lname %}{{ student.lname }}{% endif %}</p>
+            </div>
+            <div class="stud-list-elem-options">
+              <button class="btn">Info</button>
+              <button class="btn">Progress</button>
+              <button class="btn">Attendance</button>
+              <button class="btn">Start Discussion</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    </section>
+    <script>
+      let submitHandler = function (event) {
+        console.log(event.target.value);
+      };
+    </script>
+{% endblock content %}
+{% block script %}
+    <script src="{% static '/js/adminList.js' %}"></script>
+{% endblock script %}

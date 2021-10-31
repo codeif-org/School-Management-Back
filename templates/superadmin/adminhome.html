@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
 
-    <link rel="icon" type="image/png" href="../favicon.png" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -75,7 +75,7 @@
               </a>
             </div>
             <div class="goto-item">
-              <a href="/admin/students.html">
+              <a href="{% url 'superadmin:students' %}">
                 <div>
                   <img src="{% static '/img/students.png' %}" alt="" />
                   <h1>Students</h1>
@@ -83,7 +83,7 @@
               </a>
             </div>
             <div class="goto-item">
-              <a href="/admin/teachers.html">
+              <a href="{% url 'superadmin:teachers' %}">
                 <div>
                   <img src="{% static '/img/teacher.png' %}" alt="" />
                   <h1>Teachers</h1>
@@ -152,5 +152,6 @@
       </section>
       {% endblock bottom-nav %}
     </section>
+    {% block script %}{% endblock script %}
   </body>
 </html>

@@ -74,3 +74,15 @@ def addStudent(request):
         s.save()
         return redirect('superadmin:adminhome')
     return render(request, 'addStudents.html')
+
+def students(request):
+    admin = SuperAdmin.objects.get(user = request.user)
+    students = student.objects.filter(school = admin.school)
+    classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
+    return render(request, 'students.html', {'students': students, 'classes': classes})
+
+def teachers(request):
+    admin = SuperAdmin.objects.get(user = request.user)
+    teachers = teacher.objects.filter(school = admin.school)
+    classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
+    return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes})
