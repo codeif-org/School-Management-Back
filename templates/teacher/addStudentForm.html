@@ -1,0 +1,74 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/ExamForm.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+    <section id="main">
+        <section class="exam-form">
+        <div>
+          <a href="/addStudents.html">
+            <h2><i class="fas fa-arrow-left"></i> back</h2></a
+          >
+        </div>
+        <div class="main-exam-form">
+          <form action="{% url 'teacher:addStudents' %}" method="POST">
+          {% csrf_token %}
+            <div class="form-input">
+              <h3>First Name*:</h3>
+              <input type="text" name="fname" />
+            </div>
+            <div class="form-input">
+              <h3>Middle Name:</h3>
+              <input type="text" name="mname" />
+            </div>
+            <div class="form-input">
+              <h3>Last Name*:</h3>
+              <input type="text" name="lname" />
+            </div>
+            <div class="form-input">
+              <h3>Date of birth</h3>
+              <input type="date" name="dob" />
+            </div>
+            <div class="form-input">
+              <h3>Email</h3>
+              <input type="email" name="email" />
+            </div>
+            <div class="form-input">
+              <h3>Phone Number</h3>
+              <input type="tel" name="phone1" />
+            </div>
+            <div class="form-input">
+              <h3>Father's Name</h3>
+              <input type="text" name="fathname" />
+            </div>
+            <div class="form-input">
+              <h3>Mother's Name</h3>
+              <input type="text" name="motname" />
+            </div>
+            <div class="form-input">
+              <h3>Parent Phone*:</h3>
+              <input type="tel" name="phone2" />
+            </div>
+            <div class="form-input">
+              <h3>Parent Email:</h3>
+              <input type="email" name="pemail" />
+            </div>
+            <div class="form-input">
+              <h3>Address</h3>
+              <input type="text" name="address" />
+            </div>
+            <div class="form-input">
+              <h3>Admission No.</h3>
+              <input type="number" name="ad-no" />
+            </div>
+            <div class="form-input">
+              <h3>Roll No.</h3>
+              <input type="number" name="roll" />
+            </div>
+            <button type="submit" class="btn btn-md">Add</button>
+          </form>
+        </div>
+      </section>
+    </section>
+{% endblock content %}

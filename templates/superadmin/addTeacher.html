@@ -1,0 +1,77 @@
+{% extends 'adminhome.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/ExamForm.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+    <section id="main">
+    <form method="post" action="{% url 'superadmin:addTeacher' %}">
+    {% csrf_token %}
+        <section class="exam-form">
+        <div>
+          <a href="/teacherExamList.html">
+            <h2><i class="fas fa-arrow-left"></i> back</h2></a
+          >
+        </div>
+        <div class="main-exam-form">
+          <h2>Add Teacher:</h2>
+          <p>
+            Other information can be updated by Teacher itself <br />
+            * mandatory
+          </p>
+          <form action="">
+            <div class="form-input">
+              <h3>First Name*:</h3>
+              <input type="text" name="fname" />
+            </div>
+            <div class="form-input">
+              <h3>Middle Name:</h3>
+              <input type="text" name="mname" />
+            </div>
+            <div class="form-input">
+              <h3>Last Name*:</h3>
+              <input type="text" name="lname" />
+            </div>
+            <div class="form-input">
+              <h3>Email*:</h3>
+              <input type="email" name="email" />
+            </div>
+            <div class="form-input">
+              <h3>Phone Number*:</h3>
+              <input type="tel" name="phone" />
+            </div>
+            <div class="form-input">
+              <h3>Address:</h3>
+              <input type="text" name="address" />
+            </div>
+            <!-- <div class="form-input">
+              <h3>Max Marks:</h3>
+              <input type="number" />
+            </div>
+            <div class="form-input">
+              <h3>Duration (in minutes):</h3>
+              <input type="number" />
+            </div>
+            <div class="form-input">
+              <h3>Class:</h3>
+              <input type="text" />
+            </div>
+            <div class="form-input">
+              <h3>Subject:</h3>
+              <input type="text" />
+            </div>
+            <div class="form-input">
+              <h3>Date:</h3>
+              <input type="date" />
+            </div>
+            <div class="form-input">
+              <h3>Time:</h3>
+              <input type="time" />
+            </div> -->
+            <button type="submit" class="btn btn-md">Add Teacher</button>
+          </form>
+        </div>
+      </section>
+      </form>
+    </section>
+{% endblock content %}

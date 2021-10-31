@@ -29,4 +29,5 @@ urlpatterns = [
     path('exam/', include('exam.urls')),
     path('homework/', include('homework.urls')),
     path('notice/', include('notice.urls')),
+    path('superadmin/', include('superadmin.urls')),
 ]

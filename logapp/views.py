@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
+from superadmin.models import SuperAdmin
 from teacher.models import teacher
 from student.models import student
 from teacher.views import teacherhome
@@ -14,11 +15,15 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             try:
-                t = teacher.objects.get(username = username)
+                t = teacher.objects.get(user = request.user)
                 return redirect('teacher:teacherhome')
             except:
-                s = student.objects.get(username = username)
-                return redirect('student:studenthome')
+                try:
+                    s = student.objects.get(username = username)
+                    return redirect('student:studenthome')
+                except:
+                    a = SuperAdmin.objects.get(user = User.objects.get(username = username))
+                    return redirect('superadmin:adminhome')
         else:
             redirect('login')
     return render(request, 'login.html')

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from .models import teacher, classSection, subject
 from student.models import student
-from superadmin.models import school
+from superadmin.models import school, SuperAdmin
 # Create your views here.
 
 def teacherhome(request):
@@ -38,3 +38,37 @@ def classStudentList(request, class_id):
     for i in range(1, number+1):
         l.append(i)
     return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class, 'l': l})
+
+def addStudents(request):
+    if request.method=="POST":
+        fname = request.POST['fname']
+        try:
+            mname = request.POST['mname']
+        except:
+            mname = ''
+        lname = request.POST['lname']
+        ad_no = request.POST['ad-no']
+        email = request.POST['email']
+        roll = request.POST['roll']
+        dob = request.POST['dob']
+        fathername = request.POST['fathname']
+        mothername = request.POST['motname']
+        phone1 = request.POST['phone1']
+        phone2 = request.POST['phone2']
+        try:
+            fatheremail = request.POST['pemail']
+        except:
+            fatheremail = ''
+        try:
+            address = request.POST['address']
+        except:
+            address = ''
+        Class = classSection.objects.get(teacher = teacher.objects.get(user = request.user))
+        u = User(username = fname, email = email, password = "12345678")
+        u.save()
+        t = teacher.objects.get(user = request.user)
+        schoolobj = school.objects.get(school = t.school.school)
+        s = student(fname = fname, mname = mname, lname = lname, ad_no = ad_no, roll_no = roll, Class = Class, email = email, dob = dob, fathername = fathername, mothername = mothername, phone = phone1, fatherphone = phone2, fatheremail = fatheremail, address = address, user = u, school = schoolobj)
+        s.save()
+        return redirect('teacher:teacherhome')
+    return render(request, 'addStudentForm.html')
