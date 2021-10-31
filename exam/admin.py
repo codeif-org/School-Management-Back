@@ -4,8 +4,8 @@ from .models import exam, score
 
 @admin.register(exam)
 class examAdmin(admin.ModelAdmin):
-    list_display = ('classSection', 'subject', 'date', 'name', 'max_marks')
+    list_display = ('id', 'classSection', 'subject', 'date', 'name', 'max_marks')
 
 @admin.register(score)
 class scoreAdmin(admin.ModelAdmin):
-    list_display = ('exam', 'score')
+    list_display = ('id', 'exam','stu', 'score')

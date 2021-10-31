@@ -1,0 +1,36 @@
+{% extends 'notice.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+<section id="main">
+    <section class="attendance-data">
+        <div class="att-calender"><img src="{% static 'img/calender.png' %}" alt="" /></div>
+        <div class="main-att-Data">
+          <div class="filter-month">
+            <button class="btn btn-sm">This month</button>
+          </div>
+          <div class="main-data">
+            <div class="data-item">
+              <h2>TOTAL CLASSES</h2>
+              <h1>30</h1>
+            </div>
+            <div class="data-item">
+              <h2>CLASSES ATTENDED</h2>
+              <h1>25</h1>
+            </div>
+            <div class="data-item">
+              <h2>ABSENT</h2>
+              <h1>5</h1>
+            </div>
+            <div class="data-item">
+              <h2>ATTENDANCE %</h2>
+              <h1>83.33%</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+</sectrion>
+{% endblock content %}

@@ -1,55 +1,91 @@
 #progress-carousel {
-    margin: 20px 0px;
-  }
-  
-  .subject-container {
-    width: var(--center-width);
-    height: auto;
-    margin: auto;
-    padding: 20px 16px;
-    background-color: var(--light-grey);
-    border-radius: 10px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* transition: all 0.5s ease 0s; */
-  }
-  
-  .subject-arrow {
-    font-size: 30px;
-    cursor: pointer;
-    margin: 0px 10px;
-  }
-  
-  .subject {
-    display: flex;
-    overflow: hidden;
-  }
-  
-  .subject-btn {
-    margin: 20px;
-    /* transform: translateX(-50px); */
-    display: inline-block;
-    background: var(--dark-green);
-    color: #fff;
-    padding: 10px 15px;
-    min-width: 120px;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    letter-spacing: 2px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 900;
-    transition: all 0.5s ease 0s;
-  }
-  
-  .subject-btn:hover {
-    background-color: var(--dark);
-    color: #fff;
-  }
+  margin: 20px 0px 30px;
+}
+
+.subject-container {
+  width: var(--center-width);
+  height: auto;
+  margin: auto;
+  padding: 0px 16px;
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* transition: all 0.5s ease 0s; */
+}
+
+.subject-arrow {
+  font-size: 30px;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+
+.subject {
+  display: flex;
+  overflow: hidden;
+}
+
+.subject-btn {
+  margin: 20px;
+  /* transform: translateX(-50px); */
+  display: inline-block;
+  background: var(--dark-green);
+  color: #fff;
+  padding: 10px 15px;
+  min-width: 120px;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  letter-spacing: 2px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  transition: all 0.5s ease 0s;
+}
+
+.subject-btn:hover {
+  background-color: var(--dark);
+  color: #fff;
+}
+
+.progress {
+  width: var(--center-width);
+  height: auto;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-graph {
+  background-color: var(--light-grey);
+  min-width: 45%;
+  height: 300px;
+  border: 1px solid var(--dark-grey);
+}
+
+.progress-table {
+  min-width: 45%;
+  height: auto;
+  border: 1px solid var(--dark-grey);
+}
+
+table {
+  margin: 0 auto 10px;
+  width: 80%;
+}
+
+th {
+  padding: 20px 60px;
+}
+
+td {
+  background-color: var(--light-grey);
+  padding: 5px 20px;
+  margin: 10px 0;
+}
