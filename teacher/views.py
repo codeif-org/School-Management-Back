@@ -3,6 +3,11 @@ from django.contrib.auth.models import User, auth
 from .models import teacher, classSection, subject
 from student.models import student
 from superadmin.models import school
+
+from teacher.serializers import SubjectSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
 def teacherhome(request):
@@ -38,3 +43,16 @@ def classStudentList(request, class_id):
     # for i in range(1, number+1):
     #     l.append(i)
     return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class})
+
+@api_view(["GET", "POST"])
+def subjectAPI(request):
+    print(request.GET)
+    if request.method == "GET":
+        if "class" in request.GET:
+            cls = classSection.objects.get(id=request.GET["class"])
+            sub = subject.objects.filter(Class=cls)
+            print(cls)
+            print(sub)
+            serializer = SubjectSerializer(sub, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"msg":"This is here inside subject API"})
