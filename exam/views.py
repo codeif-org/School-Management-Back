@@ -39,17 +39,18 @@ def createExam(request):
     subjects = subject.objects.filter(teacher = t)
     classes = classSection.objects.filter(teacher = t)
     if request.method == "POST":
-        c = request.POST['class']
-        section = request.POST['section']
-        cs = classSection.objects.get(Class = c, section = section)
-        s = request.POST['subject']
-        sub = subject.objects.get(subject = s)
-        name = request.POST['exam']
-        marks = request.POST['marks']
-        date = request.POST['date']
-        test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
-        test.save()
-        return redirect('teacherExamList')
+        print(request.POST)
+        # c = request.POST['class']
+        # section = request.POST['section']
+        # cs = classSection.objects.get(Class = c, section = section)
+        # s = request.POST['subject']
+        # sub = subject.objects.get(subject = s)
+        # name = request.POST['exam']
+        # marks = request.POST['marks']
+        # date = request.POST['date']
+        # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
+        # test.save()
+        # return redirect('teacherExamList')
     return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects})
 
 def marksEdit(request, id):
