@@ -49,10 +49,11 @@ def subjectAPI(request):
     print(request.GET)
     if request.method == "GET":
         if "class" in request.GET:
-            cls = classSection.objects.get(id=request.GET["class"])
-            sub = subject.objects.filter(Class=cls)
-            print(cls)
-            print(sub)
-            serializer = SubjectSerializer(sub, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            try:
+                cls = classSection.objects.get(id=request.GET["class"])
+                sub = subject.objects.filter(Class=cls)
+                serializer = SubjectSerializer(sub, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                return Response({"msg":"Class not found"}, status=status.HTTP_400_BAD_REQUEST)    
         return Response({"msg":"This is here inside subject API"})
