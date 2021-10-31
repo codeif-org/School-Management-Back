@@ -1,0 +1,89 @@
+.exam-form {
+  width: 85%;
+  margin: auto;
+  padding: 10px 0px;
+}
+
+.main-exam-form {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--dark-grey);
+  border-radius: 8px;
+  background-color: var(--light-grey);
+}
+
+.form-input {
+  margin: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-exam-form input {
+  /* height: 30px;
+  width: 40%;
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 8px; */
+  outline: none;
+  width: 40%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease 0s;
+}
+
+.main-exam-form input:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
+
+.form-input select {
+  width: 90px;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease;
+}
+
+.form-input select:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
+
+.main-exam-form input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 8px 0px;
+  outline: none;
+}
+
+.sub-checkboxes label{
+  color: var(--dark);
+  font-size: 18px;
+  /* margin: 0px 10px; */
+}
+
+/* .sub-checkboxes input{
+  width: 20px;
+  margin: 8px 0px;
+} */
+
+
+@media screen and (max-width: 800px){
+  .form-input{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form-input > h3{
+    margin: 8px;
+  }
+  .main-exam-form input{
+    width: 100%;
+  }
+  .sub-checkboxes{
+    margin: 0px 8px;
+  }
+}
