@@ -7,7 +7,7 @@ from superadmin.models import school, SuperAdmin
 
 def teacherhome(request):
     username = request.user.username
-    t = teacher.objects.get(username = username)
+    t = teacher.objects.get(user = request.user)
     s = t.school
     return render(request, 'home.html', {'school': s})
 
@@ -64,7 +64,7 @@ def addStudents(request):
         except:
             address = ''
         Class = classSection.objects.get(teacher = teacher.objects.get(user = request.user))
-        u = User(username = fname, email = email, password = "12345678")
+        u = User.objects.create_user(username = fname, password = "12345678")
         u.save()
         t = teacher.objects.get(user = request.user)
         schoolobj = school.objects.get(school = t.school.school)

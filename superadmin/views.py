@@ -22,7 +22,7 @@ def addTeacher(request):
             address = request.POST['address']
         except:
             address = ''
-        u = User(username = fname, email = email, password = fname+"1234")
+        u = User.objects.create_user(username = fname, password = "12345678")
         u.save()
         admin = request.user
         superadmin = SuperAdmin.objects.get(user = admin)
@@ -65,7 +65,7 @@ def addStudent(request):
             address = request.POST['address']
         except:
             address = ''
-        u = User(username = fname, email = email, password = "12345678")
+        u = User.objects.create_user(username = fname, password = "12345678")
         u.save()
         admin = request.user
         superadmin = SuperAdmin.objects.get(user = admin)
