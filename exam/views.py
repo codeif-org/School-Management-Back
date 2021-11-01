@@ -21,11 +21,12 @@ def teacherExamList(request):
     exam_lst = []
     for sub in subjects:
         # print(sub)
-        oexam = exam.objects.filter(subject=sub)
+        oexam = ExamHeldSubject.objects.filter(subject=sub)
+        print(oexam)
         # print(oexam)
         # exam_lst.append(oexam)
         for iexam in oexam:
-            exam_lst.append(iexam)
+            exam_lst.append(iexam)    
     # exam_lst.append(oexam[0])
     # exam_lst.append(oexam[1])
     # exams = exam.objects.all()
