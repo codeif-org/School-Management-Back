@@ -71,14 +71,17 @@ def createExam(request):
 
 
 def marksEdit(request, id):
-    test = exam.objects.get(id=id)
-    clas = test.classSection
+    exam_held = ExamHeldSubject.objects.get(id=id)
+    # test = exam_held.exam
+    # print(test)
+    # test = exam.objects.get(id=id)
+    clas = exam_held.subject.Class
     students = student.objects.filter(Class=clas)
     print(students)
     # obj = school.objects.get(school = test.teacher.school.school)
     # students = student.objects.filter(school = obj, Class = test.classSection)
-    return render(request, 'marksEdit.html', {'students': students, 'exam': test})
-    # return render(request, 'marksEditTest.html')
+    return render(request, 'marksEdit.html', {'students': students, 'exam_held': exam_held})
+    # return render(request, 'marksEdit.html')
     # return HttpResponse(f"This is marksEdit page {id}")
 
 # exam_id-student_id
