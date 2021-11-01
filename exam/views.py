@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import exam, score
+from .models import exam, score, ExamHeldSubject
 from superadmin.models import school
 from teacher.models import teacher, classSection, subject
 from student.models import student
@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from exam.serializers import ScoreSerializer
 
 # Create your views here.
+
 
 def teacherExamList(request):
     usr = request.user
@@ -26,21 +27,32 @@ def teacherExamList(request):
         for iexam in oexam:
             exam_lst.append(iexam)
     # exam_lst.append(oexam[0])
-    # exam_lst.append(oexam[1])    
+    # exam_lst.append(oexam[1])
     # exams = exam.objects.all()
     # print("exams: ", exams)
     # print(exam_lst)
-    return render(request, 'teacherExamList.html', {'exam_lst':exam_lst})
+    return render(request, 'teacherExamList.html', {'exam_lst': exam_lst})
 
 # sub: [subject ids array]
+
+
 def createExam(request):
     obj = request.user
-    t = teacher.objects.get(username = obj.username)
-    subjects = subject.objects.filter(teacher = t)
-    classes = classSection.objects.filter(teacher = t)
+    t = teacher.objects.get(username=obj.username)
+    subjects = subject.objects.filter(teacher=t)
+    classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":
         print(request.POST)
         print("subjects selected:", request.POST.getlist('sub'))
+        exam_name = request.POST["exam_name"]
+        max_marks = request.POST["max_marks"]
+        sub_ids = request.POST.getlist("sub")
+        Exam = exam(name=exam_name, max_marks=max_marks, ms=True)
+        Exam.save()
+        for sub_id in sub_ids:
+            Subject = subject.objects.get(id=sub_id)
+            print(Subject.subject)
+            print("save exam done", Exam)
         # c = request.POST['class']
         # section = request.POST['section']
         # cs = classSection.objects.get(Class = c, section = section)
@@ -54,18 +66,21 @@ def createExam(request):
         # return redirect('teacherExamList')
     return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects})
 
+
 def marksEdit(request, id):
-    test = exam.objects.get(id = id)
+    test = exam.objects.get(id=id)
     clas = test.classSection
     students = student.objects.filter(Class=clas)
-    print(students) 
+    print(students)
     # obj = school.objects.get(school = test.teacher.school.school)
     # students = student.objects.filter(school = obj, Class = test.classSection)
     return render(request, 'marksEdit.html', {'students': students, 'exam': test})
     # return render(request, 'marksEditTest.html')
     # return HttpResponse(f"This is marksEdit page {id}")
 
-# exam_id-student_id 
+# exam_id-student_id
+
+
 @api_view(['GET', 'POST'])
 def marksUpdate(request):
     if request.method == "GET":
@@ -77,6 +92,6 @@ def marksUpdate(request):
     elif request.method == "POST":
         serializer = ScoreSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()    
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
