@@ -53,6 +53,8 @@ def createExam(request):
             Subject = subject.objects.get(id=sub_id)
             print(Subject.subject)
             print("save exam done", Exam)
+            exam_held_subject = ExamHeldSubject(exam=Exam, subject=Subject)
+            exam_held_subject.save()
         # c = request.POST['class']
         # section = request.POST['section']
         # cs = classSection.objects.get(Class = c, section = section)
