@@ -29,7 +29,7 @@ let responseHandler = function (res) {
   obj.forEach((elem) => {
     subInnerHTML =
       subInnerHTML +
-      `<input type="checkbox" name="sub${elem.id}" id="sub${elem.id}">
+      `<input type="checkbox" name="sub" id="sub${elem.id}" value="${elem.id}">
       <label for="sub${elem.id}">${elem.subject}</label> <br>`;
   });
   console.log(subInnerHTML);

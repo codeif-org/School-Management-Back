@@ -32,7 +32,7 @@ def teacherExamList(request):
     # print(exam_lst)
     return render(request, 'teacherExamList.html', {'exam_lst':exam_lst})
 
-
+# sub: [subject ids array]
 def createExam(request):
     obj = request.user
     t = teacher.objects.get(username = obj.username)
@@ -40,6 +40,7 @@ def createExam(request):
     classes = classSection.objects.filter(teacher = t)
     if request.method == "POST":
         print(request.POST)
+        print("subjects selected:", request.POST.getlist('sub'))
         # c = request.POST['class']
         # section = request.POST['section']
         # cs = classSection.objects.get(Class = c, section = section)
