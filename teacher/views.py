@@ -10,39 +10,42 @@ from rest_framework.response import Response
 from rest_framework import status
 # Create your views here.
 
+
 def teacherhome(request):
     username = request.user.username
-    t = teacher.objects.get(username = username)
+    t = teacher.objects.get(username=username)
     s = t.school
     return render(request, 'home.html', {'school': s})
 
 
-
 def addStudent(request, class_name):
-    classobj = classSection.objects.get(teacher = request.user.id)
-    students = student.objects.filter(Class = classobj)
+    classobj = classSection.objects.get(teacher=request.user.id)
+    students = student.objects.filter(Class=classobj)
     number = len(students)
     l = []
     for i in range(1, number+1):
         l.append(i)
     return render(request, 'addStudent.html', {'students': students, 'l': l})
 
+
 def YourClasses(request):
-    classTeacher = classSection.objects.get(teacher = request.user.id)
-    classes = subject.objects.filter(teacher = request.user.id)
+    classTeacher = classSection.objects.get(teacher=request.user.id)
+    classes = subject.objects.filter(teacher=request.user.id)
     print(classes)
     return render(request, 'YourClasses.html', {'class': classTeacher.Class, 'classes': classes})
 
+
 def classStudentList(request, class_id):
-    Class = classSection.objects.get(id = class_id)
-    teacherobj = teacher.objects.get(user = request.user)
+    Class = classSection.objects.get(id=class_id)
+    teacherobj = teacher.objects.get(user=request.user)
     schoolobj = teacherobj.school
-    students = student.objects.filter(school = schoolobj, Class = Class)
+    students = student.objects.filter(school=schoolobj, Class=Class)
     # number = len(students)
     # l = []
     # for i in range(1, number+1):
     #     l.append(i)
     return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class})
+
 
 @api_view(["GET", "POST"])
 def subjectAPI(request):
@@ -55,5 +58,5 @@ def subjectAPI(request):
                 serializer = SubjectSerializer(sub, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except:
-                return Response({"msg":"Class not found"}, status=status.HTTP_400_BAD_REQUEST)    
-        return Response({"msg":"This is here inside subject API"})
+                return Response({"msg": "Class not found"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"msg": "This is here inside subject API"})
