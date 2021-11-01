@@ -21,9 +21,9 @@ console.log("sub_input: ", sub_input);
 //   },
 // ];
 
-let responseHandler = function(res){
-  console.log("inside responseHandler:", res.data)
-  obj = res.data
+let responseHandler = function (res) {
+  console.log("inside responseHandler:", res.data);
+  obj = res.data;
   sub_input.innerHTML = "";
   let subInnerHTML = "";
   obj.forEach((elem) => {
@@ -34,7 +34,7 @@ let responseHandler = function(res){
   });
   console.log(subInnerHTML);
   sub_input.innerHTML = subInnerHTML;
-}
+};
 
 let requestHandler = function (event) {
   console.log("requestHandler Inside:", event.target.value);
