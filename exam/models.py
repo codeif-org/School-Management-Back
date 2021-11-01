@@ -5,7 +5,7 @@ from student.models import student
 # Create your models here.
 class exam(models.Model):
     # teacher = models.ForeignKey(teacher, on_delete=models.PROTECT)
-    classSection = models.ForeignKey(classSection, on_delete=models.PROTECT)
+    # classSection = models.ForeignKey(classSection, on_delete=models.PROTECT)
     subject = models.ForeignKey(subject, on_delete=models.PROTECT)
     date = models.DateField(auto_now=True)
     name = models.CharField(max_length=100)
