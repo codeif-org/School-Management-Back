@@ -8,4 +8,4 @@ admin.site.register(notice)
 
 @admin.register(receiver)
 class receiverAdmin(admin.ModelAdmin):
-    list_display = ('note', 'receiver')
+    list_display = ('note', 'receiver', 'posted_by')
