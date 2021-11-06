@@ -13,7 +13,7 @@ class teacher(models.Model):
     phone = models.IntegerField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key = True)
     school = models.ForeignKey('superadmin.school', on_delete=models.PROTECT)
-    username = models.CharField(max_length=50, blank=False, null=False)
+    # username = models.CharField(max_length=50, blank=False, null=False)
 
 class classSection(models.Model):
     Class = models.IntegerField()
