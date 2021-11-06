@@ -7,4 +7,4 @@ class schoolAdmin(admin.ModelAdmin):
     list_display = ('school', 'address', 'city', 'pin', 'state', 'country', 'regno')
 @admin.register(SuperAdmin)
 class superAdminAdmin(admin.ModelAdmin):
-    list_display = ('user', 'school')
+    list_display = ('id', 'user', 'school')
