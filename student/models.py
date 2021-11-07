@@ -7,7 +7,7 @@ class student(models.Model):
     fname = models.CharField(max_length=50)
     mname = models.CharField(max_length=50, blank=True, null=True)
     lname = models.CharField(max_length=50, blank=True, null=True)
-    dob = models.DateField(blank=True, null=True)
+    # dob = models.DateField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True)
     fathername = models.CharField(max_length=70)
