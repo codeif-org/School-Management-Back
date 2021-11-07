@@ -15,7 +15,7 @@ class student(models.Model):
     fatherphone = models.IntegerField()
     fatheremail = models.EmailField(blank=True, null=True)
     address = models.CharField(max_length=200)
-    ad_no = models.IntegerField()
+    add_no = models.CharField(max_length=50, blank=True, null=True)
     roll_no = models.IntegerField()
     Class = models.ForeignKey('teacher.classSection', on_delete=models.PROTECT)
     school = models.ForeignKey('superadmin.school', on_delete=models.PROTECT)
