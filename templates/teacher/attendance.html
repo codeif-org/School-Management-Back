@@ -14,6 +14,9 @@
 </section>
 {% endblock nav %} {% block content %}
 <!-- Start attendance -->
+{% if msg %}
+  You're not class teacher of any class.
+{% else %}
 <section id="start-att">
   <div class="component-back">
     <div>
@@ -52,6 +55,7 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 {% endblock content %} {% block script %}
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
