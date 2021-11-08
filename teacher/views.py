@@ -44,7 +44,7 @@ def classStudentList(request, class_id):
     # l = []
     # for i in range(1, number+1):
     #     l.append(i)
-    return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class, 'l': l})
+    return render(request, 'classStudentList.html', {'students': students, 'class': Class.Class})
 
 def addStudents(request):
     if request.method=="POST":
