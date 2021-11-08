@@ -25,7 +25,7 @@ def createHomework(request):
         topic = request.POST['topic']
         desc = request.POST['description']
         due_date = request.POST['due-date']
-        classobj = classSection.objects.get(Class = Class)
+        classobj = classSection.objects.get(id = Class)
         homework = Homework(topic = topic, desc = desc, due_date = due_date)
         homework.save()
         teacherobj = teacher.objects.get(user = request.user)
