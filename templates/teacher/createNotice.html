@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
 {% endblock extra-head %} {% block content %}
 <section id="main">
-  <form method="POST" action="{% url 'notice:addNotice' %}">
+  <form method="POST" action="{% url 'notice:createNotice' %}">
     {% csrf_token %}
     <section id="notice-accor">
       <div class="notice-class-accor component-back">
@@ -12,18 +12,18 @@
       </div>
       <div class="notice-class-list">
         <div class="notice-class-elem notice-all">
-          <input value="all" type="checkbox" name="checks[]" id="" />
+          <input value="all" type="checkbox" name="checks" id="" />
           <p>Select All</p>
         </div>
         {% for class in classes %}
         <div class="notice-class-elem">
           <input
-            value="{{ class.Class }}"
+            value="{{ class.id }}"
             type="checkbox"
-            name="checks[]"
+            name="checks"
             id=""
           />
-          <p>Class {{ class.Class }}</p>
+          <p>Class {{ class.Class }} {{ class.section }}</p>
         </div>
         {% endfor %}
       </div>
