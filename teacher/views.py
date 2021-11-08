@@ -29,10 +29,22 @@ def addStudent(request, class_name):
 
 
 def YourClasses(request):
-    classTeacher = classSection.objects.get(teacher=request.user.id)
-    classes = subject.objects.filter(teacher=request.user.id)
+    # class_var = []
+    try:
+        classTeacher = classSection.objects.get(teacher=request.user.id)
+    except:
+        classTeacher = None
+    try:        
+        classes = subject.objects.filter(teacher=request.user.id)
+    except:
+        classes = None    
+    print(classTeacher)
     print(classes)
-    return render(request, 'YourClasses.html', {'class': classTeacher.Class, 'classes': classes})
+    return render(request, 'YourClasses.html', {'class': classTeacher, 'classes': classes})
+    # except:
+    #     return render(request, 'YourClasses.html', {'msg': 'You are not assigned to any class'})
+    
+    
 
 
 def classStudentList(request, class_id):
