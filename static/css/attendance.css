@@ -126,6 +126,16 @@
   justify-content: space-between;
 }
 
+#not-found{
+  width: var(--center-width);
+  margin: auto;
+}
+
+.not-found{
+  text-align: center;
+  padding: 20px 0px;
+}
+
 /* attendance student media query */
 
 @media screen and (max-width: 800px) {

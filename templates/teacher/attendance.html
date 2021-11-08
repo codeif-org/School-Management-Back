@@ -15,7 +15,13 @@
 {% endblock nav %} {% block content %}
 <!-- Start attendance -->
 {% if msg %}
-  You're not class teacher of any class.
+<section id="not-found">
+  <div class="not-found">
+    <h1>
+      <strong>You're not class teacher of any class.</strong>
+    </h1>
+  </div>
+</section>
 {% else %}
 <section id="start-att">
   <div class="component-back">
@@ -55,8 +61,7 @@
     {% endfor %}
   </div>
 </section>
-{% endif %}
-{% endblock content %} {% block script %}
+{% endif %} {% endblock content %} {% block script %}
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
   integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
