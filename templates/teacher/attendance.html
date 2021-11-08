@@ -44,9 +44,7 @@
     <div class="menu-list att-student-list">
       <div>
         <p>
-          {{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{
-          student.mname }}{% endif %} {% if student.lname %} {{ student.lname }}
-          {% endif %} | {{ student.roll_no }}
+          {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL"%}{{student.mname}}{% endif %} {% if student.lname != "NULL"%}{{student.lname}}{% endif %} | {{ student.roll_no }}
         </p>
       </div>
       <div id="{{ student.id }}" class="att-btns">
