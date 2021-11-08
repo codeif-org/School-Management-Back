@@ -25,23 +25,27 @@ def createNotice(request):
         super_admin = SuperAdmin.objects.get(user = request.user)
         school_object = super_admin.school
         classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = school_object))
-    if request.method == 'POST':
-        topic = request.POST['topic']
-        desc = request.POST['desc']
-        noticeobj = notice(topic = topic, desc = desc)
-        noticeobj.save()
-        allclasses = request.POST.getlist('checks[]')
-        if 'all' in allclasses:
-            for c in classes:
-                receiverobj = receiver(note = noticeobj, receiver = c, posted_by = request.user)
-                receiverobj.save()
-        else:
-            for c in allclasses:
-                classobj = classSection.objects.get(Class = c)
-                receiverobj = receiver(note = noticeobj, receiver = classobj, posted_by = request.user)
-                receiverobj.save()
-        return redirect('notice:showNotice')
     return render(request, 'createNotice.html', {'classes': classes})
+
+def addNotice(request):
+    if request.method == 'POST':
+        print(request.POST)
+        # topic = request.POST['topic']
+        # desc = request.POST['desc']
+        # noticeobj = notice(topic = topic, desc = desc)
+        # noticeobj.save()
+        # allclasses = request.POST.getlist('checks[]')
+        # if 'all' in allclasses:
+        #     for c in classes:
+        #         receiverobj = receiver(note = noticeobj, receiver = c, posted_by = request.user)
+        #         receiverobj.save()
+        # else:
+        #     for c in allclasses:
+        #         classobj = classSection.objects.get(Class = c)
+        #         receiverobj = receiver(note = noticeobj, receiver = classobj, posted_by = request.user)
+        #         receiverobj.save()
+        return redirect('notice:createNotice')
+    
 
 def studentNotice(request):
     studentobj = student.objects.get(user = request.user)

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
 {% endblock extra-head %} {% block content %}
 <section id="main">
-  <form method="POST" action="{% url 'notice:createNotice' %}">
+  <form method="POST" action="{% url 'notice:addNotice' %}">
     {% csrf_token %}
     <section id="notice-accor">
       <div class="notice-class-accor component-back">
