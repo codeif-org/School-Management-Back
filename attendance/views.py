@@ -51,7 +51,7 @@ def saveAttendance(request):
 
 def Attendance(request):
     user = request.user
-    t = teacher.objects.get(username=user.username)
+    t = teacher.objects.get(user=user)
     Class = classSection.objects.get(teacher=t)
     students = student.objects.filter(school=t.school, Class=Class)
     print(students)
