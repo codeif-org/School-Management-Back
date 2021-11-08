@@ -14,18 +14,18 @@
 <section id="start-att">
   <div class="menu-list tech-exam-list">
     <div>
-      <p>{{ exam.date }}</p>
+      <p>{{ exam_held.exam.date }}</p>
     </div>
     <div class="exam-data">
       <div class="exam-desc">
-        <h3>{{ exam.name }}</h3>
+        <h3>{{ exam_held.exam.name }}</h3>
         <p>
-          Class {{ exam.classSection.Class }} {{ exam.classSection.section }} |
-          {{ exam.subject.subject }}
+          Class {{ exam_held.subject.Class.Class }} {{ exam_held.subject.Class.section }} |
+          {{ exam_held.subject.subject }}
         </p>
       </div>
       <div class="max-marks">
-        <h4>{{ exam.max_marks }}</h4>
+        <h4>{{ exam_held.exam.max_marks }}</h4>
         <p>Max Marks</p>
       </div>
     </div>

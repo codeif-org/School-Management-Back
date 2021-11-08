@@ -8,4 +8,5 @@ urlpatterns = [
     path('yourClasses/', views.YourClasses, name = 'yourClasses'),
     path('classStudentList/<int:class_id>', views.classStudentList, name = 'classStudentList'),
     path('addStudents/', views.addStudents, name='addStudents'),
+    path('api/subject/', views.subjectAPI, name='subjectAPI'),
 ]
