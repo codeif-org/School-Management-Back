@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import notice, receiver
-from teacher.models import classSection, teacher
+from teacher.models import classSection, teacher, subject
 from student.models import student
 from superadmin.models import SuperAdmin, school
 # Create your views here.
@@ -14,7 +14,13 @@ def showNotice(request):
 def createNotice(request):
     try:
         teacherobj = teacher.objects.get(user = request.user)
-        classes = classSection.objects.filter(teacher = teacherobj)
+        classes_teacher_obj = classSection.objects.filter(teacher = teacherobj)
+        teacher_subject = subject.objects.filter(teacher = teacherobj)
+        # print(classes_teacher_obj)
+        classes = [classes_teacher_obj[0]]
+        for sub in teacher_subject:
+            classes.append(sub.Class)
+        print("classes list", classes)
     except:
         super_admin = SuperAdmin.objects.get(user = request.user)
         school_object = super_admin.school
