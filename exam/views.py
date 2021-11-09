@@ -106,7 +106,7 @@ def leaderboard(request, subject_id):
     studentobj = student.objects.get(user = request.user)
     classobj = studentobj.Class
     subjects = subject.objects.filter(Class = classobj)
-    exams = exam.objects.filter(subject = subject.objects.get(id = subject_id))
+    exams = ExamHeldSubject.objects.filter(subject = subject.objects.get(id = subject_id))
     students = student.objects.filter(Class = classobj)
     print(students)
     marks = []
@@ -128,7 +128,7 @@ def progress(request, subject_id):
     classobj = studentobj.Class
     subjects = subject.objects.filter(Class = classobj)
     subjectobj = subject.objects.get(Class = classobj, id = subject_id)
-    exams = exam.objects.filter(classSection = classobj, subject = subjectobj)
+    exams = ExamHeldSubject.objects.filter(subject = subjectobj)
     scores = []
     for e in exams:
         print(e)
