@@ -50,6 +50,8 @@ def createNotice(request):
 
 def studentNotice(request):
     studentobj = student.objects.get(user = request.user)
-    classobj = classSection.objects.get(Class = studentobj.Class.Class)
+    print(studentobj.Class.id)
+    classobj = classSection.objects.get(id = studentobj.Class.id)
     notices = receiver.objects.filter(receiver = classobj)
+    print(notices)
     return render(request, 'notice.html', {'notices': notices, 'student': studentobj})
