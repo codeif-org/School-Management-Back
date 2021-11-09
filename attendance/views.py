@@ -59,3 +59,7 @@ def Attendance(request):
         return render(request, 'attendance.html', {'students': students})
     except:
         return render(request, 'attendance.html', {'msg': True})
+
+
+def studentAttendance(request):
+    return render(request, 'studentAttendance.html')

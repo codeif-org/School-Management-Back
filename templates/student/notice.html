@@ -1,45 +1,47 @@
-{% extends 'index.html' %}
-{% load static %}
-{% block extra-head %}
-    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
-{% endblock extra-head %}
-{% block nav %}
+{% extends 'index.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %} {% block nav %}
 <section id="nav">
-        <nav class="top-navbar">
-          <div class="profile-picture">
-            <img src="{% static '/img/profile.jpg' %}" />
-          </div>
-          <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
-          </div>
-        </nav>
+  <nav class="top-navbar">
+    <div class="profile-picture">
+      <img src="{% static '/img/profile.jpg' %}" />
+    </div>
+    <div class="school-name">
+      <h2>Sample Sr. Sec. School</h2>
+      <h5 class="faded">Delhi</h5>
+    </div>
+  </nav>
 </section>
-{% endblock nav %}
-{% block content %}
+{% endblock nav %} {% block content %}
 <section id="main">
-<section id="start-att">
-        <div class="component-back">
-          <div>
-            <h2>Your Notices</h2>
-          </div>
-          <!-- <button class="btn btn-lg">Post</button> -->
+  <section id="start-att">
+    <div class="component-back">
+      <div>
+        <h2>Your Notices</h2>
+      </div>
+      <!-- <button class="btn btn-lg">Post</button> -->
+    </div>
+  </section>
+  <section id="home-menu">
+    <div class="home-menu">
+      {% if notices %} {% for notice in notices %}
+      <div class="menu-list notice-list">
+        <p>{{ notice.note.date.date }} | {{ notice.note.date.time }}</p>
+        <h2>{{ notice.note.topic }}</h2>
+        <p>{{ notice.note.desc }}</p>
+        <p>to Class {{ student.Class.Class }}th</p>
+      </div>
+      {% endfor %} {% else %}
+      <section id="not-found">
+        <div class="not-found">
+          <h1>
+            <strong>Wait! Currently no notices are there.</strong>
+          </h1>
         </div>
       </section>
-    <section id="home-menu">
-        <div class="home-menu">
-          {% for notice in notices %}
-          <div class="menu-list notice-list">
-            <p>{{ notice.note.date.date }} | {{ notice.note.date.time }}</p>
-            <h2>{{ notice.note.topic }}</h2>
-            <p>
-              {{ notice.note.desc }}
-            </p>
-            <p>to Class {{ student.Class.Class }}th</p>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+      {% endif %}
+    </div>
+  </section>
 </section>
 {% endblock content %}
