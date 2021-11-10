@@ -8,7 +8,7 @@ class examAdmin(admin.ModelAdmin):
 
 @admin.register(score)
 class scoreAdmin(admin.ModelAdmin):
-    list_display = ('id', 'exam','stu', 'score')
+    list_display = ('id', 'exam_held','stu', 'score')
 
 @admin.register(ExamHeldSubject)
 class ExamHeldSubjectAdmin(admin.ModelAdmin):
