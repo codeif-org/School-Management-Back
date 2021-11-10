@@ -28,10 +28,6 @@
         <h2 class="left-column">EXAM</h2>
         <h2 class="right-column">MARKS</h2>
       </div>
-      <!-- <div class="table-list table-rows">
-        <h3 class="left-column">Half yearly examination 2021</h3>
-        <h3 class="right-column">45/50</h3>
-      </div> -->
       {% for score in scores %}
       <div class="table-list table-rows">
         <h3 class="left-column">{{ score.exam_held.exam.name }}</h3>
