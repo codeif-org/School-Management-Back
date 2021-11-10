@@ -1,47 +1,45 @@
-{% extends 'notice.html' %}
-{% load static %}
-{% block extra-head %}
-    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-{% endblock extra-head %}
-{% block content %}
-    <section id="main">
-    <section id="progress-carousel">
-        <div class="subject-container">
-          <div class="subject-arrow">
-            <i class="fas fa-chevron-circle-left"></i>
-          </div>
-          <div class="subject">
-            {% for subject in subjects %}
-            <button class="subject-btn btn-black">{{ subject.subject }}</button>
-            {% endfor %}
-          </div>
-          <div class="subject-arrow">
-            <i class="fas fa-chevron-circle-right"></i>
-          </div>
-        </div>
-      </section>
-      <!-- table and graphs -->
+{% extends 'notice.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+<link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+<link rel="stylesheet" href="{% static '/css/style.css' %}" />
+{% endblock extra-head %} {% block content %}
+<section id="main">
+  <section id="progress-carousel">
+    <div class="subject-container">
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-left"></i>
+      </div>
+      <div class="subject">
+        {% for subject in subjects %}
+        <button class="subject-btn btn-black">{{ subject.subject }}</button>
+        {% endfor %}
+      </div>
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-right"></i>
+      </div>
+    </div>
+  </section>
+  <!-- table and graphs -->
 
-      <section class="progress">
-        <div class="progress-graph"></div>
-        <div class="progress-table">
-          <table>
-            <tr>
-              <th>Exam</th>
-              <th>Marks</th>
-            </tr>
-            {% for score in scores %}
-            <tr>
-              <td>{{ score.exam_held.exam.name }}</td>
-              <td>{{ score.score }}/{{ score.exam_held.exam.max_marks }}</td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-      </section>
-    </section>
-{% endblock content %}
-{% block script %}  <script src="{% static 'js/progress.js' %}"></script> {% endblock script %} 
+  <section class="progress">
+    <div class="progress-table">
+      <table>
+        <tr>
+          <th>Exam</th>
+          <th>Marks</th>
+        </tr>
+        {% for score in scores %}
+        <tr>
+          <td>{{ score.exam_held.exam.name }}</td>
+          <td>{{ score.score }}/{{ score.exam_held.exam.max_marks }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="progress-graph"></div>
+  </section>
+</section>
+{% endblock content %} {% block script %}
+<script src="{% static 'js/progress.js' %}"></script>
+{% endblock script %}
