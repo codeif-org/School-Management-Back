@@ -62,4 +62,12 @@ def Attendance(request):
 
 
 def studentAttendance(request):
-    return render(request, 'studentAttendance.html')
+    attendances = attendance.objects.filter(student = student.objects.get(user = request.user))
+    attended = 0
+    total_classes = attendances.count()
+    for att in attendances:
+        if att.present == True:
+            attended = attended + 1
+    missed = total_classes - attended
+    percentage = (attended/total_classes)*100
+    return render(request, 'studentAttendance.html', {'total_classes': total_classes, 'attended': attended, 'missed': missed, 'percentage': str(round(percentage, 2))})
