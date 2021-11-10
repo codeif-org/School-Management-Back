@@ -105,8 +105,11 @@ def marksUpdate(request):
 def leaderboard(request, subject_id):
     studentobj = student.objects.get(user = request.user)
     classobj = studentobj.Class
+    print(classobj)
     subjects = subject.objects.filter(Class = classobj)
+    print(subjects)
     exams = ExamHeldSubject.objects.filter(subject = subject.objects.get(id = subject_id))
+    print(exams)
     students = student.objects.filter(Class = classobj)
     print(students)
     marks = []
@@ -115,7 +118,7 @@ def leaderboard(request, subject_id):
         for e in exams:
             print(e, s)
             try:
-                mark = score.objects.get(exam = e, stu = s)
+                mark = score.objects.get(exam_held = e, stu = s)
                 m = m + mark.score
             except:
                 m = 0
@@ -127,12 +130,12 @@ def progress(request, subject_id):
     studentobj = student.objects.get(user = request.user)
     classobj = studentobj.Class
     subjects = subject.objects.filter(Class = classobj)
-    subjectobj = subject.objects.get(Class = classobj, id = subject_id)
+    subjectobj = subject.objects.get(id = subject_id)
     exams = ExamHeldSubject.objects.filter(subject = subjectobj)
     scores = []
     for e in exams:
         print(e)
-        print(studentobj)
-        scoreobj = score.objects.get(exam = e, stu = studentobj)
+        scoreobj = score.objects.get(exam_held = e, stu = studentobj)
         scores.append(scoreobj)
+    print(scores)
     return render(request, 'progress.html', {'scores': scores, 'subjects': subjects})

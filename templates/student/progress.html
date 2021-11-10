@@ -35,8 +35,8 @@
             </tr>
             {% for score in scores %}
             <tr>
-              <td>{{ score.exam.name }}</td>
-              <td>{{ score.score }}/{{ score.exam.max_marks }}</td>
+              <td>{{ score.exam_held.exam.name }}</td>
+              <td>{{ score.score }}/{{ score.exam_held.exam.max_marks }}</td>
             </tr>
             {% endfor %}
           </table>
