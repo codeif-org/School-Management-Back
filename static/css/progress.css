@@ -58,24 +58,27 @@
   width: var(--center-width);
   height: auto;
   margin: auto;
-  display: flex;
-  justify-content: space-between;
 }
 
 .progress-graph {
+  margin: 30px auto 90px;
   background-color: var(--light-grey);
-  min-width: 45%;
+  width: 70%;
   height: 300px;
   border: 1px solid var(--dark-grey);
+  border-radius: 8px;
 }
 
 .progress-table {
-  min-width: 45%;
+  margin: 30px auto;
+
+  width: 70%;
   height: auto;
   border: 1px solid var(--dark-grey);
+  border-radius: 8px;
 }
 
-table {
+/* table {
   margin: 0 auto 10px;
   width: 80%;
 }
@@ -88,4 +91,42 @@ td {
   background-color: var(--light-grey);
   padding: 5px 20px;
   margin: 10px 0;
+} */
+
+.table-rows {
+  display: flex;
+  justify-content: space-evenly;
+}
+.table-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--dark-grey);
+}
+
+.table-list {
+  margin: 10px;
+  background-color: var(--light-grey);
+  padding: 10px 5px;
+}
+.table-list h3 {
+  font-weight: 200;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.left-column {
+  width: 50%;
+}
+.right-column {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
+
+@media screen and (max-width: 800px) {
+  .progress-table {
+    width: 100%;
+  }
+  .progress-graph {
+    width: 100%;
+  }
 }
