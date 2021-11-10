@@ -37,7 +37,7 @@
           {% for student in students %} {% for mark in marks %}
           {% if forloop.counter == forloop.parentloop.counter %}
           <div class="add-stud-list">
-            <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %}{% if student.lname %} {{ student.lname }}{% endif %} | {{ student.roll_no }}</p>
+            <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{student.mname}}{% endif %}{% if student.lname != "NULL" %} {{ student.lname }}{% endif %} | {{ student.roll_no }}</p>
             <h2>{{ mark }}</h2>
           </div>
           {% endif %}
