@@ -20,11 +20,25 @@
       </div>
     </div>
   </section>
-  <!-- table and graphs -->
 
+  <!-- table and graphs -->
   <section class="progress">
     <div class="progress-table">
-      <table>
+      <div class="table-heading table-rows exam-marks-list">
+        <h2 class="left-column">EXAM</h2>
+        <h2 class="right-column">MARKS</h2>
+      </div>
+      <!-- <div class="table-list table-rows">
+        <h3 class="left-column">Half yearly examination 2021</h3>
+        <h3 class="right-column">45/50</h3>
+      </div> -->
+      {% for score in scores %}
+      <div class="table-list table-rows">
+        <h3 class="left-column">{{ score.exam_held.exam.name }}</h3>
+        <h3 class="right-column">{{ score.score }}/{{ score.exam_held.exam.max_marks }}</h3>
+      </div>
+      {% endfor %}
+      <!-- <table>
         <tr>
           <th>Exam</th>
           <th>Marks</th>
@@ -35,7 +49,7 @@
           <td>{{ score.score }}/{{ score.exam_held.exam.max_marks }}</td>
         </tr>
         {% endfor %}
-      </table>
+      </table> -->
     </div>
     <div class="progress-graph"></div>
   </section>
