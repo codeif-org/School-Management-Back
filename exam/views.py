@@ -160,7 +160,7 @@ def leaderboard(request):
     exam_qs = set(exams_qs) 
     # remove duplicates from exam_qs and exam_qs is a set of exams model objects
     # print(len(exam_qs))    
-    return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs})
+    return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs, 'class': cls})
 
 def scoreAPI(request):
     print(request.GET)
