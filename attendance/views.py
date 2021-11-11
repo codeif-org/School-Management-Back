@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from teacher.models import teacher, classSection
 from student.models import student
-from attendance.models import attendance
+from attendance.models import attendance, Leave
 
 
 from rest_framework.decorators import api_view
@@ -71,3 +71,14 @@ def studentAttendance(request):
     missed = total_classes - attended
     percentage = (attended/total_classes)*100
     return render(request, 'studentAttendance.html', {'total_classes': total_classes, 'attended': attended, 'missed': missed, 'percentage': str(round(percentage, 2))})
+
+def applyLeave(request):
+    if request.method == "POST":
+        stu = student.objects.get(user = request.user)
+        date_from = request.POST['date_from']
+        date_to = request.POST['date_to']
+        reason = request.POST['reason']
+        leave = Leave(student = stu, date_from = date_from, date_to = date_to, reason = reason)
+        leave.save()
+        return redirect('student:studenthome')
+    return render(request,'applyLeave.html')
