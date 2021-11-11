@@ -164,6 +164,22 @@ def leaderboard(request):
 import json
 def scoreAPI(request):
     print(request.GET)
+    if 'subject' and 'exam' in request.GET:
+        subject = request.GET['subject']
+        exam = request.GET['exam']
+        exam_held = ExamHeldSubject.objects.get(subject = subject, exam = exam)
+        print(exam_held)
+        score_qs = score.objects.filter(exam_held = exam_held)
+        print(score_qs)
+        
+        student_score_dict = {} # student_id : [fname, roll_no, score]
+        for score_q in score_qs:
+            student_obj = student.objects.get(id = score_q.stu.id)
+            student_score_dict[score_q.stu.id] = [student_obj.fname, student_obj.roll_no, score_q.score]
+        print(student_score_dict) 
+        student_score_json = json.dumps(student_score_dict)   
+        return HttpResponse(student_score_json)
+    
     if 'exam' in request.GET:
         print(request.GET['exam'])
         examHeld_qs = ExamHeldSubject.objects.filter(exam__id = request.GET['exam'])
@@ -195,13 +211,14 @@ def scoreAPI(request):
         # print(student_score_dict) 
         student_score_json = json.dumps(student_score_dict)   
         return HttpResponse(student_score_json)
+    
     if 'subject' in request.GET:
         print(request.GET['subject']) 
         examHeld_qs = ExamHeldSubject.objects.filter(subject__id = request.GET['subject'])    
         print(examHeld_qs) # they're giving the 3 objects because each subject has 3 exams
         score_qs = score.objects.filter(exam_held__in = examHeld_qs)
         # print(score_qs)
-        
+
         student_score_dict = {} # student_id : [fname, roll_no, score]
         for score_q in score_qs:
             # print(score_q.stu.id, score_q.score)
@@ -213,5 +230,5 @@ def scoreAPI(request):
                 student_score_dict[student_obj.id] = [student_obj.fname, student_obj.roll_no, curr_score + score_q.score]
         print(student_score_dict)
         student_score_json = json.dumps(student_score_dict)
-        return HttpResponse(student_score_json)            
+        return HttpResponse(student_score_json)           
     return HttpResponse(f"This is scoreAPI page")
