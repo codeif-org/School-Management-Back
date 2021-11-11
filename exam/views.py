@@ -154,11 +154,15 @@ def leaderboard(request):
         exam_q = exam.objects.get(id = examHeld_q.exam.id)
         exams_qs.append(exam_q)
     # print(len(exams_qs))
-    exam_qs = set(exams_qs) # remove duplicates exam_held from exam_qs
+    exam_qs = set(exams_qs) 
+    # remove duplicates from exam_qs and exam_qs is a set of exams model objects
     # print(len(exam_qs))    
     return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs})
 
 
 def scoreAPI(request):
-    
+    print(request.GET)
+    if 'exam' in request.GET:
+        # print(exam)
+        print(request.GET['exam'])
     return HttpResponse(f"This is scoreAPI page")
