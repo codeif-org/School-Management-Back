@@ -147,4 +147,14 @@ def leaderboard(request):
     print(cls)
     subject_qs = subject.objects.filter(Class = cls)
     print(subject_qs)
-    return render(request, 'leaderboard.html', {'subjects': subject_qs})
+    examHeld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
+    print(examHeld_qs)
+    
+    exams_qs = []
+    for examHeld_q in examHeld_qs:
+        exam_q = exam.objects.get(id = examHeld_q.exam.id)
+        exams_qs.append(exam_q)
+    print(len(exams_qs))
+    exam_qs = set(exams_qs) # remove duplicates
+    print(len(exam_qs))    
+    return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs})
