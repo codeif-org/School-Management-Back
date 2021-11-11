@@ -143,4 +143,8 @@ def progress(request, subject_id):
 
 def leaderboard(request):
     print(request.user.id)
-    return render(request, 'leaderboard.html')
+    cls = student.objects.get(user = request.user).Class
+    print(cls)
+    subject_qs = subject.objects.filter(Class = cls)
+    print(subject_qs)
+    return render(request, 'leaderboard.html', {'subjects': subject_qs})
