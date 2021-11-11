@@ -149,7 +149,6 @@ def leaderboard(request):
     # print(subject_qs)
     examHeld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
     # print(examHeld_qs)
-    
     exams_qs = []
     for examHeld_q in examHeld_qs:
         exam_q = exam.objects.get(id = examHeld_q.exam.id)
@@ -161,4 +160,5 @@ def leaderboard(request):
 
 
 def scoreAPI(request):
+    
     return HttpResponse(f"This is scoreAPI page")
