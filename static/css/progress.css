@@ -130,3 +130,56 @@ td {
     width: 100%;
   }
 }
+
+/* leaderboard */
+#lselect {
+  width: var(--center-width);
+  margin: auto;
+}
+
+.lselect {
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.lselect h3 {
+  margin: 8px 0px;
+}
+
+.lselect p {
+  font-size: 18px;
+  margin: 8px;
+}
+
+.leader-head > h3:nth-child(3) {
+  margin-top: 20px;
+}
+
+.leader-filters {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.leader-filter {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.leader-filter select {
+  /* width: 90px; */
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease;
+}
+
+.leader-filter select:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
