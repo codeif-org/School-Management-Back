@@ -168,9 +168,9 @@ def scoreAPI(request):
         subject = request.GET['subject']
         exam = request.GET['exam']
         exam_held = ExamHeldSubject.objects.get(subject = subject, exam = exam)
-        print(exam_held)
+        # print(exam_held)
         score_qs = score.objects.filter(exam_held = exam_held)
-        print(score_qs)
+        # print(score_qs)
         
         student_score_dict = {} # student_id : [fname, roll_no, score]
         for score_q in score_qs:
