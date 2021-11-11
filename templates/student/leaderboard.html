@@ -1,49 +1,98 @@
-{% extends 'notice.html' %}
-{% load static %}
-{% block extra-head %}
-    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
-{% endblock extra-head %}
+{% extends 'notice.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/style.css' %}" />
+<link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+{% endblock extra-head %} 
 {% block content %}
 <section id="main">
-    <section id="progress-carousel">
-        <div class="subject-container">
-          <div class="subject-arrow">
-            <i class="fas fa-chevron-circle-left"></i>
-          </div>
-          <div class="subject">
-            {% for subject in subjects %}
-            <button class="subject-btn btn-black">{{ subject.subject }}</button>
-            {% endfor %}
-          </div>
-          <div class="subject-arrow">
-            <i class="fas fa-chevron-circle-right"></i>
-          </div>
+  <!-- leaderboard selection section -->
+  <section id="lselect">
+    <div class="menu-list lselect">
+      <div class="leader-head">
+        <h2>Your Leaderboard</h2>
+        <h3>Track your performance with others</h3>
+        <h3>Filter By:</h3>
+      </div>
+      <div class="leader-filters">
+        <div class="leader-filter">
+          <p>Exam:</p>
+          <select class="leader-select">
+            <option>Select Exam</option>
+            <option>Class 1</option>
+            <option>Class 2</option>
+            <option>Class 3</option>
+            <option>Class 4</option>
+            <option>Class 5</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+          </select>
         </div>
-      </section>
-
-      <!-- student list -->
-
-      <section id="start-att">
-        <div class="component-back">
-          <h2>Class {{ class.Class }} {% if class.section %}{{ class.section }}{% endif %}</h2>
-          <h2>Overall Score</h2>
+        <div class="leader-filter">
+          <p>Subject:</p>
+          <select class="leader-select">
+            <option value="">Select Subject</option>
+            <option>Class 1</option>
+            <option>Class 2</option>
+            <option>Class 3</option>
+            <option>Class 4</option>
+            <option>Class 5</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+          </select>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section>
-        <div class="student-list">
-          {% for student in students %} {% for mark in marks %}
-          {% if forloop.counter == forloop.parentloop.counter %}
-          <div class="add-stud-list">
-            <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{student.mname}}{% endif %}{% if student.lname != "NULL" %} {{ student.lname }}{% endif %} | {{ student.roll_no }}</p>
-            <h2>{{ mark }}</h2>
-          </div>
-          {% endif %}
-          {% endfor %}{% endfor %}
-        </div>
-      </section>
+  {% comment %} <section id="progress-carousel">
+    <div class="subject-container">
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-left"></i>
+      </div>
+      <div class="subject">
+        {% for subject in subjects %}
+        <button class="subject-btn btn-black">{{ subject.subject }}</button>
+        {% endfor %}
+      </div>
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-right"></i>
+      </div>
+    </div>
+  </section> {% endcomment %}
 
+  <!-- student list -->
+
+  <section id="start-att">
+    <div class="component-back">
+      <h2>
+        Class {{ class.Class }} {% if class.section %}{{ class.section }}{% endif %}
+      </h2>
+      <h2>Overall Score</h2>
+    </div>
+  </section>
+
+  <section>
+    <div class="student-list">
+      {% for student in students %} {% for mark in marks %} 
+      {% if forloop.counter == forloop.parentloop.counter %}
+      <div class="add-stud-list">
+        <p>
+          {{ forloop.counter }}. {{ student.fname }} 
+          {% if student.mname != "NULL" %}{{student.mname}}{% endif %}
+          {% if student.lname != "NULL" %}{{ student.lname }}{% endif %} | {{ student.roll_no }}
+        </p>
+        <h2>{{ mark }}</h2>
+      </div>
+      {% endif %} 
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </section>
 </section>
 {% endblock content %}

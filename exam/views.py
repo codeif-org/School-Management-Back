@@ -109,21 +109,21 @@ def leaderboard(request, subject_id):
     subjects = subject.objects.filter(Class = classobj)
     print(subjects)
     exams = ExamHeldSubject.objects.filter(subject = subject.objects.get(id = subject_id))
-    print(exams)
+    print("exams:", exams)
     students = student.objects.filter(Class = classobj)
-    print(students)
+    # print(students)
     marks = []
     for s in students:
         m = 0
         for e in exams:
-            print(e, s)
+            # print(e, s)
             try:
                 mark = score.objects.get(exam_held = e, stu = s)
                 m = m + mark.score
             except:
                 m = 0
         marks.append(m)
-    print(marks)
+    # print(marks)
     return render(request, 'leaderboard.html', {'subjects': subjects, 'sub': subjects[0], 'students': students, 'class': classobj, 'marks': marks})
 
 def progress(request, subject_id):
