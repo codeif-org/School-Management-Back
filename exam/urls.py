@@ -8,5 +8,6 @@ urlpatterns = [
     path('createExam/', views.createExam, name='createExam'),
     path('api/marksupdate/', views.marksUpdate, name='marksUpdate'),
     path('student/leaderboard/', views.leaderboard, name='leaderboard'),
+    path('student/leaderboard/api/score', views.scoreAPI, name='scoreAPI'),
     path('student/progress/<int:subject_id>', views.progress, name='progress'),
 ]
