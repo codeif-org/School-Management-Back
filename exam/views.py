@@ -3,6 +3,7 @@ from .models import exam, score, ExamHeldSubject
 from superadmin.models import school
 from teacher.models import teacher, classSection, subject
 from student.models import student
+import json
 
 # rest
 from rest_framework import status
@@ -161,7 +162,6 @@ def leaderboard(request):
     # print(len(exam_qs))    
     return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs})
 
-import json
 def scoreAPI(request):
     print(request.GET)
     if 'subject' and 'exam' in request.GET:
