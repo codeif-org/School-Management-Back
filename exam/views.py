@@ -194,5 +194,24 @@ def scoreAPI(request):
             counter += 1
         # print(student_score_dict) 
         student_score_json = json.dumps(student_score_dict)   
-        return HttpResponse(student_score_json)     
+        return HttpResponse(student_score_json)
+    if 'subject' in request.GET:
+        print(request.GET['subject']) 
+        examHeld_qs = ExamHeldSubject.objects.filter(subject__id = request.GET['subject'])    
+        print(examHeld_qs) # they're giving the 3 objects because each subject has 3 exams
+        score_qs = score.objects.filter(exam_held__in = examHeld_qs)
+        # print(score_qs)
+        
+        student_score_dict = {} # student_id : [fname, roll_no, score]
+        for score_q in score_qs:
+            # print(score_q.stu.id, score_q.score)
+            student_obj = student.objects.get(id = score_q.stu.id)
+            if student_obj not in student_score_dict:
+                student_score_dict[student_obj.id] = [student_obj.fname, student_obj.roll_no, score_q.score]
+            else:
+                curr_score = student_score_dict[student_obj.id][2]
+                student_score_dict[student_obj.id] = [student_obj.fname, student_obj.roll_no, curr_score + score_q.score]
+        print(student_score_dict)
+        student_score_json = json.dumps(student_score_dict)
+        return HttpResponse(student_score_json)            
     return HttpResponse(f"This is scoreAPI page")
