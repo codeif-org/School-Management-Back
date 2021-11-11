@@ -11,7 +11,9 @@ from rest_framework.response import Response
 from exam.serializers import ScoreSerializer
 
 # Create your views here.
-
+# https://www.dev2qa.com/what-does-double-underscore-__-means-in-django-model-queryset-objects-filter-method/
+# field_lookup
+# fieldname__lookuptype=value
 
 def teacherExamList(request):
     usr = request.user
@@ -159,10 +161,39 @@ def leaderboard(request):
     # print(len(exam_qs))    
     return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs})
 
-
+import json
 def scoreAPI(request):
     print(request.GET)
     if 'exam' in request.GET:
-        # print(exam)
         print(request.GET['exam'])
+        examHeld_qs = ExamHeldSubject.objects.filter(exam__id = request.GET['exam'])
+        # exam__id and exam works same because overall exam is a foreign key in ExamHeldSubject
+        # print(examHeld_qs) this gives 5 ExamHeldSubject objects because each subject has 5 exams
+        print(examHeld_qs)
+        score_qs = score.objects.filter(exam_held__in = examHeld_qs)
+        print(score_qs)
+        # student_ids = []
+        score_dict = {} # student_id : score
+        for score_q in score_qs:
+            # print(score_q.stu.id, score_q.score)
+            if score_q.stu.id not in score_dict:
+                score_dict[score_q.stu.id] = score_q.score
+            else:
+                curr_score = score_dict[score_q.stu.id]    
+                score_dict[score_q.stu.id] = curr_score + score_q.score
+        print(score_dict)
+        # score_json = json.dumps(score_dict)
+        
+        # create id list with arguments of student_name, roll number and score
+        student_score_dict = {}
+        counter=1
+        for item in score_dict.items():
+            print(item[0], item[1])
+            student_obj = student.objects.get(id = item[0])
+            print(student_obj)
+            student_score_dict[counter] = [student_obj.fname, student_obj.roll_no, item[1]]
+            counter += 1
+        print(student_score_dict) 
+        student_score_json = json.dumps(student_score_dict)   
+        return HttpResponse(student_score_json)     
     return HttpResponse(f"This is scoreAPI page")
