@@ -164,7 +164,7 @@ def leaderboard(request):
 
 def scoreAPI(request):
     print(request.GET)
-    if 'subject' and 'exam' in request.GET:
+    if ('subject' in request.GET) and ('exam' in request.GET):
         subject = request.GET['subject']
         exam = request.GET['exam']
         exam_held = ExamHeldSubject.objects.get(subject = subject, exam = exam)
