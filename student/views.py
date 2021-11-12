@@ -11,6 +11,7 @@ def studenthome(request):
     return render(request, 'index.html', {'student': studentobj, 'sub': sub[0]})
 
 # http://127.0.0.1:8000/student/api/classStudent?class=21
+# this can also be implented using Rest API in Django
 def classStudentAPI(request):
     if "class" in request.GET:
         class_id = request.GET['class']
