@@ -231,4 +231,4 @@ def scoreAPI(request):
         print(student_score_dict)
         student_score_json = json.dumps(student_score_dict)
         return HttpResponse(student_score_json)           
-    return HttpResponse({"msg": "No data found try to do some different parameters"})
+    return HttpResponse("No data found try to do some different parameters")

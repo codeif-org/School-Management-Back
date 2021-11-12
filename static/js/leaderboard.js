@@ -13,16 +13,18 @@ let responseHandler = function (res) {
 
   let data_arr = Object.entries(data);
   //   student_id: student_name, roll_no, score
+  let count = 1;
   data_arr.forEach((elem) => {
     console.log(elem[1][0]);
     stud_inner_html =
       stud_inner_html +
       `<div class="add-stud-list">
     <p>
-      1. ${elem[1][0]} | ${elem[1][1]}
+      ${count}. ${elem[1][0]} | ${elem[1][1]}
     </p>
     <h2>${elem[1][2]}</h2>
   </div>`;
+  count++;
   });
   stud_list.innerHTML = stud_inner_html;
   console.log("done");
