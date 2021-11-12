@@ -166,6 +166,8 @@ def leaderboard(request):
     # print(len(exam_qs))    
     return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs, 'class': cls})
 
+
+# 127.0.0.1:8000/exam/student/leaderboard/api/score?subject=571&exam=384
 def scoreAPI(request):
     print(request.GET)
     if ('subject' in request.GET) and ('exam' in request.GET):
