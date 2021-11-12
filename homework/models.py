@@ -18,3 +18,4 @@ class HomeworkSubmission(models.Model):
     homework = models.ForeignKey(Homework, on_delete=models.CASCADE)
     student = models.ForeignKey(student, on_delete=models.CASCADE)
     sub_date = models.DateTimeField(auto_now=True)
+    sub_desc = models.CharField(max_length=2000, blank=True, null=True)

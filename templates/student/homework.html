@@ -56,7 +56,9 @@
               {{ homework.homework.desc }}
             </p>
             <div class="duedate-submit-btn">
-              <button class="btn btn-green">Submit</button>
+              <a href="{% url 'homework:submitHomework' homework.homework.id %}">
+                <button class="btn btn-green">Submit</button>
+              </a>
               <p><span>Due On: </span><br /><span>{{ homework.homework.due_date.date }} | {{ homework.homework.due_date.time }}</span></p>
             </div>
           </div>

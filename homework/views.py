@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from student.models import student
 from teacher.models import classSection, teacher, subject
-from .models import Homework, Student_Homework
+from .models import Homework, Student_Homework, HomeworkSubmission
 # Create your views here.
 
 def homeworkTeacher(request):
@@ -48,3 +48,21 @@ def homeworkStudent(request):
     #     subjects.append(subjectobj.subject)
     # return render(request, 'homework.html', {'homeworks': homeworks, 'student': studentobj, 'subjects': subjects})
     return render(request, 'homework.html', {'homeworks': homeworks})
+
+def submitHomework(request, homework_id):
+    homeworkStudent = Student_Homework.objects.get(homework = Homework.objects.get(id = homework_id))
+    homework_submission = ''
+    submission = ''
+    if request.method == "POST":
+        stu = student.objects.get(user = request.user)
+        homework = Homework.objects.get(id = homework_id)
+        sub_desc = request.POST['sub_desc']
+        homework_submission = HomeworkSubmission(student = stu, homework = homework, sub_desc = sub_desc)
+        homework_submission.save()
+        return redirect('homework:homework')
+    try:
+        submission = HomeworkSubmission.objects.get(student = student.objects.get(user = request.user), homework = Homework.objects.get(id = homework_id))
+        submitted = True
+    except:
+        submitted = False
+    return render(request, 'submitHomework.html', {'submitted': submitted, 'submission': homework_submission, 'sub': submission, 'homework': homeworkStudent})

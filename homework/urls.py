@@ -7,4 +7,5 @@ urlpatterns = [
     path('teacher/createHomework/', views.createHomework, name='createHomework'),
     # path('teacher/api/createHomework/', views.homeworkAPI, name='homeworkAPI'),
     path('student/', views.homeworkStudent, name='homework'),
+    path('student/submitHomework/<int:homework_id>', views.submitHomework, name='submitHomework'),
 ]

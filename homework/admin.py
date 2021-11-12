@@ -11,4 +11,4 @@ class Student_HomeworkAdmin(admin.ModelAdmin):
 
 @admin.register(HomeworkSubmission)
 class HomeworkSubmissionAdmin(admin.ModelAdmin):
-    list_display = ('student', 'homework', 'sub_date')
+    list_display = ('student', 'homework', 'sub_date', 'sub_desc')
