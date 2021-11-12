@@ -10,12 +10,21 @@ let responseHandler = function (res) {
   console.log(Object.entries(data));
 
   let stud_inner_html = "";
-
+  
   let data_arr = Object.entries(data);
+
+  var sortedArray = data_arr.sort(function(a, b) {
+    if (a[1][2] == b[1][2]) {
+      return a[1][1] - b[1][1];
+    }
+    return b[1][2] - a[1][2];
+  });
+  console.log("sorted array", sortedArray);
   //   student_id: student_name, roll_no, score
+  console.log("data array", data_arr);
   let count = 1;
   data_arr.forEach((elem) => {
-    console.log(elem[1][0]);
+    // console.log(elem[1][0]);
     stud_inner_html =
       stud_inner_html +
       `<div class="add-stud-list">
@@ -24,7 +33,7 @@ let responseHandler = function (res) {
     </p>
     <h2>${elem[1][2]}</h2>
   </div>`;
-  count++;
+    count++;
   });
   stud_list.innerHTML = stud_inner_html;
   console.log("done");
@@ -43,13 +52,16 @@ let submitHandler = function () {
   if (exam === "none" && subject !== "none") {
     url = "/exam/student/leaderboard/api/score?" + "subject=" + subject;
     console.log(url);
-  }
-  else if (exam !== "none" && subject === "none") {
+  } else if (exam !== "none" && subject === "none") {
     url = "/exam/student/leaderboard/api/score?" + "exam=" + exam;
     console.log(url);
-  }
-  else{
-    url = "/exam/student/leaderboard/api/score?" + "exam=" + exam + "&subject=" + subject;
+  } else {
+    url =
+      "/exam/student/leaderboard/api/score?" +
+      "exam=" +
+      exam +
+      "&subject=" +
+      subject;
     console.log(url);
   }
 

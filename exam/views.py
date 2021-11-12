@@ -16,6 +16,10 @@ from exam.serializers import ScoreSerializer
 # field_lookup
 # fieldname__lookuptype=value
 
+# for dict sorting
+# from collections import OrderedDict
+# student_score_dict = OrderedDict(sorted(student_score_dict.items(), key=lambda t: t[1][2], reverse=True))
+
 def teacherExamList(request):
     usr = request.user
     oteacher = teacher.objects.get(user=usr)
