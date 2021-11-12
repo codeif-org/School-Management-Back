@@ -66,7 +66,7 @@
     </div>
   </section>
 
-  <section>
+  <!-- <section>
     <div class="student-list">
       {% for student in students %} {% for mark in marks %} 
       {% if forloop.counter == forloop.parentloop.counter %}
@@ -82,10 +82,32 @@
       {% endfor %}
       {% endfor %}
     </div>
+  </section> -->
+  <section>
+    <div class="student-list">
+      <div class="add-stud-list">
+        <p>
+          1. Mayur | 71
+        </p>
+        <h2>69</h2>
+      </div>
+      <div class="add-stud-list">
+        <p>
+          2. Mansi | 66
+        </p>
+        <h2>94</h2>
+      </div>
+    </div>
   </section>
 </section>
 {% endblock content %}
 {% block script %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
+  integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
 <script src="{% static '/js/leaderboard.js' %}"></script>
 {% endblock script %}
 
