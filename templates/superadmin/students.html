@@ -40,7 +40,7 @@
           {% for student in students %}
           <div class="stud-list-elem">
             <div>
-              <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %} {% if student.lname %}{{ student.lname }}{% endif %}</p>
+              <p>{{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{ student.mname }}{% endif %} {% if student.lname != "NULL" %}{{ student.lname }}{% endif %}</p>
             </div>
             <div class="stud-list-elem-options">
               <button class="btn">Info</button>

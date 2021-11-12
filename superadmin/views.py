@@ -78,8 +78,8 @@ def addStudent(request):
 def students(request):
     admin = SuperAdmin.objects.get(user = request.user)
     students = student.objects.filter(school = admin.school)
-    classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
-    sort(classes)
+    classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school=admin.school))
+    # sort(classes)
     return render(request, 'students.html', {'students': students, 'classes': classes})
 
 def teachers(request):
