@@ -35,8 +35,9 @@
       </section>
 
       <section id="admin-stud-list">
+        <h2>Click on any student to view info:</h2>
         <div class="admin-stud-list">
-          <h2>Click on any student to view info:</h2>
+          <!-- <h2>Click on any student to view info:</h2> -->
           {% for student in students %}
           <div class="stud-list-elem">
             <div>
@@ -55,6 +56,7 @@
     </section>
 {% endblock content %}
 {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js" integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static '/js/adminList.js' %}"></script>
     <script src="{% static '/js/adminStudents.js' %}"></script>
 {% endblock script %}

@@ -1,13 +1,13 @@
 console.log("added adminList.js");
 
 let studs_list = document.querySelectorAll(".stud-list-elem");
-console.log(studs_list);
+// console.log(studs_list);
 
 let compHandler = function (elem) {
-  console.log(elem);
+  // console.log(elem);
   //   elemInnerHTML = elem.innerHTML;
   //   elem.innerHTML = elemInnerHTML + `Hello`;
-  console.log(elem.childNodes[3]);
+  // console.log(elem.childNodes[3]);
   let btnElem = elem.childNodes[3];
   btnElem.classList.toggle("active-block");
 
