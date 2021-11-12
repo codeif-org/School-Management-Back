@@ -16,8 +16,8 @@
       <div class="leader-filters">
         <div class="leader-filter">
           <p>Exam:</p>
-          <select class="leader-select">
-            <option>Select Exam</option>
+          <select class="leader-select" id="examselect">
+            <option value="none">Select Exam</option>
             {% for exam in exams %}
             <option value="{{exam.id}}">{{exam.name}}</option>
             {% endfor %}
@@ -26,14 +26,15 @@
         </div>
         <div class="leader-filter">
           <p>Subject:</p>
-          <select class="leader-select">
-            <option value="">Select Subject</option>
+          <select class="leader-select" id="subselect">
+            <option value="none">Select Subject</option>
             {% for subject in subjects %}
             <option value="{{subject.id}}">{{ subject.subject }}</option>
             {% endfor %}
             {% comment %} <option>Class 10</option> {% endcomment %}
           </select>
         </div>
+        <button class="btn btn-black" onclick="submitHandler()">Apply</button>
       </div>
     </div>
   </section>
