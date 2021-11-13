@@ -6,6 +6,7 @@ from .models import notice, receiver
 from teacher.models import classSection, teacher, subject
 from student.models import student
 from superadmin.models import SuperAdmin, school
+from django.contrib.auth.models import User
 # Create your views here.
 
 def teacherNotice(request, category):
@@ -78,28 +79,26 @@ def superAdminNotice(request, category):
         # notice_qs = receiver.objects.filter(posted_by__in = superadmin_qs.user)
         notice_qs = []
         for superadmin in superadmin_qs:
-            notice_q = notice.objects.filter(posted_by = superadmin.user)
-            # print(notice_q)
-            # notice_qs.append(notice_q)
-            try:
-                if notice_q[0].note:
-                    for item in notice_q:
-                        notice_qs.append(item)
-            except:
-                print("no notice")
-                pass  
-        print(notice_qs)    
-        return render(request, 'superNotice.html', {'receivers': notice_qs, 'superadmin': superadminObj})
+            notice_q = notice.objects.filter(posted_by = superadmin.user).values()
+            print(notice_q)
+            for item in notice_q:
+                notice_qs.append(item) 
+        print(notice_qs)
+        for notice_q in notice_qs:
+            notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
+            notice_q["posted_by"] = User.objects.get(id = notice_q["posted_by_id"]).username
+        print("last notice_qs: ", notice_qs)        
+        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
     elif category == 'sent':
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
         superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
         notice_qs = notice.objects.filter(posted_by = user).values()
         print(notice_qs)
-        receiver_qs = []
+        # receiver_qs = []
         for notice_q in notice_qs:
             notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
         print(notice_qs)    
-        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj, 'receivers': receiver_qs})
+        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
         
         

@@ -28,10 +28,12 @@
     <div class="home-menu">
       {% for notice in notices %}
       <div class="menu-list notice-list">
-        <p>{{ notice.date.date }} | {{ notice.date.time }}</p>
+        <p>{{ notice.date.date }} | {{ notice.date.time }} <br /> 
+        {% if notice.posted_by %}<span>Posted By: {{notice.posted_by}}</span>{% endif %}  
+        </p>
         <h2>{{ notice.topic }}</h2>
         <p>{{ notice.desc }}</p>
-        <p>to Classes <br /> {% for class in notice.receiver %}{{class.receiver.Class}}{{class.receiver.section}} | {% endfor %}</p>
+        <p>to Classes: <br /> {% for class in notice.receiver %}{{class.receiver.Class}}{{class.receiver.section}} | {% endfor %}</p>
       </div>
       {% endfor %}
     </div>
