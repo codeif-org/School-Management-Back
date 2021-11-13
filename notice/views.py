@@ -8,7 +8,7 @@ from student.models import student
 from superadmin.models import SuperAdmin, school
 # Create your views here.
 
-def showNotice(request):
+def teacherNotice(request, category):
     # teacherobj = teacher.objects.get(user = request.user)
     # classobj = classSection.objects.get(teacher = teacherobj)
     receivers = receiver.objects.filter(posted_by = request.user)
