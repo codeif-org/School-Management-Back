@@ -12,8 +12,8 @@ from django.contrib.auth.models import User
 def teacherNotice(request, category):
     # teacherobj = teacher.objects.get(user = request.user)
     # classobj = classSection.objects.get(teacher = teacherobj)
-    receivers = receiver.objects.filter(posted_by = request.user)
-    return render(request, 'addNotice.html', {'receivers': receivers})
+    receivers = notice.objects.filter(posted_by = request.user)
+    return render(request, 'teacherNotice.html', {'receivers': receivers})
 
 def createNotice(request):
     try:
