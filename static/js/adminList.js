@@ -1,6 +1,6 @@
 console.log("added adminList.js");
 
-let studs_list = document.querySelectorAll(".stud-list-elem");
+// let studs_list = document.querySelectorAll(".stud-list-elem");
 // console.log(studs_list);
 
 let compHandler = function (elem) {
@@ -11,19 +11,35 @@ let compHandler = function (elem) {
   let btnElem = elem.childNodes[3];
   btnElem.classList.toggle("active-block");
 
-  studs_list.forEach((elem_) => {
-    if (elem_ !== elem) {
-      // console.log("yes");
-      elem_.childNodes[3].classList.remove("active-block");
-    }
-    // else {
-    //   console.log("no");
-    // }
-  });
+  // studs_list.forEach((elem_) => {
+  //   if (elem_ !== elem) {
+  //     // console.log("yes");
+  //     elem_.childNodes[3].classList.remove("active-block");
+  //   }
+  //   // else {
+  //   //   console.log("no");
+  //   // }
+  // });
 };
 
-studs_list.forEach((elem) => {
-  elem.addEventListener("click", function () {
-    compHandler(elem);
+// studs_list.forEach((elem) => {
+//   elem.addEventListener("click", function () {
+//     compHandler(elem);
+//   });
+// });
+
+var loadHandler = function () {
+  console.log("loadHandler");
+  let studs_list = document.querySelectorAll(".stud-list-elem");
+  studs_list.forEach((elem) => {
+    elem.addEventListener("click", function () {
+      compHandler(elem);
+    });
   });
-});
+
+  return 0;
+};
+
+window.onload = loadHandler();
+
+// export default loadHandler();

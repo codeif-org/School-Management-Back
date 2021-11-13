@@ -17,7 +17,6 @@
               <input
                 type="text"
                 placeholder="Type Student Name here..."
-                onchange="submitHandler(event)"
               />
               <i class="fas fa-search"></i>
             </div>
@@ -57,6 +56,5 @@
 {% endblock content %}
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js" integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{% static '/js/adminList.js' %}"></script>
     <script src="{% static '/js/adminStudents.js' %}"></script>
 {% endblock script %}
