@@ -32,6 +32,11 @@ body {
   /* background: var(--light-grey); */
 }
 
+::selection {
+  background: var(--dark);
+  color: var(--light-grey);
+}
+
 ul {
   list-style: none;
 }

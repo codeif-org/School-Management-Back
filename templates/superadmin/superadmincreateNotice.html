@@ -1,0 +1,47 @@
+{% extends 'adminhome.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/style.css' %}" />
+<link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %} {% block content %}
+<section id="main">
+  <form method="POST" action="{% url 'notice:createNotice' %}">
+    {% csrf_token %}
+    <section id="notice-accor">
+      <div class="notice-class-accor component-back">
+        <h2>Select Class</h2>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="notice-class-list">
+        <div class="notice-class-elem notice-all">
+          <input value="all" type="checkbox" name="checks" id="" />
+          <p>Select All</p>
+        </div>
+        {% for class in classes %}
+        <div class="notice-class-elem">
+          <input
+            value="{{ class.id }}"
+            type="checkbox"
+            name="checks"
+            id=""
+          />
+          <p>Class {{ class.Class }} {{ class.section }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    <!-- Notice content -->
+    <section id="content-info">
+      <div class="content-info">
+        <div class="content-topic">
+          <label for=""><h2>Topic</h2></label>
+          <input name="topic" type="text" />
+        </div>
+        <div class="content-topic content-desc">
+          <label for=""><h2>Description</h2></label>
+          <textarea name="desc" id="" cols="30" rows="10"></textarea>
+        </div>
+        <button type="submit" class="btn btn-black">Post Notice</button>
+      </div>
+    </section>
+  </form>
+</section>
+{% endblock content %}

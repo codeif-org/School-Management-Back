@@ -24,10 +24,12 @@ def createNotice(request):
         for sub in teacher_subject:
             classes.append(sub.Class)
         # print("classes list", classes)
+        posting_by = "teacher"
     except:
         super_admin = SuperAdmin.objects.get(user = request.user)
         school_object = super_admin.school
         classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = school_object))
+        posting_by = "superadmin"
     if request.method == 'POST':
         print(request.POST)
         topic = request.POST['topic']
@@ -46,7 +48,10 @@ def createNotice(request):
                 receiverobj = receiver(note = noticeobj, receiver = classobj, posted_by = request.user)
                 receiverobj.save()
         return redirect('notice:createNotice')    
-    return render(request, 'createNotice.html', {'classes': classes})
+    if posting_by == "teacher":
+        return render(request, 'createNotice.html', {'classes': classes})
+    elif posting_by == "superadmin":
+        return render(request, 'superadmincreateNotice.html', {'classes': classes})
 
 
 def studentNotice(request):
@@ -66,7 +71,9 @@ def superAdminNotice(request, category):
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
         # print(schoolobj)
-        superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
+        superadmin_qs = SuperAdmin.objects.filter(school = schoolobj).exclude(user = user)
+        # superadmin_qs.remove(superadminObj)
+        print(type(superadmin_qs))
         # print(superadmin_qs)
         # notice_qs = receiver.objects.filter(posted_by__in = superadmin_qs.user)
         notice_qs = []
@@ -87,7 +94,6 @@ def superAdminNotice(request, category):
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
         superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
-        
         notice_qs = receiver.objects.filter(posted_by = user)
         print(notice_qs)
         return render(request, 'superNotice.html', {'receivers': notice_qs, 'superadmin': superadminObj})
