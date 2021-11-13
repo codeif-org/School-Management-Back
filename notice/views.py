@@ -1,5 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+
+import superadmin
 from .models import notice, receiver
 from teacher.models import classSection, teacher, subject
 from student.models import student
@@ -56,5 +58,38 @@ def studentNotice(request):
     return render(request, 'notice.html', {'notices': notices, 'student': studentobj})
 
 
-def superAdminNotice(request):
-    return render(request, 'superNotice.html')
+def superAdminNotice(request, category):
+    print(category)
+    user = request.user
+    if category == 'all':
+        # print(user)
+        superadminObj = SuperAdmin.objects.get(user = user)
+        schoolobj = superadminObj.school
+        # print(schoolobj)
+        superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
+        # print(superadmin_qs)
+        # notice_qs = receiver.objects.filter(posted_by__in = superadmin_qs.user)
+        notice_qs = []
+        for superadmin in superadmin_qs:
+            notice_q = receiver.objects.filter(posted_by = superadmin.user)
+            # print(notice_q)
+            # notice_qs.append(notice_q)
+            try:
+                if notice_q[0].note:
+                    for item in notice_q:
+                        notice_qs.append(item)
+            except:
+                print("no notice")
+                pass  
+        print(notice_qs)    
+        return render(request, 'superNotice.html', {'receivers': notice_qs, 'superadmin': superadminObj})
+    elif category == 'sent':
+        superadminObj = SuperAdmin.objects.get(user = user)
+        schoolobj = superadminObj.school
+        superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
+        
+        notice_qs = receiver.objects.filter(posted_by = user)
+        print(notice_qs)
+        return render(request, 'superNotice.html', {'receivers': notice_qs, 'superadmin': superadminObj})
+        
+        

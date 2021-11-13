@@ -1,7 +1,8 @@
 {% extends 'adminhome.html' %} {% load static %} {% block extra-head %}
 <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
-{% endblock extra-head %} {% block content %}
+{% endblock extra-head %} 
+{% block content %}
 <section id="main">
   <!-- Start attendance -->
   <section id="start-att">
@@ -17,8 +18,8 @@
 
   <section class="notice-toggle">
     <div class="notice-buttons">
-      <button class="btn btn-md">All</button>
-      <button class="btn btn-md">Sent</button>
+      <a href="{% url 'notice:superAdminNotice' "all" %}"><button class="btn btn-md">All</button></a>
+      <a href="{% url 'notice:superAdminNotice' "sent" %}"><button class="btn btn-md">Sent</button></a>
     </div>
   </section>
 
@@ -26,6 +27,7 @@
   <section id="home-menu">
     <div class="home-menu">
       {% for receiver in receivers %}
+      {{receiver.receiver.note}}
       <div class="menu-list notice-list">
         <p>{{ receiver.note.date.date }} | {{ receiver.note.date.time }}</p>
         <h2>{{ receiver.note.topic }}</h2>

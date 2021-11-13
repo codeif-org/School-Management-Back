@@ -6,4 +6,6 @@ urlpatterns = [
     path('teacher/showNotice/', views.showNotice, name='showNotice'),
     path('teacher/createNotice/', views.createNotice, name='createNotice'),
     path('student/notice/', views.studentNotice, name='studentNotice'),
+    path('superadmin/<str:category>', views.superAdminNotice, name = 'superAdminNotice'),
+    
 ]
