@@ -26,13 +26,12 @@
   <!-- Student List -->
   <section id="home-menu">
     <div class="home-menu">
-      {% for receiver in receivers %}
-      {{receiver.receiver.note}}
+      {% for notice in notices %}
       <div class="menu-list notice-list">
-        <p>{{ receiver.note.date.date }} | {{ receiver.note.date.time }}</p>
-        <h2>{{ receiver.note.topic }}</h2>
-        <p>{{ receiver.note.desc }}</p>
-        <p>to Class {{ receiver.receiver.Class }}th</p>
+        <p>{{ notice.date.date }} | {{ notice.date.time }}</p>
+        <h2>{{ notice.topic }}</h2>
+        <p>{{ notice.desc }}</p>
+        <p>to Classes <br /> {% for class in notice.receiver %}{{class.receiver.Class}}{{class.receiver.section}} | {% endfor %}</p>
       </div>
       {% endfor %}
     </div>

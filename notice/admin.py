@@ -4,9 +4,9 @@ from .models import notice, receiver
 
 @admin.register(notice)
 class noticeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'topic', 'desc')
+    list_display = ('id', 'date', 'topic', 'desc', 'posted_by')
 # admin.site.register(notice)
 
 @admin.register(receiver)
 class receiverAdmin(admin.ModelAdmin):
-    list_display = ('note', 'receiver', 'posted_by')
+    list_display = ('note', 'receiver')

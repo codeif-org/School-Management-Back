@@ -34,18 +34,18 @@ def createNotice(request):
         print(request.POST)
         topic = request.POST['topic']
         desc = request.POST['desc']
-        noticeobj = notice(topic = topic, desc = desc)
+        noticeobj = notice(topic = topic, desc = desc, posted_by = request.user)
         noticeobj.save()
         allclasses = request.POST.getlist('checks')
         if 'all' in allclasses:
             for c in classes:
-                receiverobj = receiver(note = noticeobj, receiver = c, posted_by = request.user)
+                receiverobj = receiver(note = noticeobj, receiver = c)
                 receiverobj.save()
         else:
             for c in allclasses:
                 print(c)
                 classobj = classSection.objects.get(id = c)
-                receiverobj = receiver(note = noticeobj, receiver = classobj, posted_by = request.user)
+                receiverobj = receiver(note = noticeobj, receiver = classobj)
                 receiverobj.save()
         return redirect('notice:createNotice')    
     if posting_by == "teacher":
@@ -78,7 +78,7 @@ def superAdminNotice(request, category):
         # notice_qs = receiver.objects.filter(posted_by__in = superadmin_qs.user)
         notice_qs = []
         for superadmin in superadmin_qs:
-            notice_q = receiver.objects.filter(posted_by = superadmin.user)
+            notice_q = notice.objects.filter(posted_by = superadmin.user)
             # print(notice_q)
             # notice_qs.append(notice_q)
             try:
@@ -94,8 +94,12 @@ def superAdminNotice(request, category):
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
         superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
-        notice_qs = receiver.objects.filter(posted_by = user)
+        notice_qs = notice.objects.filter(posted_by = user).values()
         print(notice_qs)
-        return render(request, 'superNotice.html', {'receivers': notice_qs, 'superadmin': superadminObj})
+        receiver_qs = []
+        for notice_q in notice_qs:
+            notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
+        print(notice_qs)    
+        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj, 'receivers': receiver_qs})
         
         
