@@ -26,9 +26,9 @@
     />
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra-head %}{% endblock extra-head %}
   </head>
 {% endblock head %}
-{% block extra-head %}{% endblock extra-head %}
   <body>
     <section id="main">
     {% block nav %}
