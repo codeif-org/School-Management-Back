@@ -15,7 +15,7 @@
     <div class="component-back">
       <h2>You are class teacher of</h2>
       <a href="{% url 'teacher:addStudent' class.id %}"
-        ><button class="btn btn-md">Class {{ class.Class }}th</button></a
+        ><button class="btn btn-md">Class {{ class.Class }}th {{ class.section }} </button></a
       >
     </div>
   </section>

@@ -28,6 +28,12 @@
   justify-content: space-between;
 }
 
+.notice-list-info > p:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
 .notice-toggle {
   margin: auto;
 }
@@ -166,4 +172,40 @@ input[type="date"] {
   width: 100%;
   justify-content: space-between;
   margin: 20px 0;
+}
+
+.duedate-submit-btn > p:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.duedate {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.duedate p {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.homework-download {
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.homework-download button {
+  margin: 5px;
+}
+
+.homework-download p {
+  margin: 10px 5px;
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
 }
