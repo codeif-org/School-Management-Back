@@ -209,3 +209,28 @@ input[type="date"] {
   color: green;
   cursor: pointer;
 }
+
+/* homework modal css */
+
+.homework-modal {
+  width: 100%;
+  height: 100%;
+}
+
+.homework-modal p,
+.answer h2,
+.answer p {
+  padding: 10px;
+}
+
+.homework-modal > :nth-child(3) {
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
+}
+
+.answer {
+  margin: 10px;
+  border: 1px solid var(--dark-grey);
+  border-radius: 5px;
+}

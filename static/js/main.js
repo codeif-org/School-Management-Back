@@ -1,6 +1,3 @@
-// above two lines are most important for the axios post request
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-axios.defaults.xsrfCookieName = "csrftoken";
 console.log("main js added");
 
 // var elems = document.querySelectorAll(".att-student-list button");
@@ -36,46 +33,19 @@ console.log("main js added");
 // //   }
 // };
 
-
-// onload logic
-var attDate = document.querySelector(".att-date > button:nth-child(1)")
-
-window.onload = function(event) {
-  console.log("window on log")
-  let dateStr = attDate.textContent
-  let dateList = dateStr.split("/")
-  dateList.reverse()
-  let correctDate = dateList.join("-")
-  // console.log(correctDate)
-
-  
-
-}
-
-
-
-
-
-
-
-var attChanged = function (event) {
-  console.log("hello inside attChanged");
-};
-
 var requestHandler = function (req, value, student_id) {
   console.log("inside request handler");
-  console.log(typeof req);
   axios({
-    method: req,
-    url: "http://127.0.0.1:8000/attendance/teacher/api/saveAttendance/",
-    data: {
-      present: value,
-      student: student_id,
-      date: "2021-10-16",
-    },
+      method: req,
+      url: "http://127.0.0.1:8000/attendance/teacher/api/saveAttendance/",
+      data: {
+          present: value,
+          student: student_id,
+          date: "2021-10-16",
+      },
   })
     .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
 };
 
 var btnHandler = function (event) {
@@ -92,24 +62,31 @@ var btnHandler = function (event) {
   ) {
     elem.previousElementSibling.classList.toggle("btn-clicked");
     elem.classList.toggle("btn-clicked");
-    elem.setAttribute("onclick", "attChanged(event)");
-    elem.previousElementSibling.setAttribute("onclick", "btnHandler(event)");
-    requestHandler("patch", value, student_id);
+    requestHandler("patch", value, student_id)
   } else if (
     elem.nextElementSibling &&
     elem.nextElementSibling.classList.contains("btn-clicked")
   ) {
     elem.nextElementSibling.classList.toggle("btn-clicked");
     elem.classList.toggle("btn-clicked");
-    elem.setAttribute("onclick", "attChanged");
-    elem.nextElementSibling.setAttribute("onclick", "btnHandler(event)");
-    requestHandler("patch", value, student_id);
+    requestHandler("patch", value, student_id)
   } else {
     elem.classList.toggle("btn-clicked");
-    // console.log(elem.getAttribute("onclick"))
-    elem.setAttribute("onclick", "attChanged");
-    // console.log(elem.getAttribute("onclick"))
     console.log("nothing");
-    requestHandler("post", value, student_id);
+    requestHandler("post", value, student_id)
   }
 };
+
+
+// modal JS
+
+var modalBtn = document.querySelector('.modal-btn');
+var modalBg = document.querySelector('.modal-bg');
+var modalClose = document.querySelector('.modal-close')
+
+modalBtn.addEventListener('click', function(){
+  modalBg.classList.add('modal-active');
+});
+modalClose.addEventListener('click', function(){
+  modalBg.classList.remove('modal-active');
+});

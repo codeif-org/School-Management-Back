@@ -73,7 +73,7 @@ def submitHomework(request, homework_id):
         sub_desc = request.POST['sub_desc']
         homework_submission = HomeworkSubmission(student = stu, homework = homework, sub_desc = sub_desc)
         homework_submission.save()
-        return redirect('homework:homework/1')
+        return redirect('homework:homework', id = 1)
     return render(request, 'submitHomework.html', {'submitted': submitted, 'submission': homework_submission, 'sub': submission, 'homework': homeworkStudent})
 
 def homeworkList(request, homework_id):
