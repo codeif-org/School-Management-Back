@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import notice, receiver
 from teacher.models import classSection, teacher, subject
@@ -45,8 +46,6 @@ def createNotice(request):
         return redirect('notice:createNotice')    
     return render(request, 'createNotice.html', {'classes': classes})
 
-    
-    
 
 def studentNotice(request):
     studentobj = student.objects.get(user = request.user)
@@ -55,3 +54,7 @@ def studentNotice(request):
     notices = receiver.objects.filter(receiver = classobj)
     print(notices)
     return render(request, 'notice.html', {'notices': notices, 'student': studentobj})
+
+
+def superAdminNotice(request):
+    return render(request, 'superNotice.html')
