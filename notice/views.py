@@ -10,10 +10,34 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def teacherNotice(request, category):
-    # teacherobj = teacher.objects.get(user = request.user)
-    # classobj = classSection.objects.get(teacher = teacherobj)
-    receivers = notice.objects.filter(posted_by = request.user)
-    return render(request, 'teacherNotice.html', {'receivers': receivers})
+    if category == 'all':
+        # teacherobj = teacher.objects.get(user = request.user)
+        # classobj = classSection.objects.get(teacher = teacherobj)
+        schoolobj = teacher.objects.get(user = request.user).school
+        superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
+        notice_qs = []
+        for superadmin in superadmin_qs:
+            notice_q = notice.objects.filter(posted_by = superadmin.user).values()
+            print(notice_q)
+            for item in notice_q:
+                notice_qs.append(item)
+        print(notice_qs)   
+        for notice_q in notice_qs:
+            notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
+            notice_q["posted_by"] = User.objects.get(id = notice_q["posted_by_id"]).username
+        print("last notice_qs: ", notice_qs)  
+        notice_qs.reverse()     
+        return render(request, 'teacherNotice.html', {'notices': notice_qs})
+          
+        
+    elif category == 'sent':    
+        notice_qs = notice.objects.filter(posted_by = request.user).values()
+        print(notice_qs)
+        for notice_q in notice_qs:
+            notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
+        print("last notice_qs:  ", notice_qs)  
+        notice_qs.reverse()  
+        return render(request, 'teacherNotice.html', {'notices': notice_qs})
 
 def createNotice(request):
     try:
@@ -87,7 +111,8 @@ def superAdminNotice(request, category):
         for notice_q in notice_qs:
             notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
             notice_q["posted_by"] = User.objects.get(id = notice_q["posted_by_id"]).username
-        print("last notice_qs: ", notice_qs)        
+        print("last notice_qs: ", notice_qs)      
+        notice_qs.reverse()  
         return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
     elif category == 'sent':
         superadminObj = SuperAdmin.objects.get(user = user)
@@ -96,9 +121,11 @@ def superAdminNotice(request, category):
         notice_qs = notice.objects.filter(posted_by = user).values()
         print(notice_qs)
         # receiver_qs = []
+        # receiver means classes
         for notice_q in notice_qs:
             notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
-        print(notice_qs)    
+        print(notice_qs)  
+        notice_qs.reverse()  
         return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
         
         

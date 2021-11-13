@@ -7,39 +7,39 @@
 {% endblock extra-head %}
 {% block content %}
 <section id="main">
-    <!-- Start attendance -->
-      <section id="start-att">
-        <div class="component-back">
-          <div>
-            <h2>New Notice</h2>
-          </div>
-          <a href="{% url 'notice:createNotice' %}"
-            ><button class="btn btn-lg">Post</button></a
-          >
-        </div>
-      </section>
+  <!-- Start attendance -->
+  <section id="start-att">
+    <div class="component-back">
+      <div>
+        <h2>New Notice</h2>
+      </div>
+      <a href="{% url 'notice:createNotice' %}">
+        <button class="btn btn-lg">Post</button>
+      </a>
+    </div>
+  </section>
 
-      <section class="notice-toggle">
-        <div class="notice-buttons">
-          <button class="btn btn-md">All</button>
-          <button class="btn btn-md">Sent</button>
-        </div>
-      </section>
+  <section class="notice-toggle">
+    <div class="notice-buttons">
+      <a href="{% url 'notice:teacherNotice' "all" %}"><button class="btn btn-md">Received</button></a>
+      <a href="{% url 'notice:teacherNotice' "sent" %}"><button class="btn btn-md">Sent</button></a>
+    </div>
+  </section>
 
-      <!-- Student List -->
-      <section id="home-menu">
-        <div class="home-menu">
-          {% for receiver in receivers %}
-          <div class="menu-list notice-list">
-            <p>{{ receiver.note.date.date }} | {{ receiver.note.date.time }}</p>
-            <h2>{{ receiver.note.topic }}</h2>
-            <p>
-              {{ receiver.note.desc }}
-            </p>
-            <p>to Class {{ receiver.receiver.Class }}th</p>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+  <!-- Student List -->
+  <section id="home-menu">
+    <div class="home-menu">
+      {% for notice in notices %}
+      <div class="menu-list notice-list">
+        <p>{{ notice.date.date }} | {{ notice.date.time }} <br /> 
+        {% if notice.posted_by %}<span>Posted By: {{notice.posted_by}}</span>{% endif %}  
+        </p>
+        <h2>{{ notice.topic }}</h2>
+        <p>{{ notice.desc }}</p>
+        <p>to Classes: <br /> {% for class in notice.receiver %}{{class.receiver.Class}}{{class.receiver.section}} | {% endfor %}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 </section>
 {% endblock content %}
