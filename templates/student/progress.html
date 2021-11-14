@@ -5,21 +5,6 @@
 <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
 {% endblock extra-head %} {% block content %}
 <section id="main">
-  <!-- <section id="progress-carousel">
-    <div class="subject-container">
-      <div class="subject-arrow">
-        <i class="fas fa-chevron-circle-left"></i>
-      </div>
-      <div class="subject">
-        {% for subject in subjects %}
-        <button class="subject-btn btn-black">{{ subject.subject }}</button>
-        {% endfor %}
-      </div>
-      <div class="subject-arrow">
-        <i class="fas fa-chevron-circle-right"></i>
-      </div>
-    </div>
-  </section> -->
 
   <section id="lselect">
     <div class="menu-list lselect">
@@ -83,7 +68,9 @@
         {% endfor %}
       </table> -->
     </div>
-    <div class="progress-graph"></div>
+    <div class="chart">
+      <canvas id="myChart" width="100px" height="50px"></canvas>
+    </div>
   </section>
 </section>
 {% endblock content %} {% block script %}
@@ -95,4 +82,69 @@
   referrerpolicy="no-referrer"
 ></script>
 <script src="{% static 'js/progressAPI.js' %}"></script>
+
+<!-- Chart.js cdn -->
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+      integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+<!-- Chart.js -->
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: [{% for key, value in scores.items %}'{{ value.0 }}', {% endfor %}],
+          datasets: [{
+              label: '% of Marks',
+              data: [{% for key, value in scores.items %}'{{ value.3 }}', {% endfor %}],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 2
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
 {% endblock script %}
+
+
+<!-- waste html -->
+<!-- <section id="progress-carousel">
+    <div class="subject-container">
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-left"></i>
+      </div>
+      <div class="subject">
+        {% for subject in subjects %}
+        <button class="subject-btn btn-black">{{ subject.subject }}</button>
+        {% endfor %}
+      </div>
+      <div class="subject-arrow">
+        <i class="fas fa-chevron-circle-right"></i>
+      </div>
+    </div>
+  </section> -->

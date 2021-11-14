@@ -55,9 +55,10 @@
 }
 
 .progress {
-  width: var(--center-width);
+  width: 90%;
   height: auto;
   margin: auto;
+  display: flex;
 }
 
 .progress-graph {
@@ -70,9 +71,8 @@
 }
 
 .progress-table {
-  margin: 30px auto;
-
-  width: 70%;
+  margin: 30px;
+  width: 45%;
   height: auto;
   border: 1px solid var(--dark-grey);
   border-radius: 8px;
@@ -188,4 +188,10 @@ td {
   margin-left: 0;
   margin-right: 0;
   font-size: 12px;
+}
+
+/* chartjs */
+.chart {
+  padding: 10px 0px;
+  width: 48%;
 }
