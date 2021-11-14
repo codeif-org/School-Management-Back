@@ -183,3 +183,9 @@ td {
   border: 2px solid var(--dark);
   border-radius: 8px;
 }
+
+.linfo > p {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 12px;
+}
