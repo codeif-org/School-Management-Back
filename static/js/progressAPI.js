@@ -25,12 +25,16 @@ let submitHandler = function () {
   //   console.log(subject);
 
   // axios request to get the data
-  axios({
-    method: "get",
-    url: `/exam/api/student/progress?subject=${subject}`,
-  })
-    .then((res) => responseHandler(res))
-    .catch((err) => console.log(err));
+  if (subject === "none") {
+    alert("Please select a subject");
+  } else {
+    axios({
+      method: "get",
+      url: `/exam/api/student/progress?subject=${subject}`,
+    })
+      .then((res) => responseHandler(res))
+      .catch((err) => console.log(err));
+  }
 };
 
 //     let data = response.data;
