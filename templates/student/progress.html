@@ -57,18 +57,19 @@
         <h2 class="left-column">EXAM</h2>
         <h2 class="right-column">MARKS</h2>
       </div>
+      <!-- {{key}}, {{value.0}}  -->
       {% for key, value in scores.items %} 
-      {%comment%} {{key}}, {{value.0}} {%endcomment %}
-      <div class="table-list table-rows">
-        <h3 class="left-column">{{ value.0 }}</h3>
-        <h3 class="right-column">{{ value.1 }}/{{ value.2 }} = {{value.3}}%</h3>
+      <div id="table-rows">
+        <div class="table-list table-rows">
+          <h3 class="left-column">{{ value.0 }}</h3>
+          <h3 class="right-column">{{ value.1 }}/{{ value.2 }} = {{value.3}}%</h3>
+        </div>
       </div>
-      {% endfor %} {% comment %}
-      <h3 class="left-column">{{ score.exam_held.exam.name }}</h3>
+      {% endfor %} 
+      <!-- <h3 class="left-column">{{ score.exam_held.exam.name }}</h3>
       <h3 class="right-column">
         {{ score.score }}/{{ score.exam_held.exam.max_marks }}
-      </h3>
-      {% endcomment %}
+      </h3> -->
       <!-- <table>
         <tr>
           <th>Exam</th>
