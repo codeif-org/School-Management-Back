@@ -176,11 +176,11 @@ def progressAPI(request):
         for score_q in scores_qs:
             scores_dict[score_q.exam_held.exam.id] = [score_q.exam_held.exam.name, score_q.score, score_q.exam_held.exam.max_marks, round((score_q.score/score_q.exam_held.exam.max_marks)*100, 1)]
         print(scores_dict)
-        # return JsonResponse(scores_dict, safe=False)
-        return HttpResponse(json.dumps(scores_dict), content_type="application/json")    
+        return JsonResponse(scores_dict, safe=False)
+        # return HttpResponse(json.dumps(scores_dict), content_type="application/json")   
+        # above both are same 
         # return HttpResponse(scores_qs)
-        
-    return HttpResponse("This is Progress API")
+    return HttpResponse(json.dumps({"error": "No subject id"}), content_type="application/json")
 
 def leaderboard(request):
     # print(request.user.id)
