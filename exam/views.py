@@ -133,11 +133,11 @@ def marksUpdate(request):
 #     # print(marks)
 #     return render(request, 'leaderboard.html', {'subjects': subjects, 'sub': subjects[0], 'students': students, 'class': classobj, 'marks': marks})
 
-def progress(request, subject_id):
+def progress(request):
     studentobj = student.objects.get(user = request.user)
     classobj = studentobj.Class
     subject_qs = subject.objects.filter(Class = classobj)
-    subjectobj = subject.objects.get(id = subject_id)
+    # subjectobj = subject.objects.get(id = subject_id)
     examheld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
     print(examheld_qs)
     scores_dict = {}
