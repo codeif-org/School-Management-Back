@@ -161,6 +161,8 @@ def progress(request):
     print(scores_dict)    
     return render(request, 'progress.html', {'scores': scores_dict, 'subjects': subject_qs})
 
+def progressAPI(request):
+    return HttpResponse("This is Progress API")
 
 def leaderboard(request):
     # print(request.user.id)

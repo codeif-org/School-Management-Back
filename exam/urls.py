@@ -10,4 +10,5 @@ urlpatterns = [
     path('student/leaderboard/', views.leaderboard, name='leaderboard'),
     path('student/leaderboard/api/score', views.scoreAPI, name='scoreAPI'),
     path('student/progress/', views.progress, name='progress'),
+    path('api/student/progress', views.progressAPI, name='progressAPI'),
 ]
