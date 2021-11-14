@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from student.models import student
+import superadmin
 from teacher.models import classSection, teacher
 from .models import SuperAdmin, school
 
 # Create your views here.
 def adminhome(request):
-    return render(request, 'adminhome.html')
+    super_admin = SuperAdmin.objects.get(user = request.user)
+    school_id = super_admin.school.id
+    return render(request, 'adminhome.html', {'school_id': school_id})
 
 def addTeacher(request):
     if request.method == "POST":
@@ -86,3 +89,8 @@ def teachers(request):
     teachers = teacher.objects.filter(school = admin.school)
     classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
     return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes})
+
+def info(request, school_id):
+    super_admin = SuperAdmin.objects.get(user = request.user)
+    school = super_admin.school
+    return render(request, 'schoolInfo.html', {'school': school})
