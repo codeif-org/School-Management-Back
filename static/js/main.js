@@ -80,13 +80,17 @@ var btnHandler = function (event) {
 
 // modal JS
 
-var modalBtn = document.querySelector('.modal-btn');
+var modalBtn = document.querySelectorAll('.modal-btn');
 var modalBg = document.querySelector('.modal-bg');
 var modalClose = document.querySelector('.modal-close')
 
-modalBtn.addEventListener('click', function(){
-  modalBg.classList.add('modal-active');
+
+modalBtn.forEach(element => {
+  element.addEventListener('click' , function(){
+    modalBg.classList.add('modal-active')
+  });
 });
-modalClose.addEventListener('click', function(){
-  modalBg.classList.remove('modal-active');
-});
+
+modalClose.addEventListener('click' , function(){
+    modalBg.classList.remove('modal-active')
+  });

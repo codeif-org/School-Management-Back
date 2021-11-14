@@ -11,6 +11,7 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers, status
 import datetime
+from datetime import date
 # Create your views here.
 
 
@@ -55,8 +56,17 @@ def Attendance(request):
     try:
         Class = classSection.objects.get(teacher=t)
         students = student.objects.filter(school=t.school, Class=Class)
-        print(students)
-        return render(request, 'attendance.html', {'students': students})
+        today_date = date.today()
+        leaveStudents = Leave.objects.filter(student__in = student.objects.filter(Class = Class))
+        lStudents = []
+        for ls in leaveStudents:
+            if today_date>=ls.date_from and today_date<=ls.date_to:
+                lStudents.append(ls)
+        print(lStudents[0].student)
+        lid = []
+        for l in lStudents:
+            lid.append(l.student.id)
+        return render(request, 'attendance.html', {'students': students, 'leave': lStudents, 'leaveId': lid})
     except:
         return render(request, 'attendance.html', {'msg': True})
 

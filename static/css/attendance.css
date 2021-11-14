@@ -7,6 +7,12 @@
   padding: 0px 16px;
 }
 
+.submit-attendance {
+  display: flex;
+  justify-content: end;
+  padding: 0px 16px;
+}
+
 .att-student-list {
   flex-direction: column;
 }
@@ -25,13 +31,38 @@
 
 /* means select the div i.e., nth-child(1) of att-student-list */
 
-.att-student-list > div:nth-child(1) {
+.att-student-list > div:nth-child(-n + 2) {
   align-self: baseline;
 }
 
 .att-student-list > div > p {
   margin-bottom: 10px;
   font-size: 18px;
+}
+
+.applyLeave p {
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
+}
+
+/* modal css for leave reason in teacher attendance */
+
+.leave-modal {
+  padding: 10px;
+  height: 100%;
+}
+.reason-heading {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.leave-modal > :nth-child(3) p {
+  padding: 10px 0;
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
 }
 
 /* Add Students Html file addStudents */
@@ -124,16 +155,6 @@
 .main-att-Data .main-data .data-item {
   display: flex;
   justify-content: space-between;
-}
-
-#not-found{
-  width: var(--center-width);
-  margin: auto;
-}
-
-.not-found{
-  text-align: center;
-  padding: 20px 0px;
 }
 
 /* attendance student media query */

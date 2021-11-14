@@ -1,6 +1,10 @@
-{% extends 'home.html' %} {% load static %} {% block extra-head %}
+{% extends 'home.html' %} 
+{% load static %} 
+{% block extra-head %}
 <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
-{% endblock extra-head %} {% block nav %}
+<link rel="stylesheet" href="{% static 'css/adminList.css' %}" />
+{% endblock extra-head %} 
+{% block nav %}
 <section id="nav">
   <nav class="top-navbar">
     <div class="profile-picture">
@@ -47,15 +51,39 @@
           {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL"%}{{student.mname}}{% endif %} {% if student.lname != "NULL"%}{{student.lname}}{% endif %} | {{ student.roll_no }}
         </p>
       </div>
+      {% if student.id in leaveId %}
+          <div class="applyLeave" data-target = "#{{ student.id }}">
+              <p class="stud-list-elem">
+                Applied For Leave <i class="fas fa-chevron-down"></i>
+              </p>
+          </div>
+      {% endif %}
       <div id="{{ student.id }}" class="att-btns">
-        <button class="btn btn-md" onclick="btnHandler(event)" value="false">
+        <button class="att-btn btn btn-md" onclick="btnHandler(event)" value="false">
           Absent
         </button>
-        <button class="btn btn-md" onclick="btnHandler(event)" value="true">
+        <button class="att-btn btn btn-md" onclick="btnHandler(event)" value="true">
           Present
         </button>
       </div>
+      <div class="stud-list-elem-options">
+          <button class="btn">Application</button>
+      </div>
     </div>
+    <!-- modal for leave reason -->
+      <div class="modal-bg" id="{{ student.id }}">
+        <div class="modal">
+          <div class="leave-modal">
+            <h1 class="reason-heading">Reason</h1>
+            <p>
+              {{ leave.reason }}
+            </p>
+            <div><p>Download Leave Application</p></div>
+          </div>
+
+          <span class="modal-close"><i class="fas fa-times"></i></span>
+        </div>
+      </div>
     {% endfor %}
   </div>
 </section>
@@ -69,4 +97,5 @@
   referrerpolicy="no-referrer"
 ></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/applyLeave.js' %}"></script>
 {% endblock script %}

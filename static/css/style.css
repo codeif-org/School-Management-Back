@@ -460,10 +460,10 @@ h6 {
   background-color: white;
   width: 50%;
   height: 70vh;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
   border-radius: 5px;
 }
 
