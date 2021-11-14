@@ -93,9 +93,10 @@
 
 <!-- Chart.js -->
 <script>
+  
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'pie',
       data: {
           labels: [{% for key, value in scores.items %}'{{ value.0 }}', {% endfor %}],
           datasets: [{
@@ -128,6 +129,12 @@
           }
       }
   });
+
+  function scrollToBottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+    history.scrollRestoration = "manual";
+    window.onload = scrollToBottom;
   </script>
 {% endblock script %}
 

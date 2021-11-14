@@ -55,3 +55,6 @@ let submitHandler = function () {
 //     progressText.innerHTML = `${completed}/${total}`;
 //     let progressTitle = document.getElementById('progressTitle');
 //     progressTitle.innerHTML = `${subject}`;
+
+
+// charts
