@@ -56,5 +56,28 @@ let submitHandler = function () {
 //     let progressTitle = document.getElementById('progressTitle');
 //     progressTitle.innerHTML = `${subject}`;
 
-
 // charts
+// https://stackoverflow.com/questions/7985450/eval-unexpected-token-error
+// to use eval
+console.log(mydata);
+console.log(typeof mydata);
+// JSON.parse(mydata);
+console.log(typeof mydata);
+console.log(Object.entries(mydata));
+
+// use eval to convert string to object
+// https://www.pluralsight.com/guides/convert-strings-to-json-objects-in-javascript-with-eval
+eval('('+mydata+')' );
+console.log(typeof eval('('+mydata+')' ));
+mydata = eval('('+mydata+')' );
+console.log(mydata);
+console.log(typeof mydata);
+
+let mydata_arr = Object.entries(mydata);
+mydata_arr.forEach((elem) => {
+    console.log(elem);
+})
+
+
+
+

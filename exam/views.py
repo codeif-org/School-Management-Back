@@ -161,7 +161,7 @@ def progress(request):
         item.append(percent)
         print(item)
     print(scores_dict)    
-    return render(request, 'progress.html', {'scores': scores_dict, 'subjects': subject_qs})
+    return render(request, 'progress.html', {'scores': scores_dict, 'subjects': subject_qs, 'scores_json': json.dumps(scores_dict)})
 
 def progressAPI(request):
     if "subject" in request.GET:
