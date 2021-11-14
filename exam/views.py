@@ -136,16 +136,30 @@ def marksUpdate(request):
 def progress(request, subject_id):
     studentobj = student.objects.get(user = request.user)
     classobj = studentobj.Class
-    subjects = subject.objects.filter(Class = classobj)
+    subject_qs = subject.objects.filter(Class = classobj)
     subjectobj = subject.objects.get(id = subject_id)
-    exams = ExamHeldSubject.objects.filter(subject = subjectobj)
-    scores = []
-    for e in exams:
-        print(e)
-        scoreobj = score.objects.get(exam_held = e, stu = studentobj)
-        scores.append(scoreobj)
-    print(scores)
-    return render(request, 'progress.html', {'scores': scores, 'subjects': subjects})
+    examheld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
+    print(examheld_qs)
+    scores_dict = {}
+    # {"examheld_id": [exam_name, marks, max_marks]}
+    for examheld_q in examheld_qs:
+        if examheld_q.exam.id not in scores_dict:
+            scores_dict[examheld_q.exam.id] = [examheld_q.exam.name, score.objects.get(exam_held=examheld_q, stu=studentobj).score, (examheld_q.exam.max_marks)*len(subject_qs)]
+        else:
+            scores_dict[examheld_q.exam.id][1] = scores_dict[examheld_q.exam.id][1] + score.objects.get(exam_held=examheld_q, stu=studentobj).score
+        print(examheld_q)
+        # scoreobj = score.objects.get(exam_held = examheld_q, stu = studentobj)
+        # scores.append(scoreobj)
+    # print(len(scores))
+    print(scores_dict)
+    print(len(subject_qs))
+    print(scores_dict.keys())
+    for item in scores_dict.values():
+        percent =  round((item[1]/item[2])*100, 1)
+        item.append(percent)
+        print(item)
+    print(scores_dict)    
+    return render(request, 'progress.html', {'scores': scores_dict, 'subjects': subject_qs})
 
 
 def leaderboard(request):
