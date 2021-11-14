@@ -58,14 +58,14 @@
         <h2 class="right-column">MARKS</h2>
       </div>
       <!-- {{key}}, {{value.0}}  -->
-      {% for key, value in scores.items %} 
       <div id="table-rows">
+      {% for key, value in scores.items %} 
         <div class="table-list table-rows">
           <h3 class="left-column">{{ value.0 }}</h3>
           <h3 class="right-column">{{ value.1 }}/{{ value.2 }} = {{value.3}}%</h3>
         </div>
-      </div>
       {% endfor %} 
+    </div>
       <!-- <h3 class="left-column">{{ score.exam_held.exam.name }}</h3>
       <h3 class="right-column">
         {{ score.score }}/{{ score.exam_held.exam.max_marks }}
@@ -88,5 +88,11 @@
 </section>
 {% endblock content %} {% block script %}
 <!-- <script src="{% static 'js/progress.js' %}"></script> -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
+  integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
 <script src="{% static 'js/progressAPI.js' %}"></script>
 {% endblock script %}
