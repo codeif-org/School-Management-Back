@@ -62,11 +62,11 @@ def Attendance(request):
         for ls in leaveStudents:
             if today_date>=ls.date_from and today_date<=ls.date_to:
                 lStudents.append(ls)
-        print(lStudents[0].student)
         lid = []
         for l in lStudents:
             lid.append(l.student.id)
-        return render(request, 'attendance.html', {'students': students, 'leave': lStudents, 'leaveId': lid})
+        print(lStudents[0].student, lStudents[1].student)
+        return render(request, 'attendance.html', {'students': students, 'leaves': lStudents, 'leaveId': lid})
     except:
         return render(request, 'attendance.html', {'msg': True})
 

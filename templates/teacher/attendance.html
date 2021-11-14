@@ -16,7 +16,9 @@
     </div>
   </nav>
 </section>
-{% endblock nav %} {% block content %}
+{% endblock nav %}
+{% block content %}
+<section id="main">
 <!-- Start attendance -->
 {% if msg %}
 <section id="not-found">
@@ -70,13 +72,19 @@
           <button class="btn">Application</button>
       </div>
     </div>
-    <!-- modal for leave reason -->
-      <div class="modal-bg" id="{{ student.id }}">
+    {% endfor %}
+  </div>
+</section>
+{% endif %} 
+</section>
+{% for leave in leaves %}
+      <!-- modal for leave reason -->
+      <div class="modal-bg" id="{{ leave.student.id }}">
         <div class="modal">
           <div class="leave-modal">
             <h1 class="reason-heading">Reason</h1>
-            <p>
-              {{ leave.reason }}
+            <p> {{leave}}
+              {{ leave.reason }} {{ leave.student.id }}
             </p>
             <div><p>Download Leave Application</p></div>
           </div>
@@ -84,10 +92,7 @@
           <span class="modal-close"><i class="fas fa-times"></i></span>
         </div>
       </div>
-    {% endfor %}
-  </div>
-</section>
-{% endif %} 
+      {% endfor %}
 {% endblock content %}
 {% block script %}
 <script
