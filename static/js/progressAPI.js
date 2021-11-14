@@ -1,5 +1,7 @@
 // console.log("progressAPI.js");
 
+// http://127.0.0.1:8000/exam/api/student/progress?subject=596
+
 // server side more vs client side more
 // this means if server side is more then we'll use server side more for the simple logics
 // which one is to select decided by which one is more efficient to handle load
