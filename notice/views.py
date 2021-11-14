@@ -118,14 +118,13 @@ def superAdminNotice(request, category):
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
         superadmin_qs = SuperAdmin.objects.filter(school = schoolobj)
-        notice_qs = notice.objects.filter(posted_by = user).values()
-        print(notice_qs)
-        # receiver_qs = []
-        # receiver means classes
+        notice_qs = notice.objects.filter(posted_by = user).order_by("date").values()
         for notice_q in notice_qs:
             notice_q["receiver"] = receiver.objects.filter(note = notice_q["id"])
-        print(notice_qs)  
-        notice_qs.reverse()  
-        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
+        # print(notice_qs)  
+        notice_qs_1 = [item for item in notice_qs]
+        notice_qs_1.reverse() 
+        print("last ", notice_qs_1)
+        return render(request, 'superNotice.html', {'notices': notice_qs_1, 'superadmin': superadminObj})
         
         
