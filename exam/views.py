@@ -1,8 +1,10 @@
+from typing import List
 from django.shortcuts import render, redirect, HttpResponse
 from .models import exam, score, ExamHeldSubject
 from superadmin.models import school
 from teacher.models import teacher, classSection, subject
 from student.models import student
+from django.http import JsonResponse
 import json
 
 # rest
@@ -162,6 +164,22 @@ def progress(request):
     return render(request, 'progress.html', {'scores': scores_dict, 'subjects': subject_qs})
 
 def progressAPI(request):
+    if "subject" in request.GET:
+        subject_id = request.GET["subject"]
+        studentobj = student.objects.get(user = request.user)
+        examheld_qs = ExamHeldSubject.objects.filter(subject = subject_id)
+        # print(examheld_qs)
+        scores_qs = score.objects.filter(exam_held__in = examheld_qs, stu = studentobj)
+        # print(scores_qs)
+        scores_dict = {}
+        # exam_id: [exam_name, marks, max_marks, percent]
+        for score_q in scores_qs:
+            scores_dict[score_q.exam_held.exam.id] = [score_q.exam_held.exam.name, score_q.score, score_q.exam_held.exam.max_marks, round((score_q.score/score_q.exam_held.exam.max_marks)*100, 1)]
+        print(scores_dict)
+        # return JsonResponse(scores_dict, safe=False)
+        return HttpResponse(json.dumps(scores_dict), content_type="application/json")    
+        # return HttpResponse(scores_qs)
+        
     return HttpResponse("This is Progress API")
 
 def leaderboard(request):
