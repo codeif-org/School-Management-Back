@@ -195,3 +195,16 @@ td {
   padding: 10px 0px;
   width: 48%;
 }
+
+@media screen and (max-width: 900px) {
+  .progress{
+    flex-direction: column;
+  }
+  .progress-table{
+    width: 95%;
+    margin: 30px auto;
+  }
+  .chart {
+    width: 100%;
+  }
+}
