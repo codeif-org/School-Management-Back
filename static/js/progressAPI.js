@@ -139,3 +139,17 @@ console.log(labels_data);
 console.log(percent_data);
 
 chart_func(labels_data, percent_data);
+
+// In this, when we hit the progress page then we'll get the data from the django dictionary initially
+// that is my data which is a dictionary
+// then we'll convert it to a json string by using eval
+// and we pass on the data to the chart_func function which will convert it to a chart
+// chart_func needs only labels and data, in progress page that is labels_data and percent_data
+
+// but if we hit the api for subject then we'll convert that incoming data into labels_data_response and percent_data_response
+// and also we've destroyed the chart before redrawing
+// and it's done new chart redraw successfully with the new data
+// so we've used the chart_func function to redraw the chart with the new data but with same function
+
+// in sum-up this progressAPI page only needs data in a format of json that will converted into Object.entries
+// exam_id: [exam_name, marks, max_marks, percentage]
