@@ -27,7 +27,8 @@
     <div class="home-menu">
       {% if notices %} {% for notice in notices %}
       <div class="menu-list notice-list">
-        <p>{{ notice.note.date.date }} | {{ notice.note.date.time }}</p>
+        <p>{{ notice.note.date.date }} | {{ notice.note.date.time }} <br /> 
+        {% if notice.note.posted_by %}<span>Posted By: {{notice.note.posted_by}}</span>{% endif %}</p>
         <h2>{{ notice.note.topic }}</h2>
         <p>{{ notice.note.desc }}</p>
         <p>to Class {{ student.Class.Class }}th</p>
