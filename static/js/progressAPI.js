@@ -1,5 +1,8 @@
 // console.log("progressAPI.js");
 
+// server side more vs client side more
+// this means if server side is more then we'll use server side more for the simple logics
+// which one is to select decided by which one is more efficient to handle load
 let responseHandler = function (response) {
   //   console.log("responseHandler");
   //   console.log(response.data);
