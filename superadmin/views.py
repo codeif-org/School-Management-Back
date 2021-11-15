@@ -90,7 +90,7 @@ def teachers(request):
     classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
     return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes})
 
-def info(request, school_id):
+def info(request):
     super_admin = SuperAdmin.objects.get(user = request.user)
     school = super_admin.school
     return render(request, 'schoolInfo.html', {'school': school})

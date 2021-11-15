@@ -58,14 +58,15 @@ def Attendance(request):
         students = student.objects.filter(school=t.school, Class=Class)
         today_date = date.today()
         leaveStudents = Leave.objects.filter(student__in = student.objects.filter(Class = Class))
+        print(leaveStudents)
         lStudents = []
         for ls in leaveStudents:
             if today_date>=ls.date_from and today_date<=ls.date_to:
                 lStudents.append(ls)
+        print(lStudents)
         lid = []
         for l in lStudents:
             lid.append(l.student.id)
-        print(lStudents[0].student, lStudents[1].student)
         return render(request, 'attendance.html', {'students': students, 'leaves': lStudents, 'leaveId': lid})
     except:
         return render(request, 'attendance.html', {'msg': True})

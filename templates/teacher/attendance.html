@@ -72,19 +72,14 @@
           <button class="btn">Application</button>
       </div>
     </div>
-    {% endfor %}
-  </div>
-</section>
-{% endif %} 
-</section>
-{% for leave in leaves %}
+    {% for leave in leaves %}
+    {% if student.id == leave.student.id %}
       <!-- modal for leave reason -->
-      <div class="modal-bg" id="{{ leave.student.id }}">
+      <div class="modal-bg" id="{{ student.id }}">
         <div class="modal">
           <div class="leave-modal">
             <h1 class="reason-heading">Reason</h1>
-            <p> {{leave}}
-              {{ leave.reason }} {{ leave.student.id }}
+              {{ leave.reason }} {{ student.id }} {{ leave.student.id }}
             </p>
             <div><p>Download Leave Application</p></div>
           </div>
@@ -92,7 +87,13 @@
           <span class="modal-close"><i class="fas fa-times"></i></span>
         </div>
       </div>
-      {% endfor %}
+      {% endif %}
+{% endfor %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %} 
+</section>
 {% endblock content %}
 {% block script %}
 <script
