@@ -23,7 +23,9 @@ from exam.serializers import ScoreSerializer
 # student_score_dict = OrderedDict(sorted(student_score_dict.items(), key=lambda t: t[1][2], reverse=True))
 
 def superadminExam(request):
-    return HttpResponse("This is super admin exam list")
+    return render(request, 'superadminExam.html')
+
+
 
 def teacherExamList(request):
     usr = request.user

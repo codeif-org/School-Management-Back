@@ -1,0 +1,53 @@
+{% extends 'attendance.html' %} {% load static %} {% block extra-head %}
+<link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static 'css/teacherExam.css' %}" />
+{% endblock extra-head %} {% block content %}
+<!-- Start attendance -->
+<section id="start-att">
+  <div class="component-back">
+    <div>
+      <h2>Create Exam</h2>
+      <p>Class 9th</p>
+    </div>
+    <button class="btn btn-lg">Create</button>
+  </div>
+  <div class="exam-list-txt flex">
+    <p>LIST OF EXAMS</p>
+    <div>
+      <i class="fas fa-angle-double-right"></i>
+      <button class="btn btn-black">Class</button>
+    </div>
+  </div>
+</section>
+
+<!-- Student List -->
+<!-- {{ exam_lst }}  -->
+<section id="home-menu">
+  <div class="home-menu">
+      {% for current_exam in exam_lst %}
+      <div id="exam#{{ current_exam.exam.id }}" class="menu-list tech-exam-list">
+        <div>
+          <p>{{ current_exam.exam.date }}</p>
+        </div>
+        <div class="exam-data">
+          <a href="{% url 'exam:marksEdit' current_exam.id %}">
+            <div class="exam-desc">
+              <h3 class="text-underline">{{ current_exam.exam.name }}</h3>
+              <p>Class {{ current_exam.subject.Class.Class }}th {{ current_exam.subject.Class.section }} | {{ current_exam.subject.subject }}</p>
+            </div>
+          </a>
+          <div class="max-marks">
+            <h4>{{ current_exam.exam.max_marks }}</h4>
+            <p>Max Marks</p>
+          </div>
+          <div class="students-enrolled">
+            <h4>28/30</h4>
+            <p>Student Enrolled</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</section>
+
+{% endblock content %}
