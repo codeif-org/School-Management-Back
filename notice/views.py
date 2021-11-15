@@ -113,7 +113,7 @@ def superAdminNotice(request, category):
             notice_q["posted_by"] = User.objects.get(id = notice_q["posted_by_id"]).username
         print("last notice_qs: ", notice_qs)      
         notice_qs.reverse()  
-        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj})
+        return render(request, 'superNotice.html', {'notices': notice_qs, 'superadmin': superadminObj, 'category': category})
     elif category == 'sent':
         superadminObj = SuperAdmin.objects.get(user = user)
         schoolobj = superadminObj.school
@@ -125,6 +125,6 @@ def superAdminNotice(request, category):
         notice_qs_1 = [item for item in notice_qs]
         notice_qs_1.reverse() 
         print("last ", notice_qs_1)
-        return render(request, 'superNotice.html', {'notices': notice_qs_1, 'superadmin': superadminObj})
+        return render(request, 'superNotice.html', {'notices': notice_qs_1, 'superadmin': superadminObj, 'category': category})
         
         
