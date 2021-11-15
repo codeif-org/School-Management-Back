@@ -47,8 +47,8 @@ def teacherExamList(request):
 
 
 def createExam(request):
-    obj = request.user
-    t = teacher.objects.get(username=obj.username)
+    user = request.user
+    t = teacher.objects.get(user=user)
     subjects = subject.objects.filter(teacher=t)
     classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":
