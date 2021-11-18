@@ -1,7 +1,7 @@
 from typing import List
 from django.shortcuts import render, redirect, HttpResponse
 from .models import exam, score, ExamHeldSubject
-from superadmin.models import school
+from superadmin.models import school, SuperAdmin
 from teacher.models import teacher, classSection, subject
 from student.models import student
 from django.http import JsonResponse
@@ -23,6 +23,17 @@ from exam.serializers import ScoreSerializer
 # student_score_dict = OrderedDict(sorted(student_score_dict.items(), key=lambda t: t[1][2], reverse=True))
 
 def superadminExam(request):
+    superadminobj = SuperAdmin.objects.get(user = request.user)
+    # print(superadminobj)
+    schoolobj = superadminobj.school
+    # print(schoolobj)
+    teacher_qs = teacher.objects.filter(school = schoolobj)
+    # print(len(teacher_qs))
+    subject_qs = subject.objects.filter(teacher__in = teacher_qs)
+    # print(len(subject_qs))
+    examheld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
+    print(len(examheld_qs))
+    
     return render(request, 'superadminExam.html')
 
 
