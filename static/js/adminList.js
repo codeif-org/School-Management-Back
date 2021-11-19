@@ -1,5 +1,11 @@
 console.log("added adminList.js");
 
+// to find the height of the element from bottom of the page
+// let elem = document.getElementsByClassName("tech-exam-list")[1]
+// elem.scrollHeight - elem.scrollTop === elem.clientHeight
+// elem.getBoundingClientRect().bottom
+// window.innerHeight - elem.getBoundingClientRect().bottom
+
 // let studs_list = document.querySelectorAll(".stud-list-elem");
 // console.log(studs_list);
 
