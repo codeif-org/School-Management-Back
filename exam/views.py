@@ -34,7 +34,7 @@ def superadminExam(request):
     examheld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
     print(len(examheld_qs))
     
-    return render(request, 'superadminExam.html')
+    return render(request, 'superadminExam.html', {"exam_lst": examheld_qs})
 
 
 
