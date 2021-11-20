@@ -9,7 +9,7 @@
       <h2>Create Exam</h2>
       <p>Class 9th</p>
     </div>
-    <button class="btn btn-lg">Create</button>
+    <a href="{% url 'exam:superadminCreateExam' %}"><button class="btn btn-lg">Create</button></a>
   </div>
   <div class="exam-list-txt flex">
     <p>LIST OF EXAMS</p>
@@ -33,7 +33,8 @@
           <a href="script:javascript.void(0)">
             <div class="exam-desc">
               <h3 class="text-underline">{{ current_exam.exam.name }}</h3>
-              <p>Class {{ current_exam.subject.Class.Class }}th {{ current_exam.subject.Class.section }} | {{ current_exam.subject.subject }}</p>
+              <p>Class {{ current_exam.subject.Class.Class }}th {{ current_exam.subject.Class.section }} | 
+              {{ current_exam.subject.subject }}</p>
             </div>
           </a>
           <div class="max-marks">
