@@ -36,7 +36,37 @@ def superadminExam(request):
     
     return render(request, 'superadminExam.html', {"exam_lst": examheld_qs})
 
-
+def superadminCreateExam(request):
+    # user = request.user
+    # t = teacher.objects.get(user=user)
+    # subjects = subject.objects.filter(teacher=t)
+    # classes = classSection.objects.filter(teacher=t)
+    if request.method == "POST":
+        print(request.POST)
+        print("subjects selected:", request.POST.getlist('sub'))
+        exam_name = request.POST["exam_name"]
+        max_marks = request.POST["max_marks"]
+        sub_ids = request.POST.getlist("sub")
+        Exam = exam(name=exam_name, max_marks=max_marks, ms=True)
+        Exam.save()
+        for sub_id in sub_ids:
+            Subject = subject.objects.get(id=sub_id)
+            print(Subject.subject)
+            print("save exam done", Exam)
+            exam_held_subject = ExamHeldSubject(exam=Exam, subject=Subject)
+            exam_held_subject.save()
+        # c = request.POST['class']
+        # section = request.POST['section']
+        # cs = classSection.objects.get(Class = c, section = section)
+        # s = request.POST['subject']
+        # sub = subject.objects.get(subject = s)
+        # name = request.POST['exam']
+        # marks = request.POST['marks']
+        # date = request.POST['date']
+        # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
+        # test.save()
+        # return redirect('teacherExamList')
+    return render(request, 'superadminCreateExam.html', {'classes': classes, 'subjects': subjects})
 
 def teacherExamList(request):
     usr = request.user

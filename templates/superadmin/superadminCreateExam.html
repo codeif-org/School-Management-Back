@@ -1,0 +1,89 @@
+{% extends 'adminhome.html' %} {% load static %} {% block extra-head %}
+<!-- css files -->
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/ExamForm.css' %}" />
+{% endblock extra-head %} {% block content %}
+<!-- Exam form -->
+<section class="exam-form">
+  <div>
+    <a href="/teacherExamList.html">
+      <h2><i class="fas fa-arrow-left"></i> back</h2></a
+    >
+  </div>
+  <div class="main-exam-form">
+    <form method="post" action="{% url 'exam:createExam' %}">
+      {% csrf_token %}
+      <div class="form-input">
+        <h3>Exam Name:</h3>
+        <input type="text" name="exam_name" />
+      </div>
+      <div class="form-input">
+        <h3>Max Marks:</h3>
+        <input type="number" name="max_marks" />
+      </div>
+      <!-- <div class="form-input">
+        <h3>Duration (in minutes):</h3>
+        <input type="number" />
+      </div> -->
+      <div class="form-input">
+        <h3>Class:</h3>
+        <!-- <input type="checkbox" name="select-class" id="select-class"> -->
+        <select
+          name="select-class"
+          id="select-class"
+          onchange="submitHandler(event)"
+        >
+          <option value="not-selected" selected>Select</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+      </div>
+      <div class="form-input">
+        <h3>Subject:</h3>
+        <div class="sub-checkboxes">
+          <p>Select Class First</p>
+        </div>
+        <!-- <div class="sub-checkboxes">
+                <input type="checkbox" name="sub1" id="sub1">
+                <label for="sub1">English</label> <br>
+                <input type="checkbox" name="sub2" id="sub2">
+                <label for="sub2">Hindi</label> <br>
+                <input type="checkbox" name="sub3" id="sub3">
+                <label for="sub3">Maths</label><br>
+                <input type="checkbox" name="sub4" id="sub4">
+                <label for="sub4">Physics</label><br>
+                <input type="checkbox" name="sub5" id="sub5">
+                <label for="sub5">Biology</label><br>
+              </div> -->
+      </div>
+      <!-- <div class="form-input">
+        <h3>Date:</h3>
+        <input type="date" />
+      </div>
+      <div class="form-input">
+        <h3>Time:</h3>
+        <input type="time" />
+      </div> -->
+      <button type="submit" class="btn btn-md">Create</button>
+    </form>
+  </div>
+</section>
+{% endblock content %} {% block script %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
+  integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script src="{% static 'js/createExam.js' %}"></script>
+{% endblock script %}
