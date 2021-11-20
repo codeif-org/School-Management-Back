@@ -52,8 +52,6 @@ def superadminCreateExam(request):
     # print(class_qs)
     # print(class_qs.order_by('Class'))
     # print(sorted(class_qs.items(), key = lambda kv:(kv[1], kv[0]))) 
-    # subjects = subject.objects.filter(teacher=t)
-    # classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":
         print(request.POST)
         print("subjects selected:", request.POST.getlist('sub'))

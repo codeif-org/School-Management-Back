@@ -13,12 +13,12 @@ class exam(models.Model):
     ms = models.BooleanField()
 
 class ExamHeldSubject(models.Model):
-    exam = models.ForeignKey(exam, on_delete=models.PROTECT)
-    subject = models.ForeignKey(subject, on_delete=models.PROTECT)
+    exam = models.ForeignKey(exam, on_delete=models.CASCADE)
+    subject = models.ForeignKey(subject, on_delete=models.CASCADE)
     
 class score(models.Model):
-    exam_held = models.ForeignKey(ExamHeldSubject, on_delete=models.PROTECT)
-    stu = models.ForeignKey(student, on_delete=models.PROTECT)
+    exam_held = models.ForeignKey(ExamHeldSubject, on_delete=models.CASCADE)
+    stu = models.ForeignKey(student, on_delete=models.CASCADE)
     score = models.IntegerField()
 
         

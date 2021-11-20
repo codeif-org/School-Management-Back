@@ -11,7 +11,7 @@
     >
   </div>
   <div class="main-exam-form">
-    <form method="post" action="{% url 'exam:createExam' %}">
+    <form method="post" action="{% url 'exam:superadminCreateExam' %}">
       {% csrf_token %}
       <div class="form-input">
         <h3>Exam Name:</h3>
