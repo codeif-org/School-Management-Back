@@ -29,12 +29,14 @@ def superadminExam(request):
     # print(schoolobj)
     teacher_qs = teacher.objects.filter(school = schoolobj)
     # print(len(teacher_qs))
+    class_qs = classSection.objects.filter(teacher__in = teacher_qs).values().order_by('Class')
+    # print(class_qs)
     subject_qs = subject.objects.filter(teacher__in = teacher_qs)
     # print(len(subject_qs))
     examheld_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
     print(len(examheld_qs))
     
-    return render(request, 'superadminExam.html', {"exam_lst": examheld_qs})
+    return render(request, 'superadminExam.html', {"exam_lst": examheld_qs, "classes": class_qs})
 
 # here after selecting the class we have two options to embed the subject data
 # 1. by sending from django to javascript
@@ -76,7 +78,7 @@ def superadminCreateExam(request):
         # date = request.POST['date']
         # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
         # test.save()
-        # return redirect('teacherExamList')
+        return redirect('exam:superadminExam')
     return render(request, 'superadminCreateExam.html', {'classes': class_qs})
 
 def teacherExamList(request):

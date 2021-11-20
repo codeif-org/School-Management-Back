@@ -3,6 +3,27 @@
   align-items: center;
 }
 
+.exam-list-txt select {
+  /* width: 90px; */
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease;
+  margin: 10px;
+}
+
+.exam-list-txt select:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
+
+.exam-list-class-filter{
+  display: flex;
+  align-items: center;
+}
+
 .tech-exam-list {
   flex-direction: column;
 }
