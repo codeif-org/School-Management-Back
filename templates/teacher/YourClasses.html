@@ -1,7 +1,12 @@
-{% extends 'attendance.html' %} {% load static %} {% block extra-head %}
+{% extends 'home.html' %} 
+{% load static %} 
+{% block extra-head %}
 <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 <link rel="stylesheet" href="{% static '/css/YourClasses.css' %}" />
-{% endblock extra-head %} {% block content %} {% if msg %} {{ msg }} {% else %}
+{% endblock extra-head %}
+{% block school-img %}{% endblock school-img %} 
+{% block content %} 
+{% if msg %} {{ msg }} {% else %}
 <section id="main">
   <!-- your classes heading -->
   <div class="class-heading">

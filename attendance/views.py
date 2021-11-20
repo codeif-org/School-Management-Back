@@ -53,6 +53,7 @@ def saveAttendance(request):
 def Attendance(request):
     user = request.user
     t = teacher.objects.get(user=user)
+    school = t.school
     try:
         Class = classSection.objects.get(teacher=t)
         students = student.objects.filter(school=t.school, Class=Class)
@@ -67,12 +68,13 @@ def Attendance(request):
         lid = []
         for l in lStudents:
             lid.append(l.student.id)
-        return render(request, 'attendance.html', {'students': students, 'leaves': lStudents, 'leaveId': lid})
+        return render(request, 'attendance.html', {'students': students, 'leaves': lStudents, 'leaveId': lid, 'school': school})
     except:
         return render(request, 'attendance.html', {'msg': True})
 
 
 def studentAttendance(request):
+    studentobj = student.objects.get(user = request.user)
     attendances = attendance.objects.filter(student = student.objects.get(user = request.user))
     attended = 0
     total_classes = attendances.count()
@@ -81,9 +83,10 @@ def studentAttendance(request):
             attended = attended + 1
     missed = total_classes - attended
     percentage = (attended/total_classes)*100
-    return render(request, 'studentAttendance.html', {'total_classes': total_classes, 'attended': attended, 'missed': missed, 'percentage': str(round(percentage, 2))})
+    return render(request, 'studentAttendance.html', {'total_classes': total_classes, 'attended': attended, 'missed': missed, 'percentage': str(round(percentage, 2)), 'student': studentobj})
 
 def applyLeave(request):
+    studentobj = student.objects.get(user = request.user)
     if request.method == "POST":
         stu = student.objects.get(user = request.user)
         date_from = request.POST['date_from']
@@ -92,4 +95,4 @@ def applyLeave(request):
         leave = Leave(student = stu, date_from = date_from, date_to = date_to, reason = reason)
         leave.save()
         return redirect('student:studenthome')
-    return render(request,'applyLeave.html')
+    return render(request,'applyLeave.html', {'student': studentobj})

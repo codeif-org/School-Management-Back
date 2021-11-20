@@ -1,4 +1,4 @@
-{% extends 'attendance.html' %} {% load static %} {% block extra-head %}
+{% extends 'home.html' %} {% load static %} {% block extra-head %}
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -9,7 +9,9 @@
 <!-- css files -->
 <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static '/css/teacherExam.css' %}" />
-{% endblock extra-head %} {% block content %}
+{% endblock extra-head %} 
+{% block school-img %}{% endblock school-img %}
+{% block content %}
 <!-- Student List -->
 <section id="start-att">
   <div class="menu-list tech-exam-list">

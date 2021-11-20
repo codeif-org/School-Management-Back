@@ -1,7 +1,11 @@
-{% extends 'attendance.html' %} {% load static %} {% block extra-head %}
+{% extends 'index.html' %} 
+{% load static %} 
+{% block extra-head %}
 <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
-{% endblock extra-head %} {% block content %}
+{% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
+{% block content %}
 <section id="main">
   <form method="POST" action="{% url 'notice:createNotice' %}">
     {% csrf_token %}

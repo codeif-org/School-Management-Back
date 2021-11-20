@@ -5,6 +5,8 @@ from .models import Homework, Student_Homework, HomeworkSubmission
 # Create your views here.
 
 def homeworkTeacher(request):
+    t = teacher.objects.get(user = request.user)
+    school = t.school
     subjects = subject.objects.filter(teacher = teacher.objects.get(user = request.user))
     classes = []
     for sub in subjects:
@@ -14,7 +16,7 @@ def homeworkTeacher(request):
         student_homework = Student_Homework.objects.filter(Class = Class)
         for hw in student_homework:
             homeworks.append(hw)
-    return render(request, 'homeworkTeacher.html', {'homeworks': homeworks})
+    return render(request, 'homeworkTeacher.html', {'homeworks': homeworks, 'school': school})
 
 def createHomework(request):
     teacherobj = teacher.objects.get(user = request.user)
@@ -33,7 +35,7 @@ def createHomework(request):
         hw = Student_Homework(subject = subjectobj, homework = homework, Class = classobj)
         hw.save()
         return redirect('homework:homeworkTeacher')
-    return render(request, 'createHomework.html', {'classes': classes})
+    return render(request, 'createHomework.html', {'classes': classes, 'school': schoolobj})
 
 
 def homeworkStudent(request, id):
@@ -55,9 +57,10 @@ def homeworkStudent(request, id):
         if hw.homework.id not in completed_ids:
             due_homeworks.append(hw)
     submitted = False
-    return render(request, 'homework.html', {'homeworks': due_homeworks, 'submitted': submitted})
+    return render(request, 'homework.html', {'homeworks': due_homeworks, 'submitted': submitted, 'student': studentobj})
 
 def submitHomework(request, homework_id):
+    studentobj = student.objects.get(user = request.user)
     homeworkStudent = Student_Homework.objects.get(homework = Homework.objects.get(id = homework_id))
     homework_submission = ''
     submission = ''
@@ -74,7 +77,7 @@ def submitHomework(request, homework_id):
         homework_submission = HomeworkSubmission(student = stu, homework = homework, sub_desc = sub_desc)
         homework_submission.save()
         return redirect('homework:homework', id = 1)
-    return render(request, 'submitHomework.html', {'submitted': submitted, 'submission': homework_submission, 'sub': submission, 'homework': homeworkStudent})
+    return render(request, 'submitHomework.html', {'submitted': submitted, 'submission': homework_submission, 'sub': submission, 'homework': homeworkStudent, 'student': studentobj})
 
 def homeworkList(request, homework_id):
     homework = Student_Homework.objects.get(homework = Homework.objects.get(id = homework_id))

@@ -19,17 +19,21 @@ def teacherhome(request):
 
 
 def addStudent(request, class_name):
+    t = teacher.objects.get(user = request.user)
+    school = t.school
     classobj = classSection.objects.get(teacher=request.user.id)
     students = student.objects.filter(Class=classobj)
     number = len(students)
     l = []
     for i in range(1, number+1):
         l.append(i)
-    return render(request, 'addStudent.html', {'students': students, 'l': l})
+    return render(request, 'addStudent.html', {'students': students, 'l': l, 'school': school})
 
 
 def YourClasses(request):
     # class_var = []
+    teacherobj = teacher.objects.get(user = request.user)
+    school = teacherobj.school
     try:
         classTeacher = classSection.objects.get(teacher=request.user.id)
     except:
@@ -40,7 +44,7 @@ def YourClasses(request):
         classes = None    
     print(classTeacher)
     print(classes)
-    return render(request, 'YourClasses.html', {'class': classTeacher, 'classes': classes})
+    return render(request, 'YourClasses.html', {'class': classTeacher, 'classes': classes, 'school': school})
     # except:
     #     return render(request, 'YourClasses.html', {'msg': 'You are not assigned to any class'})
     

@@ -1,7 +1,9 @@
-{% extends 'attendance.html' %} {% load static %} {% block extra-head %}
+{% extends 'home.html' %} {% load static %} {% block extra-head %}
 <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static 'css/teacherExam.css' %}" />
-{% endblock extra-head %} {% block content %}
+{% endblock extra-head %} 
+{% block school-img %}{% endblock school-img %}
+{% block content %}
 <!-- Start attendance -->
 <section id="start-att">
   <div class="component-back">

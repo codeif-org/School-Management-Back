@@ -4,19 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static 'css/adminList.css' %}" />
 {% endblock extra-head %} 
-{% block nav %}
-<section id="nav">
-  <nav class="top-navbar">
-    <div class="profile-picture">
-      <img src="{% static '/img/profile.jpg' %}" />
-    </div>
-    <div class="school-name">
-      <h2>Sample Sr. Sec. School</h2>
-      <h5 class="faded">Delhi</h5>
-    </div>
-  </nav>
-</section>
-{% endblock nav %}
+{% block school-img %}{% endblock school-img %}
 {% block content %}
 <section id="main">
 <!-- Start attendance -->

@@ -16,6 +16,7 @@ from exam.serializers import ScoreSerializer
 def teacherExamList(request):
     usr = request.user
     oteacher = teacher.objects.get(user=usr)
+    school = oteacher.school
     subjects = subject.objects.filter(teacher=oteacher)
     # print(subjects)
     exam_lst = []
@@ -32,7 +33,7 @@ def teacherExamList(request):
     # exams = exam.objects.all()
     # print("exams: ", exams)
     # print(exam_lst)
-    return render(request, 'teacherExamList.html', {'exam_lst': exam_lst})
+    return render(request, 'teacherExamList.html', {'exam_lst': exam_lst, 'school': school})
 
 # sub: [subject ids array]
 
@@ -40,6 +41,7 @@ def teacherExamList(request):
 def createExam(request):
     obj = request.user
     t = teacher.objects.get(username=obj.username)
+    school = t.school
     subjects = subject.objects.filter(teacher=t)
     classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":
@@ -67,10 +69,12 @@ def createExam(request):
         # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
         # test.save()
         # return redirect('teacherExamList')
-    return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects})
+    return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects, 'school': school})
 
 
 def marksEdit(request, id):
+    t = teacher.objects.get(user = request.user)
+    school = t.school
     exam_held = ExamHeldSubject.objects.get(id=id)
     # test = exam_held.exam
     # print(test)
@@ -80,7 +84,7 @@ def marksEdit(request, id):
     print(students)
     # obj = school.objects.get(school = test.teacher.school.school)
     # students = student.objects.filter(school = obj, Class = test.classSection)
-    return render(request, 'marksEdit.html', {'students': students, 'exam_held': exam_held})
+    return render(request, 'marksEdit.html', {'students': students, 'exam_held': exam_held, 'school': school})
     # return render(request, 'marksEdit.html')
     # return HttpResponse(f"This is marksEdit page {id}")
 
@@ -124,7 +128,7 @@ def leaderboard(request, subject_id):
                 m = 0
         marks.append(m)
     print(marks)
-    return render(request, 'leaderboard.html', {'subjects': subjects, 'sub': subjects[0], 'students': students, 'class': classobj, 'marks': marks})
+    return render(request, 'leaderboard.html', {'subjects': subjects, 'sub': subjects[0], 'students': students, 'class': classobj, 'marks': marks, 'student': studentobj})
 
 def progress(request, subject_id):
     studentobj = student.objects.get(user = request.user)
@@ -138,4 +142,4 @@ def progress(request, subject_id):
         scoreobj = score.objects.get(exam_held = e, stu = studentobj)
         scores.append(scoreobj)
     print(scores)
-    return render(request, 'progress.html', {'scores': scores, 'subjects': subjects})
+    return render(request, 'progress.html', {'scores': scores, 'subjects': subjects, 'student': studentobj})

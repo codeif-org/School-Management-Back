@@ -9,9 +9,12 @@ from .models import SuperAdmin, school
 def adminhome(request):
     super_admin = SuperAdmin.objects.get(user = request.user)
     school_id = super_admin.school.id
-    return render(request, 'adminhome.html', {'school_id': school_id})
+    school = super_admin.school
+    return render(request, 'adminhome.html', {'school_id': school_id, 'school': school})
 
 def addTeacher(request):
+    super_admin = SuperAdmin.objects.get(user = request.user)
+    school = super_admin.school
     if request.method == "POST":
         fname = request.POST['fname']
         try:
@@ -33,9 +36,11 @@ def addTeacher(request):
         t = teacher(fname = fname, mname = mname, lname = lname, email = email, phone = phone, user = u, school = schoolobj)
         t.save()
         return redirect('superadmin:adminhome')
-    return render(request, 'addTeacher.html')
+    return render(request, 'addTeacher.html', {'school': school})
 
 def addStudent(request):
+    super_admin = SuperAdmin.objects.get(user = request.user)
+    school = super_admin.school
     if request.method == "POST":
         ad_no = request.POST['ad-no']
         fname = request.POST['fname']
@@ -76,19 +81,21 @@ def addStudent(request):
         s = student(fname = fname, mname = mname, lname = lname, ad_no = ad_no, roll_no = roll, Class = classobj, email = email, dob = dob, fathername = fathername, mothername = mothername, phone = phone1, fatherphone = phone2, fatheremail = fatheremail, address = address, user = u, school = schoolobj)
         s.save()
         return redirect('superadmin:adminhome')
-    return render(request, 'addStudents.html')
+    return render(request, 'addStudents.html', {'school': school})
 
 def students(request):
     admin = SuperAdmin.objects.get(user = request.user)
+    school = admin.school
     students = student.objects.filter(school = admin.school)
     classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
-    return render(request, 'students.html', {'students': students, 'classes': classes})
+    return render(request, 'students.html', {'students': students, 'classes': classes, 'school': school})
 
 def teachers(request):
     admin = SuperAdmin.objects.get(user = request.user)
+    school = admin.school
     teachers = teacher.objects.filter(school = admin.school)
     classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
-    return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes})
+    return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes, 'school': school})
 
 def info(request):
     super_admin = SuperAdmin.objects.get(user = request.user)

@@ -1,4 +1,10 @@
-{% extends 'attendance.html' %}
+{% extends 'home.html' %}
+{% load static %}
+{% block extra-head %}
+<link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static 'css/adminList.css' %}" />
+{% endblock extra-head %} 
+{% block school-img %}{% endblock school-img %}
 {% block content %}
 <section id="main">
     <section id="start-att">

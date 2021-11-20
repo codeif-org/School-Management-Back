@@ -37,18 +37,19 @@
             <img src="{% static '/img/profile.jpg' %}" />
           </div>
           <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
+            <h2>{{ school.school }}</h2>
+            <h5 class="faded">{{ school.address }}</h5>
           </div>
         </nav>
       </section>
     {% endblock nav %} 
-    {% block content %}
+    {% block school-img %}
       <!-- school image -->
       <section class="school-image">
         <div><img src="{% static '/img/school.jpg' %}" /></div>
       </section>
-      
+    {% endblock school-img %}
+{% block content %}
       <!-- Home Menu List -->
       <section id="home-menu">
         <div class="home-menu">

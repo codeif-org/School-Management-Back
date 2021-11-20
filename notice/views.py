@@ -6,14 +6,20 @@ from superadmin.models import SuperAdmin, school
 # Create your views here.
 
 def showNotice(request):
-    # teacherobj = teacher.objects.get(user = request.user)
+    try:
+        teacherobj = teacher.objects.get(user = request.user)
+        school = teacherobj.school
+    except:
+        admin = SuperAdmin.objects.get(user = request.user)
+        school = admin.school
     # classobj = classSection.objects.get(teacher = teacherobj)
     receivers = receiver.objects.filter(posted_by = request.user)
-    return render(request, 'addNotice.html', {'receivers': receivers})
+    return render(request, 'addNotice.html', {'receivers': receivers, 'school': school})
 
 def createNotice(request):
     try:
         teacherobj = teacher.objects.get(user = request.user)
+        school_object = teacherobj.school
         classes_teacher_obj = classSection.objects.filter(teacher = teacherobj)
         teacher_subject = subject.objects.filter(teacher = teacherobj)
         # print(classes_teacher_obj)
@@ -43,7 +49,7 @@ def createNotice(request):
                 receiverobj = receiver(note = noticeobj, receiver = classobj, posted_by = request.user)
                 receiverobj.save()
         return redirect('notice:createNotice')    
-    return render(request, 'createNotice.html', {'classes': classes})
+    return render(request, 'createNotice.html', {'classes': classes, 'school': school_object})
 
     
     

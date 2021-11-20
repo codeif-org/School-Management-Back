@@ -1,4 +1,4 @@
-{% extends 'notice.html' %}
+{% extends 'index.html' %}
 {% load static %}
 {% block extra-head %}
     <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 {% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
 {% block content %}
     <section id="main">
     <section id="progress-carousel">
