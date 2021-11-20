@@ -35,7 +35,7 @@
         >
           <option value="not-selected" selected>Select</option>
           {% for class in classes %}
-          <option value="{{class}}">{{class}}</option>
+          <option value="{{class.id}}">{{class.Class}}{{class.section}}</option>
           {% endfor %}
           <!-- <option value="11">11</option>
           <option value="12">12</option> -->
@@ -78,5 +78,8 @@
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
 ></script>
+<script>
+  var user = "{{request.user.id}}";
+</script>
 <script src="{% static 'js/createExam.js' %}"></script>
 {% endblock script %}

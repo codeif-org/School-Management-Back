@@ -36,6 +36,9 @@ def superadminExam(request):
     
     return render(request, 'superadminExam.html', {"exam_lst": examheld_qs})
 
+# here after selecting the class we have two options to embed the subject data
+# 1. by sending from django to javascript
+# 2. by calling api from javascript
 def superadminCreateExam(request):
     user = request.user
     # t = teacher.objects.get(user=user)
@@ -44,8 +47,11 @@ def superadminCreateExam(request):
     # this will gives all the teachers of the school
     teacher_qs = teacher.objects.filter(school = schoolobj)
     # this will gives the unique classes of the school
-    class_qs = classSection.objects.filter(teacher__in = teacher_qs).values_list('Class', flat=True).distinct()
-    print(class_qs)
+    # class_qs = classSection.objects.filter(teacher__in = teacher_qs).values_list('Class', flat=True).distinct()
+    class_qs = classSection.objects.filter(teacher__in = teacher_qs).values().order_by('Class')
+    # print(class_qs)
+    # print(class_qs.order_by('Class'))
+    # print(sorted(class_qs.items(), key = lambda kv:(kv[1], kv[0]))) 
     # subjects = subject.objects.filter(teacher=t)
     # classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":

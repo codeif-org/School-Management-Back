@@ -99,6 +99,12 @@ def subjectAPI(request):
     if request.method == "GET":
         if "class" in request.GET:
             try:
+                schoolobj = SuperAdmin.objects.get(user = request.GET["user"]).school
+                print(schoolobj)
+                teacher_qs = teacher.objects.filter(school = schoolobj)
+                print(teacher_qs)
+                class_qs = classSection.objects.filter(teacher__in = teacher_qs, Class = request.GET["class"]).values()
+                print(class_qs)
                 cls = classSection.objects.get(id=request.GET["class"])
                 sub = subject.objects.filter(Class=cls)
                 serializer = SubjectSerializer(sub, many=True)
