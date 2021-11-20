@@ -37,8 +37,15 @@ def superadminExam(request):
     return render(request, 'superadminExam.html', {"exam_lst": examheld_qs})
 
 def superadminCreateExam(request):
-    # user = request.user
+    user = request.user
     # t = teacher.objects.get(user=user)
+    schoolobj = SuperAdmin.objects.get(user = user).school
+    # print(schoolobj)
+    # this will gives all the teachers of the school
+    teacher_qs = teacher.objects.filter(school = schoolobj)
+    # this will gives the unique classes of the school
+    class_qs = classSection.objects.filter(teacher__in = teacher_qs).values_list('Class', flat=True).distinct()
+    print(class_qs)
     # subjects = subject.objects.filter(teacher=t)
     # classes = classSection.objects.filter(teacher=t)
     if request.method == "POST":
@@ -66,7 +73,7 @@ def superadminCreateExam(request):
         # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
         # test.save()
         # return redirect('teacherExamList')
-    return render(request, 'superadminCreateExam.html', {'classes': classes, 'subjects': subjects})
+    return render(request, 'superadminCreateExam.html', {'classes': class_qs})
 
 def teacherExamList(request):
     usr = request.user
