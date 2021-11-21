@@ -187,19 +187,38 @@ def marksEdit(request, id):
 
 @api_view(['GET', 'POST'])
 def marksUpdate(request):
+    def check_score(request):
+        print("check_score")
+        print(request.data)
+        if score.objects.filter(stu=request.data['stu'], exam_held=request.data['exam_held']).exists():
+            request_method = "PUT"
+        else:
+            request_method = "POST"    
+        print(request_method)
+        return request_method
+    request_method = check_score(request) 
+       
     if request.method == "GET":
         print(request)
         scores = score.objects.all()
         serializer = ScoreSerializer(scores, many=True)
         # return Response({"msg":"api is being baked"})
         return Response(serializer.data)
-    elif request.method == "POST":
-        print(request.data)
+    if request_method == "POST":
+        print(type(request.method))
         serializer = ScoreSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"msg": "Marks Added Successfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request_method == "PUT":
+        print(type(request.method))
+        score_qs = score.objects.get(stu=request.data['stu'], exam_held=request.data['exam_held'])
+        serializer = ScoreSerializer(score_qs, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Marks Updated Successfully"}, status=status.HTTP_202_ACCEPTED)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 # def leaderboard(request, subject_id):
 #     studentobj = student.objects.get(user = request.user)

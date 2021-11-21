@@ -39,28 +39,28 @@ var student_elems = document.querySelectorAll(".marks-stud-list");
 
 var marks_edit = function (eve) {
   let elem = eve.target;
-  console.log(elem);
+  // console.log(elem);
   elem.parentNode.innerHTML = `<input type="text" class="student-marks-input"><i class="fas fa-check done-student-marks" onclick="marks_done(event)"></i>`;
 };
 
 var marks_done = function (even) {
   let elem = even.target;
-  console.log(elem);
+  // console.log(elem);
   let done_elem = document.querySelector(".student-marks-input");
   elem.parentNode.innerHTML = `${done_elem.value}<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i>`;
   // console.log("done elem typeof", typeof(done_elem.value));
-  let marks = parseInt(done_elem.value)
+  let marks = parseInt(done_elem.value);
   updateMarks(elem, marks);
 };
 
 var updateMarks = function (elem, marks) {
-  console.log(marks)
-  console.log("GET Request");
+  // console.log(marks)
+  // console.log("GET Request");
   // axios
   //   .post("http://localhost:8000/exam/api/marksupdate/")
   //   .then((res) => console.log(res))
   //   .catch((err) => console.log(err));
-  console.log(student_elems);
+  // console.log(student_elems);
   student_elems.forEach((elem) => {
     elem.addEventListener("click", function () {
       // console.log(elem)
@@ -79,7 +79,7 @@ var updateMarks = function (elem, marks) {
         // xsrfHeaderName: "X-CSRFToken",
         // headers: { "X-CSRFToken": CSRF_TOKEN },
       })
-        .then((res) => console.log(res))
+        .then((res) => console.log(res.data.msg))
         .catch((err) => console.log(err));
     });
   });
