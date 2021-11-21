@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 {% extends 'notice.html' %} {% load static %} {% block extra-head %}
 <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
 {% endblock extra-head %} 
+=======
+{% extends 'index.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
+{% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
+>>>>>>> mansi-config
 {% block content %}
 <section id="main">
   <!-- leaderboard selection section -->

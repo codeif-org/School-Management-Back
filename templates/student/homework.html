@@ -6,19 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
     <link rel="stylesheet" href="{% static 'css/notice.css' %}" />
 {% endblock extra-head %}
-{% block nav %}
-    <section id="nav">
-        <nav class="top-navbar">
-          <div class="profile-picture">
-            <img src="{% static '/img/profile.jpg' %}" />
-          </div>
-          <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
-          </div>
-        </nav>
-      </section>
-{% endblock nav %}
+{% block school-img %}{% endblock school-img %}
 {% block content %}
     <section id="main">
          <!-- Start attendance -->
@@ -34,8 +22,8 @@
       <!-- due completed buttons -->
       <section id="due-compl">
         <div class="due-compl">
-          <button class="btn btn-black">Due</button>
-          <button class="btn">Completed</button>
+          <a href = "{% url 'homework:homework' 0 %}"><button class="btn btn-black">Due</button></a>
+          <a href = "{% url 'homework:homework' 1 %}"><button class="btn">Completed</button></a>
         </div>
       </section>
 
@@ -45,7 +33,7 @@
         {% for homework in homeworks %} 
           <div class="menu-list notice-list">
             <div class="notice-list-info">
-              <p>{{ homework.homework.date.date }} | {{ homework.homework.date.time }}</p>
+              <p>{{ homework.homework.date }}</p>
               <p>
                 <span>{{ homework.subject.subject }} </span><br />
                 <span>by {{ homework.subject.teacher.fname }} {% if homework.subject.teacher.mname %}{{ homework.subject.teacher.mname }}{% endif %} {% if homework.subject.teacher.lname %} {{ homework.subject.teacher.mname }} {% endif %}</span>
@@ -56,11 +44,21 @@
               {{ homework.homework.desc }}
             </p>
             <div class="duedate-submit-btn">
-              <button class="btn btn-green">Submit</button>
-              <p><span>Due On: </span><br /><span>{{ homework.homework.due_date.date }} | {{ homework.homework.due_date.time }}</span></p>
+              <a href="{% url 'homework:submitHomework' homework.homework.id %}">
+                {% if submitted is False %}
+                  <button class="btn btn-green">Submit</button>
+                  {% else %}
+                  <button class="btn btn-green"> View Submission </button>
+                {% endif %}
+              </a>
+              <p>
+              {% if submitted is False %}
+              <span>Due On: </span><br /><span>{{ homework.homework.due_date.date }} | {{ homework.homework.due_date.time }}</span>
+              {% endif %}
+              </p>
             </div>
           </div>
-          {% endfor %}
+          {% endfor %} 
         </div>
       </section>
     </section>

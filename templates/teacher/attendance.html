@@ -1,18 +1,12 @@
-{% extends 'home.html' %} {% load static %} {% block extra-head %}
+{% extends 'home.html' %} 
+{% load static %} 
+{% block extra-head %}
 <link rel="stylesheet" href="{% static 'css/attendance.css' %}" />
-{% endblock extra-head %} {% block nav %}
-<section id="nav">
-  <nav class="top-navbar">
-    <div class="profile-picture">
-      <img src="{% static '/img/profile.jpg' %}" />
-    </div>
-    <div class="school-name">
-      <h2>Sample Sr. Sec. School</h2>
-      <h5 class="faded">Delhi</h5>
-    </div>
-  </nav>
-</section>
-{% endblock nav %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/adminList.css' %}" />
+{% endblock extra-head %} 
+{% block school-img %}{% endblock school-img %}
+{% block content %}
+<section id="main">
 <!-- Start attendance -->
 {% if msg %}
 <section id="not-found">
@@ -47,19 +41,49 @@
           {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL"%}{{student.mname}}{% endif %} {% if student.lname != "NULL"%}{{student.lname}}{% endif %} | {{ student.roll_no }}
         </p>
       </div>
+      {% if student.id in leaveId %}
+          <div class="applyLeave" data-target = "#{{ student.id }}">
+              <p class="stud-list-elem">
+                Applied For Leave <i class="fas fa-chevron-down"></i>
+              </p>
+          </div>
+      {% endif %}
       <div id="{{ student.id }}" class="att-btns">
-        <button class="btn btn-md" onclick="btnHandler(event)" value="false">
+        <button class="att-btn btn btn-md" onclick="btnHandler(event)" value="false">
           Absent
         </button>
-        <button class="btn btn-md" onclick="btnHandler(event)" value="true">
+        <button class="att-btn btn btn-md" onclick="btnHandler(event)" value="true">
           Present
         </button>
       </div>
+      <div class="stud-list-elem-options">
+          <button class="btn">Application</button>
+      </div>
     </div>
+    {% for leave in leaves %}
+    {% if student.id == leave.student.id %}
+      <!-- modal for leave reason -->
+      <div class="modal-bg" id="{{ student.id }}">
+        <div class="modal">
+          <div class="leave-modal">
+            <h1 class="reason-heading">Reason</h1>
+              {{ leave.reason }} {{ student.id }} {{ leave.student.id }}
+            </p>
+            <div><p>Download Leave Application</p></div>
+          </div>
+
+          <span class="modal-close"><i class="fas fa-times"></i></span>
+        </div>
+      </div>
+      {% endif %}
+{% endfor %}
     {% endfor %}
   </div>
 </section>
-{% endif %} {% endblock content %} {% block script %}
+{% endif %} 
+</section>
+{% endblock content %}
+{% block script %}
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"
   integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA=="
@@ -67,4 +91,5 @@
   referrerpolicy="no-referrer"
 ></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/applyLeave.js' %}"></script>
 {% endblock script %}

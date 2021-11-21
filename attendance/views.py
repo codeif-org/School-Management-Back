@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from teacher.models import teacher, classSection
 from student.models import student
-from attendance.models import attendance
+from attendance.models import attendance, Leave
 
 
 from rest_framework.decorators import api_view
@@ -11,6 +11,7 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers, status
 import datetime
+from datetime import date
 # Create your views here.
 
 
@@ -52,14 +53,46 @@ def saveAttendance(request):
 def Attendance(request):
     user = request.user
     t = teacher.objects.get(user=user)
+    school = t.school
     try:
         Class = classSection.objects.get(teacher=t)
         students = student.objects.filter(school=t.school, Class=Class)
-        print(students)
-        return render(request, 'attendance.html', {'students': students})
+        today_date = date.today()
+        leaveStudents = Leave.objects.filter(student__in = student.objects.filter(Class = Class))
+        print(leaveStudents)
+        lStudents = []
+        for ls in leaveStudents:
+            if today_date>=ls.date_from and today_date<=ls.date_to:
+                lStudents.append(ls)
+        print(lStudents)
+        lid = []
+        for l in lStudents:
+            lid.append(l.student.id)
+        return render(request, 'attendance.html', {'students': students, 'leaves': lStudents, 'leaveId': lid, 'school': school})
     except:
         return render(request, 'attendance.html', {'msg': True})
 
 
 def studentAttendance(request):
-    return render(request, 'studentAttendance.html')
+    studentobj = student.objects.get(user = request.user)
+    attendances = attendance.objects.filter(student = student.objects.get(user = request.user))
+    attended = 0
+    total_classes = attendances.count()
+    for att in attendances:
+        if att.present == True:
+            attended = attended + 1
+    missed = total_classes - attended
+    percentage = (attended/total_classes)*100
+    return render(request, 'studentAttendance.html', {'total_classes': total_classes, 'attended': attended, 'missed': missed, 'percentage': str(round(percentage, 2)), 'student': studentobj})
+
+def applyLeave(request):
+    studentobj = student.objects.get(user = request.user)
+    if request.method == "POST":
+        stu = student.objects.get(user = request.user)
+        date_from = request.POST['date_from']
+        date_to = request.POST['date_to']
+        reason = request.POST['reason']
+        leave = Leave(student = stu, date_from = date_from, date_to = date_to, reason = reason)
+        leave.save()
+        return redirect('student:studenthome')
+    return render(request,'applyLeave.html', {'student': studentobj})

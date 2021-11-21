@@ -1,9 +1,10 @@
-{% extends 'notice.html' %}
+{% extends 'index.html' %}
 {% load static %}
 {% block extra-head %}
     <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 {% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
 {% block content %}
 <section id="main">
     <section class="attendance-data">
@@ -15,19 +16,19 @@
           <div class="main-data">
             <div class="data-item">
               <h2>TOTAL CLASSES</h2>
-              <h1>30</h1>
+              <h1>{{ total_classes }}</h1>
             </div>
             <div class="data-item">
               <h2>CLASSES ATTENDED</h2>
-              <h1>25</h1>
+              <h1>{{ attended }}</h1>
             </div>
             <div class="data-item">
               <h2>ABSENT</h2>
-              <h1>5</h1>
+              <h1>{{ missed }}</h1>
             </div>
             <div class="data-item">
               <h2>ATTENDANCE %</h2>
-              <h1>83.33%</h1>
+              <h1>{{ percentage }}%</h1>
             </div>
           </div>
         </div>

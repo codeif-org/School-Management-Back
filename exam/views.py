@@ -148,7 +148,7 @@ def createExam(request):
         # test = exam(teacher = t, classSection = cs, subject = sub, date = date, name = name, marks = marks)
         # test.save()
         # return redirect('teacherExamList')
-    return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects})
+    return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects, 'school': school})
 
 
 def marksEdit(request, id):

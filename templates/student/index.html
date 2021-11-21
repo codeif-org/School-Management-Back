@@ -36,17 +36,20 @@
           <div class="profile-picture">
             <img src="{% static '/img/profile.jpg' %}" />
           </div>
+          {{ user.username }}
           <div class="school-name">
             <h2>{{ student.school.school }}</h2>
             <h5 class="faded">{{ student.school.city }}</h5>
           </div>
         </nav>
       </section>
+      {% endblock nav %}
+      {% block school-img %}
       <!-- school image -->
       <section class="school-image">
         <div><img src="{% static '/img/school.jpg' %}" /></div>
       </section>
-      {% endblock nav %}
+      {% endblock school-img %}
       <!-- Home Menu List -->
       <!-- Go to section -->
       {% block content %}
@@ -74,7 +77,7 @@
               </a>
             </div>
             <div class="goto-item">
-              <a href="#">
+              <a href="{% url 'attendance:applyLeave' %}">
                 <div>
                   <img src="{% static '/img/leave.png' %}" alt="" />
                   <h1>Apply Leave</h1>
@@ -144,7 +147,7 @@
               </a>
             </div>
             <div class="nav-button">
-              <a href="{% url 'homework:homework' %}">
+              <a href="{% url 'homework:homework' 0 %}">
                 <img src="{% static 'img/homework.png' %}" />
                 <h5 class="faded">Homework</h5>
               </a>

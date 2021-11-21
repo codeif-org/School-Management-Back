@@ -42,6 +42,7 @@ def teacherNotice(request, category):
 def createNotice(request):
     try:
         teacherobj = teacher.objects.get(user = request.user)
+        school_object = teacherobj.school
         classes_teacher_obj = classSection.objects.filter(teacher = teacherobj)
         teacher_subject = subject.objects.filter(teacher = teacherobj)
         # print(classes_teacher_obj)

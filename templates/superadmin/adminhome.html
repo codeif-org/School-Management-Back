@@ -38,9 +38,10 @@
           <div class="profile-picture">
             <img src="{% static 'img/profile.jpg' %}" />
           </div>
+          {{ user.username }}
           <div class="school-name">
-            <h2>Sample Sr. Sec. School</h2>
-            <h5 class="faded">Delhi</h5>
+            <h2> {{ school.school }} </h2>
+            <h5 class="faded"> {{ school.address }} </h5>
           </div>
         </nav>
       </section>
@@ -142,7 +143,7 @@
               </a>
             </div>
             <div class="nav-button">
-              <a href="/admin/schoolInfo.html">
+              <a href="{% url 'superadmin:info' %}">
                 <img src="{% static '/img/check.png' %}" />
                 <h5 class="faded">Info</h5>
               </a>
