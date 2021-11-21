@@ -77,10 +77,27 @@ a {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  height: 60px;
+  /* height: 60px; */
   width: var(--center-width);
   /* background-color: #F8F8F8; */
 }
+
+.topnav-profile{
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.topnav-profile > h2{
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .top-navbar {
+    flex-direction: column;
+  }
+}
+  
 
 .profile-picture {
   height: 50px;
