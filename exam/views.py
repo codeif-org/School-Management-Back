@@ -194,6 +194,7 @@ def marksUpdate(request):
         # return Response({"msg":"api is being baked"})
         return Response(serializer.data)
     elif request.method == "POST":
+        print(request.data)
         serializer = ScoreSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

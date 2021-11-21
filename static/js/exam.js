@@ -73,7 +73,7 @@ var updateMarks = function (elem, marks) {
         url: "http://127.0.0.1:8000/exam/api/marksupdate/",
         data: {
           score: marks,
-          exam: parseInt(ids[0]),
+          exam_held: parseInt(ids[0]),
           stu: parseInt(ids[1]),
         },
         // xsrfHeaderName: "X-CSRFToken",
