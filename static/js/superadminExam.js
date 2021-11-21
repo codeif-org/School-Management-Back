@@ -2,8 +2,8 @@ console.log("superadminExam.js");
 
 let submitHandler = function (event) {
   event.preventDefault();
-  console.log("submitHandler");
-  console.log(event.target.value);
+  // console.log("submitHandler");
+  // console.log(event.target.value);
   let current_class = event.target.value;
   let exam_classes = document.querySelectorAll(".exam-class");
 //   console.log(exam_classes);
