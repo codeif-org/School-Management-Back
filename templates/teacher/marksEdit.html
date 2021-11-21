@@ -37,7 +37,8 @@
     {% for student in students %}
     <div id="{{ exam.id }}-{{ student.id }}" class="add-stud-list marks-stud-list">
       <p>
-        {{ forloop.counter }}. {{ student.fname }} {% if student.mname %}{{ student.mname }}{% endif %} {% if student.lname %} 
+        {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{ student.mname }}
+        {% endif %} {% if student.lname != "NULL" %} 
         {{ student.lname }} {% endif %}| {{ student.roll_no }}
       </p>
       <div>
@@ -50,6 +51,6 @@
 {% endblock content %}
 {% block script %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js" integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+    <!-- <script src="{% static 'js/main.js' %}"></script> -->
     <script src="{% static 'js/exam.js' %}"></script>
 {% endblock script %}

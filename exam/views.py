@@ -168,7 +168,9 @@ def marksEdit(request, id):
     if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
         print("auth")    
         student_qs = student.objects.filter(Class=class_q)
-        return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held})
+        score_qs = score.objects.filter(exam_held=id)
+        # print("score_qs ", len(score_qs))
+        return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held, 'scores': score_qs})
 
 
 # exam_id-student_id
