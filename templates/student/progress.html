@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'notice.html' %} {% load static %} {% block extra-head %}
 <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
 <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
@@ -19,25 +18,6 @@
           <p>Subject:</p>
           <select class="leader-select" id="subselect">
             <option value="none">Select Subject</option>
-=======
-{% extends 'index.html' %}
-{% load static %}
-{% block extra-head %}
-    <link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-{% endblock extra-head %}
-{% block school-img %}{% endblock school-img %}
-{% block content %}
-    <section id="main">
-    <section id="progress-carousel">
-        <div class="subject-container">
-          <div class="subject-arrow">
-            <i class="fas fa-chevron-circle-left"></i>
-          </div>
-          <div class="subject">
->>>>>>> mansi-config
             {% for subject in subjects %}
             <option value="{{subject.id}}">{{ subject.subject }}</option>
             {% endfor %} 
