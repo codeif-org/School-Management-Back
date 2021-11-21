@@ -158,18 +158,14 @@ def marksEdit(request, id):
     class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
     print("class_teacher_verify_qs ", class_teacher_verify)
     
-    teacher_subject_qs = subject.objects.filter(teacher=teacherobj)
-    teacher_subject_class_verify = [] # verify that user is teacher of subjects
-    for subject_q in teacher_subject_qs:
-        if subject_q.Class not in teacher_subject_class_verify:
-            teacher_subject_class_verify.append(subject_q.Class)
-    print("teacher_subject_class_verify ", teacher_subject_class_verify)        
+    subject_teacher_verify = subject.objects.filter(teacher=teacherobj) # verify that user is teacher of subjects      
             
     exam_held = ExamHeldSubject.objects.get(id=id)
     class_q = exam_held.subject.Class
+    subject_q = exam_held.subject
     print("class_q ", class_q)
     # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
-    if class_q == class_teacher_verify or class_q in teacher_subject_class_verify:
+    if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
         print("auth")    
         student_qs = student.objects.filter(Class=class_q)
         return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held})
