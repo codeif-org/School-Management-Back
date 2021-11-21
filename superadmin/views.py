@@ -1,9 +1,11 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from student.models import student
 import superadmin
 from teacher.models import classSection, teacher
 from .models import SuperAdmin, school
+import json
 
 # Create your views here.
 def adminhome(request):
@@ -102,3 +104,21 @@ def info(request):
     super_admin = SuperAdmin.objects.get(user = request.user)
     school = super_admin.school
     return render(request, 'schoolInfo.html', {'school': school})
+
+def infoAPI(request):
+    # print(request.user)
+    # print(request.GET['user'])
+    # user = request.GET['user']
+    user = request.user
+    # userobj = User.objects.get(username = user)
+    try:
+        schoolobj = SuperAdmin.objects.get(user = user).school
+    except 1:
+        schoolobj = teacher.objects.get(user = user).school
+    except 2:
+        schoolobj = student.objects.get(user = user).school        
+    school_dict = school.objects.filter(id = schoolobj.id).values()
+    # print(school_dict)
+    school_json = json.dumps(list(school_dict))      
+    # print(school_json)  
+    return HttpResponse(school_json, content_type = "application/json")
