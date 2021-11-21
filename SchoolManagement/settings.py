@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-aolr*$@(eh0$yy*y(*^f6i%h^*rs&8&3+@=iqi_$(&bue(b3&$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'SchoolManagement.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/teacher', 'templates/student', 'templates/logapp'],
+        'DIRS': ['templates/teacher', 'templates/student', 'templates/logapp', 'templates/superadmin'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -173,3 +173,5 @@ if DEBUG:
        ]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+CSRF_COOKIE_NAME = "csrftoken"

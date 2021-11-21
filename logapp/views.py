@@ -14,7 +14,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            print(request.user)
+            # print(request.user)
             try:
                 t = teacher.objects.get(user = request.user)
                 return redirect('teacher:teacherhome')
@@ -23,7 +23,7 @@ def login(request):
                     s = student.objects.get(user = request.user)
                     return redirect('student:studenthome')
                 except:
-                    a = SuperAdmin.objects.get(user = User.objects.get(username = username))
+                    a = SuperAdmin.objects.get(user = request.user)
                     return redirect('superadmin:adminhome')
         else:
             redirect('login')

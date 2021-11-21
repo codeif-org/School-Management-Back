@@ -9,6 +9,7 @@ import json
 
 # Create your views here.
 def adminhome(request):
+    # print(request.user)
     super_admin = SuperAdmin.objects.get(user = request.user)
     school_id = super_admin.school.id
     schoolobj = super_admin.school
