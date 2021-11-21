@@ -7,15 +7,23 @@
   <div class="component-back">
     <div>
       <h2>Create Exam</h2>
-      <p>Class 9th</p>
+      <!-- <p>Class 9th</p> -->
     </div>
     <button class="btn btn-lg">Create</button>
   </div>
-  <div class="exam-list-txt flex">
-    <p>LIST OF EXAMS</p>
-    <div>
-      <i class="fas fa-angle-double-right"></i>
-      <button class="btn btn-black">Class</button>
+  <div class="exam-list-txt">
+    <h1>LIST OF EXAMS</h1>
+    <div class="exam-list-class-filter">
+      <p>Filter by Class:</p>
+      <!-- <i class="fas fa-angle-double-right"></i> -->
+      <!-- <button class="btn btn-black">Class</button> -->
+      <select name="select-class" id="" onchange="submitHandler(event)">
+        <option value="all" selected="">Select Class</option>
+        {% for class in classes %}
+        <option>{{class.Class}}{{class.section}}</option>
+        {% endfor %}
+        <!-- <option value="31">1 A</option> -->
+      </select>
     </div>
   </div>
 </section>
@@ -40,10 +48,10 @@
             <h4>{{ current_exam.exam.max_marks }}</h4>
             <p>Max Marks</p>
           </div>
-          <div class="students-enrolled">
+          <!-- <div class="students-enrolled">
             <h4>28/30</h4>
             <p>Student Enrolled</p>
-          </div>
+          </div> -->
         </div>
       </div>
       {% endfor %}

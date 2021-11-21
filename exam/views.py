@@ -9,7 +9,7 @@ import json
 
 # rest
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from exam.serializers import ScoreSerializer
 
@@ -83,24 +83,26 @@ def superadminCreateExam(request):
 
 def teacherExamList(request):
     usr = request.user
-    oteacher = teacher.objects.get(user=usr)
-    subjects = subject.objects.filter(teacher=oteacher)
-    # print(subjects)
-    exam_lst = []
-    for sub in subjects:
-        # print(sub)
-        oexam = ExamHeldSubject.objects.filter(subject=sub)
-        print(oexam)
-        # print(oexam)
-        # exam_lst.append(oexam)
-        for iexam in oexam:
-            exam_lst.append(iexam)    
-    # exam_lst.append(oexam[0])
-    # exam_lst.append(oexam[1])
-    # exams = exam.objects.all()
-    # print("exams: ", exams)
-    # print(exam_lst)
-    return render(request, 'teacherExamList.html', {'exam_lst': exam_lst})
+    teacherobj = teacher.objects.get(user=usr)
+    # queryset for subject teachers
+    subject_qs = subject.objects.filter(teacher=teacherobj)
+    # print(subject_qs)
+    # __in use for multiple objects or queryset to filter another queryset
+    # exam_qs = []
+    exam_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
+    print(exam_qs)
+    
+    # queryset exam_qs_1 for class teachers
+    class_qs = classSection.objects.get(teacher=teacherobj)
+    subject_qs_1  = subject.objects.filter(Class=class_qs)
+    # print(subject_qs_1)
+    exam_qs_1 = ExamHeldSubject.objects.filter(subject__in = subject_qs_1)
+    print(exam_qs_1)
+    
+    # union of both the queryset
+    exam_qs = exam_qs.union(exam_qs_1)
+    return render(request, 'teacherExamList.html', {'exam_lst': exam_qs})
+
 
 # sub: [subject ids array]
 
