@@ -22,7 +22,7 @@
       <select name="select-class" id="" onchange="submitHandler(event)">
         <option value="all" selected="">Select Class</option>
         {% for class in classes %}
-        <option value="31">{{class.Class}}{{class.section}}</option>
+        <option>{{class.Class}}{{class.section}}</option>
         {% endfor %}
         <!-- <option value="31">1 A</option> -->
       </select>
@@ -44,7 +44,7 @@
           <div class="exam-desc">
             <h3 class="text-underline">{{ current_exam.exam.name }}</h3>
             <p>
-              Class {{current_exam.subject.Class.Class}}{{current_exam.subject.Class.section}} | 
+              Class <span class="exam-class">{{current_exam.subject.Class.Class}}{{current_exam.subject.Class.section}}</span> | 
               {{current_exam.subject.subject}}
             </p>
           </div>
@@ -66,3 +66,7 @@
 </section>
 
 {% endblock content %}
+{% block script %}
+<script src="{% static 'js/superadminExam.js' %}"></script>
+{% endblock script %}
+
