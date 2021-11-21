@@ -45,44 +45,36 @@ var marks_edit = function (eve) {
 
 var marks_done = function (even) {
   let elem = even.target;
-  // console.log(elem);
+  // console.log(elem.parentNode.parentNode.parentNode);
+  let id_elem = elem.parentNode.parentNode.parentNode.getAttribute("id");
+  let ids = id_elem.split("-");
+  console.log(id_elem);
+  // let id_str = elem.getAttribute("id");
+  // var ids = id_str.split("-");
   let done_elem = document.querySelector(".student-marks-input");
   elem.parentNode.innerHTML = `${done_elem.value}<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i>`;
   // console.log("done elem typeof", typeof(done_elem.value));
   let marks = parseInt(done_elem.value);
-  updateMarks(elem, marks);
+  // console.log("marks", marks);
+  // console.log("elem", elem);
+  // console.log(ids);
+  updateMarks(ids, marks);
 };
 
-var updateMarks = function (elem, marks) {
-  // console.log(marks)
-  // console.log("GET Request");
-  // axios
-  //   .post("http://localhost:8000/exam/api/marksupdate/")
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
-  // console.log(student_elems);
-  student_elems.forEach((elem) => {
-    elem.addEventListener("click", function () {
-      // console.log(elem)
-      let id_str = elem.getAttribute("id");
-      let ids = id_str.split("-");
-      // exam_id - student_id
-      // console.log(typeof parseInt(ids[0]));
-      axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/exam/api/marksupdate/",
-        data: {
-          score: marks,
-          exam_held: parseInt(ids[0]),
-          stu: parseInt(ids[1]),
-        },
-        // xsrfHeaderName: "X-CSRFToken",
-        // headers: { "X-CSRFToken": CSRF_TOKEN },
-      })
-        .then((res) => console.log(res.data.msg))
-        .catch((err) => console.log(err));
-    });
-  });
+var updateMarks = function (ids, marks) {
+  axios({
+    method: "post",
+    url: "http://127.0.0.1:8000/exam/api/marksupdate/",
+    data: {
+      score: marks,
+      exam_held: parseInt(ids[0]),
+      stu: parseInt(ids[1]),
+    },
+    // xsrfHeaderName: "X-CSRFToken",
+    // headers: { "X-CSRFToken": CSRF_TOKEN },
+  })
+    .then((res) => console.log(res.data.msg))
+    .catch((err) => console.log(err));
 };
 
 // var student_elems = document.querySelectorAll(".marks-stud-list");
