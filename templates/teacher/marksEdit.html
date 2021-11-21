@@ -35,14 +35,14 @@
 <section>
   <div class="student-list">
     {% for student in students %}
-    <div id="{{ exam.id }}-{{ student.id }}" class="add-stud-list marks-stud-list">
+    <div id="{{ exam_held.id }}-{{ student.id }}" class="add-stud-list marks-stud-list">
       <p>
         {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{ student.mname }}
         {% endif %} {% if student.lname != "NULL" %} 
         {{ student.lname }} {% endif %}| {{ student.roll_no }}
       </p>
       <div>
-        <p>48<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i></p>
+        <p>{{student.score}}<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i></p>
       </div>
     </div>
     {% endfor %}

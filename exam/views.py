@@ -167,8 +167,18 @@ def marksEdit(request, id):
     # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
     if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
         print("auth")    
-        student_qs = student.objects.filter(Class=class_q)
+        student_qs = student.objects.filter(Class=class_q).values()
         score_qs = score.objects.filter(exam_held=id)
+        for student_q in student_qs:
+            # print("student_q ", student_q)
+            if score.objects.filter(stu=student_q['id'], exam_held=id).exists():
+                # print("score exists")
+                student_q['score'] = score.objects.get(stu=student_q['id'], exam_held=id).score
+            else:
+                # print("score not exists")
+                student_q['score'] = "--"
+        
+        # print("student_qs ", student_qs)        
         # print("score_qs ", len(score_qs))
         return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held, 'scores': score_qs})
 
