@@ -7,8 +7,9 @@ import json
 
 def studenthome(request):
     studentobj = student.objects.get(user = request.user)
+    schoolobj = studentobj.school
     sub = subject.objects.filter(Class = studentobj.Class)
-    return render(request, 'index.html', {'student': studentobj, 'sub': sub[0]})
+    return render(request, 'index.html', {'student': studentobj, 'sub': sub[0], 'school': schoolobj})
 
 # http://127.0.0.1:8000/student/api/classStudent?class=21
 # this can also be implented using Rest API in Django

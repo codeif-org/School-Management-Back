@@ -11,8 +11,8 @@ import json
 def adminhome(request):
     super_admin = SuperAdmin.objects.get(user = request.user)
     school_id = super_admin.school.id
-    school = super_admin.school
-    return render(request, 'adminhome.html', {'school_id': school_id, 'school': school})
+    schoolobj = super_admin.school
+    return render(request, 'adminhome.html', {'school_id': school_id, 'school': schoolobj})
 
 def addTeacher(request):
     super_admin = SuperAdmin.objects.get(user = request.user)
