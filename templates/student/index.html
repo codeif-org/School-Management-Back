@@ -33,13 +33,15 @@
       {% block nav %}
       <section id="nav">
         <nav class="top-navbar">
-          <div class="profile-picture">
-            <img src="{% static '/img/profile.jpg' %}" />
+          <div class="topnav-profile">
+            <div class="profile-picture">
+              <img src="{% static 'img/profile.jpg' %}" />
+            </div>
+            <h2>Hey! <span id="topnav-username">{{ user.username }}</span></h2>
           </div>
-          {{ user.username }}
           <div class="school-name">
-            <h2>{{ student.school.school }}</h2>
-            <h5 class="faded">{{ student.school.city }}</h5>
+            <h2><span id="schoolName">{{ school.school }}</span></h2>
+            <h5 class="faded"><span id="schoolAddress">{{ school.address }}</span></h5>
           </div>
         </nav>
       </section>
