@@ -85,18 +85,20 @@
   </section> -->
   <section>
     <div class="student-list">
+    {% for value in scores_dict %}
       <div class="add-stud-list">
+        <p>
+          {{forloop.counter}}. {{value.1.0}} | {{value.1.1}}
+        </p>
+        <h2>{{value.1.2}}</h2>
+      </div>
+    {% endfor %}
+      <!-- <div class="add-stud-list">
         <p>
           1. Mayur | 71
         </p>
         <h2>69</h2>
-      </div>
-      <div class="add-stud-list">
-        <p>
-          2. Mansi | 66
-        </p>
-        <h2>94</h2>
-      </div>
+      </div> -->
     </div>
   </section>
 </section>

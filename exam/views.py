@@ -307,7 +307,19 @@ def leaderboard(request):
     exam_qs = set(exams_qs) 
     # remove duplicates from exam_qs and exam_qs is a set of exams model objects
     # print(len(exam_qs))    
-    return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs, 'class': cls})
+    # student_id : [fname, roll_no, score]
+    class_student_qs = student.objects.filter(Class = cls)
+    score_qs = score.objects.filter(stu__in = class_student_qs)
+    student_scores_dict = {}
+    for score_q in score_qs:
+        if score_q.stu.id not in student_scores_dict:
+            student_scores_dict[score_q.stu.id] = [score_q.stu.fname, score_q.stu.roll_no, score_q.score]
+        else:
+            student_scores_dict[score_q.stu.id][2] = student_scores_dict[score_q.stu.id][2] + score_q.score
+    student_scores_dict_sorted = list(sorted(student_scores_dict.items(), key=lambda x: x[1][2], reverse=True))    
+    print(student_scores_dict_sorted)   
+    # print(student_score_sort)     
+    return render(request, 'leaderboard.html', {'subjects': subject_qs, 'exams': exam_qs, 'class': cls, 'scores_dict': student_scores_dict_sorted})
 
 
 # 127.0.0.1:8000/exam/student/leaderboard/api/score?subject=571&exam=384
