@@ -152,18 +152,28 @@ def createExam(request):
 
 
 def marksEdit(request, id):
+    # first verify
+    user = request.user
+    teacherobj = teacher.objects.get(user=user) # verify that user is teacher
+    class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
+    print("class_teacher_verify_qs ", class_teacher_verify)
+    
+    teacher_subject_qs = subject.objects.filter(teacher=teacherobj)
+    teacher_subject_class_verify = [] # verify that user is teacher of subjects
+    for subject_q in teacher_subject_qs:
+        if subject_q.Class not in teacher_subject_class_verify:
+            teacher_subject_class_verify.append(subject_q.Class)
+    print("teacher_subject_class_verify ", teacher_subject_class_verify)        
+            
     exam_held = ExamHeldSubject.objects.get(id=id)
-    # test = exam_held.exam
-    # print(test)
-    # test = exam.objects.get(id=id)
-    clas = exam_held.subject.Class
-    students = student.objects.filter(Class=clas)
-    print(students)
-    # obj = school.objects.get(school = test.teacher.school.school)
-    # students = student.objects.filter(school = obj, Class = test.classSection)
-    return render(request, 'marksEdit.html', {'students': students, 'exam_held': exam_held})
-    # return render(request, 'marksEdit.html')
-    # return HttpResponse(f"This is marksEdit page {id}")
+    class_q = exam_held.subject.Class
+    print("class_q ", class_q)
+    # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
+    if class_q == class_teacher_verify or class_q in teacher_subject_class_verify:
+        print("auth")    
+        student_qs = student.objects.filter(Class=class_q)
+        return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held})
+
 
 # exam_id-student_id
 
