@@ -86,22 +86,33 @@ def teacherExamList(request):
     teacherobj = teacher.objects.get(user=usr)
     # queryset for subject teachers
     subject_qs = subject.objects.filter(teacher=teacherobj)
+    # class_qs = subject_qs.values_list('Class', flat=True).distinct()
+    # class_qs = subject.objects.select_related('Class').all().distinct()
+    class_qs = []
+    for subject_q in subject_qs:
+        if subject_q.Class not in class_qs:
+            class_qs.append(subject_q.Class)
+    print("class_qs ", class_qs)
     # print(subject_qs)
     # __in use for multiple objects or queryset to filter another queryset
     # exam_qs = []
     exam_qs = ExamHeldSubject.objects.filter(subject__in = subject_qs)
-    print(exam_qs)
+    # print(exam_qs)
     
     # queryset exam_qs_1 for class teachers
-    class_qs = classSection.objects.get(teacher=teacherobj)
-    subject_qs_1  = subject.objects.filter(Class=class_qs)
+    class_qs_1 = classSection.objects.get(teacher=teacherobj)
+    subject_qs_1  = subject.objects.filter(Class=class_qs_1)
     # print(subject_qs_1)
     exam_qs_1 = ExamHeldSubject.objects.filter(subject__in = subject_qs_1)
-    print(exam_qs_1)
+    # print(exam_qs_1)
     
     # union of both the queryset
     exam_qs = exam_qs.union(exam_qs_1)
-    return render(request, 'teacherExamList.html', {'exam_lst': exam_qs})
+    class_qs.append(class_qs_1)
+    # print(class_qs)
+    class_qs = set(class_qs)
+    print("class_qs ", class_qs)
+    return render(request, 'teacherExamList.html', {'exam_lst': exam_qs, 'classes': class_qs})
 
 
 # sub: [subject ids array]

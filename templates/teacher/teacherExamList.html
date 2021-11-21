@@ -41,17 +41,22 @@
           <a href="{% url 'exam:marksEdit' current_exam.id %}">
             <div class="exam-desc">
               <h3 class="text-underline">{{ current_exam.exam.name }}</h3>
-              <p>Class {{ current_exam.subject.Class.Class }}th {{ current_exam.subject.Class.section }} | {{ current_exam.subject.subject }}</p>
+              <p>
+                Class <span class="exam-class">{{current_exam.subject.Class.Class}}{{current_exam.subject.Class.section}}</span> | 
+                {{current_exam.subject.subject}}
+              </p>
             </div>
           </a>
           <div class="max-marks">
             <h4>{{ current_exam.exam.max_marks }}</h4>
             <p>Max Marks</p>
           </div>
-          <!-- <div class="students-enrolled">
+          {% comment %}
+          <div class="students-enrolled">
             <h4>28/30</h4>
             <p>Student Enrolled</p>
-          </div> -->
+          </div>
+          {% endcomment %}
         </div>
       </div>
       {% endfor %}
@@ -59,3 +64,6 @@
 </section>
 
 {% endblock content %}
+{% block script %}
+<script src="{% static 'js/superadminExam.js' %}"></script>
+{% endblock script %}
