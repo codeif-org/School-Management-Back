@@ -1,0 +1,32 @@
+#homework-head{
+    width: var(--center-width);
+    margin: auto;
+}
+
+.homework-head{
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.homework-head > *{
+    margin-bottom: 10px;
+}
+
+.posted-cred{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.right-align{
+    text-align: right;
+}
+
+.submitted-hw > *{
+    margin-bottom: 10px;
+}
+
+.submitted-hw > p > span{
+    color: green;
+}

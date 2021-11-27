@@ -1,0 +1,24 @@
+.menu-list {
+    width: var(--center-width);
+    margin: auto;
+  }
+  .heading {
+    margin: auto;
+    display: block;
+  }
+  
+  .content-topic {
+    margin-top: 20px;
+  }
+  
+  .content-topic h2 {
+    margin-bottom: 10px;
+  }
+  
+  #leave-date {
+    margin: 0;
+  }
+  
+  #leave-application {
+    margin-bottom: 20px;
+  }
