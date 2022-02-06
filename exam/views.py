@@ -92,7 +92,6 @@ def teacherExamList(request):
     for subject_q in subject_qs:
         if subject_q.Class not in class_qs:
             class_qs.append(subject_q.Class)
-    print("class_qs ", class_qs)
     # print(subject_qs)
     # __in use for multiple objects or queryset to filter another queryset
     # exam_qs = []
@@ -154,18 +153,23 @@ def createExam(request):
 def marksEdit(request, id):
     # first verify
     user = request.user
-    teacherobj = teacher.objects.get(user=user) # verify that user is teacher
-    class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
-    print("class_teacher_verify_qs ", class_teacher_verify)
-    
-    subject_teacher_verify = subject.objects.filter(teacher=teacherobj) # verify that user is teacher of subjects      
-            
+    operator=''
     exam_held = ExamHeldSubject.objects.get(id=id)
     class_q = exam_held.subject.Class
     subject_q = exam_held.subject
-    print("class_q ", class_q)
-    # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
-    if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
+    superadmin=SuperAdmin.objects.filter(user=user)
+    if superadmin:
+        operator='superadmin'
+    if not superadmin:
+        teacherobj = teacher.objects.get(user=user) # verify that user is teacher
+        class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
+        print("class_teacher_verify_qs ", class_teacher_verify)
+        subject_teacher_verify = subject.objects.filter(teacher=teacherobj) # verify that user is teacher of subjects      
+        # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
+        if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
+            operator='teacher'
+    
+    if  operator in ['teacher','superadmin']:
         print("auth")    
         student_qs = student.objects.filter(Class=class_q).values()
         for student_q in student_qs:
