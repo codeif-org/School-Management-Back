@@ -32,4 +32,4 @@ def login(request):
 def logout(request):
     current_user = request.user
     auth.logout(request)
-    return redirect('/')
+    return redirect('login')

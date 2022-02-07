@@ -18,11 +18,15 @@ from django.urls import path, include
 from teacher import views
 import logapp
 from logapp.views import login
+from django.contrib.auth import logout
+from django.contrib.auth.views import LogoutView
+from .settings import LOGOUT_REDIRECT_URL
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', login, name='login'),
+    path('logout/', LogoutView.as_view(next_page=LOGOUT_REDIRECT_URL), name='logout'),
     path('teacher/', include('teacher.urls')),
     path('attendance/', include('attendance.urls')),
     path('student/', include('student.urls')),

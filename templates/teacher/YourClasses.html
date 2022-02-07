@@ -15,16 +15,17 @@
   </div>
 
   <!-- class teacher -->
-  {% if class is not None %}
+  
   <section class="class-teacher">
     <div class="component-back">
+      {% if class is not None %}
       <h2>You are class teacher of</h2>
       <a href="{% url 'teacher:addStudent' class.id %}"
-        ><button class="btn btn-md">Class {{ class.Class }}th {{ class.section }} </button></a
-      >
+        ><button class="btn btn-md">Class {{ class.Class }}th {{ class.section }} </button></a>
+        {% else %}<h2> You are not class teacher of any class.</h2> {% endif %}
     </div>
   </section>
-  {% else %} You are not class teacher of any class. {% endif %}
+  
 
   <!-- other classes -->
 
