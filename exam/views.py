@@ -149,44 +149,41 @@ def createExam(request):
         # return redirect('teacherExamList')
     return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects, 'school': school})
 
-
-def marksEdit(request, id):
-    # first verify
+def superadminMarksEdit(request,id):
     user = request.user
-    operator=''
     exam_held = ExamHeldSubject.objects.get(id=id)
     class_q = exam_held.subject.Class
-    subject_q = exam_held.subject
     superadmin=SuperAdmin.objects.filter(user=user)
-    if superadmin:
-        operator='superadmin'
-    if not superadmin:
-        teacherobj = teacher.objects.get(user=user) # verify that user is teacher
-        class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
-        print("class_teacher_verify_qs ", class_teacher_verify)
-        subject_teacher_verify = subject.objects.filter(teacher=teacherobj) # verify that user is teacher of subjects      
-        # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
-        if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
-            operator='teacher'
-    
-    if  operator in ['teacher','superadmin']:
+    if  superadmin:
         print("auth")    
         student_qs = student.objects.filter(Class=class_q).values()
         for student_q in student_qs:
-            # print("student_q ", student_q)
             if score.objects.filter(stu=student_q['id'], exam_held=id).exists():
-                # print("score exists")
                 student_q['score'] = score.objects.get(stu=student_q['id'], exam_held=id).score
             else:
-                # print("score not exists")
                 student_q['score'] = "--"
-        
-        # print("student_qs ", student_qs)        
-        # print("score_qs ", len(score_qs))
-        return render(request, 'marksEdit.html', {'students': student_qs, 'exam_held': exam_held})
+        return render(request, 'superadminMarksEdit.html', {'students': student_qs, 'exam_held': exam_held})
 
+def teacherMarksEdit(request, id):
+    user = request.user
+    exam_held = ExamHeldSubject.objects.get(id=id)
+    class_q = exam_held.subject.Class
+    subject_q = exam_held.subject
+    teacherobj = teacher.objects.get(user=user) # verify that user is teacher
+    class_teacher_verify = classSection.objects.get(teacher=teacherobj) # verify that user is teacher of class
+    print("class_teacher_verify_qs ", class_teacher_verify)
+    subject_teacher_verify = subject.objects.filter(teacher=teacherobj) # verify that user is teacher of subjects      
+    
+    # if user is teacher and ((is teacher of class) or (is teacher of subject)) then only he/she can edit
+    if class_q == class_teacher_verify or subject_q in subject_teacher_verify:
+        student_qs = student.objects.filter(Class=class_q).values()
+        for student_q in student_qs:
+            if score.objects.filter(stu=student_q['id'], exam_held=id).exists():
+                student_q['score'] = score.objects.get(stu=student_q['id'], exam_held=id).score
+            else:
+                student_q['score'] = "--"
+        return render(request, 'teacherMarksEdit.html', {'students': student_qs, 'exam_held': exam_held})
 
-# exam_id-student_id
 
 
 @api_view(['GET', 'POST'])

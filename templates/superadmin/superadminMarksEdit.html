@@ -1,0 +1,58 @@
+{% extends 'adminhome.html' %} {% load static %} {% block extra-head %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+  integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<!-- css files -->
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/teacherExam.css' %}" />
+{% endblock extra-head %} 
+{% block school-img %}{% endblock school-img %}
+{% block content %}
+<!-- Student List -->
+<section id="start-att">
+  <div class="menu-list tech-exam-list">
+    <div>
+      <p>{{ exam_held.exam.date }}</p>
+    </div>
+    <div class="exam-data">
+      <div class="exam-desc">
+        <h3>{{ exam_held.exam.name }}</h3>
+        <p>
+          Class {{ exam_held.subject.Class.Class }} {{ exam_held.subject.Class.section }} |
+          {{ exam_held.subject.subject }}
+        </p>
+      </div>
+      <div class="max-marks">
+        <h4>{{ exam_held.exam.max_marks }}</h4>
+        <p>Max Marks</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="student-list">
+    {% for student in students %}
+    <div id="{{ exam_held.id }}-{{ student.id }}" class="add-stud-list marks-stud-list">
+      <p>
+        {{ forloop.counter }}. {{ student.fname }} {% if student.mname != "NULL" %}{{ student.mname }}
+        {% endif %} {% if student.lname != "NULL" %} 
+        {{ student.lname }} {% endif %}| {{ student.roll_no }}
+      </p>
+      <div>
+        <p>{{student.score}}<i class="fas fa-edit edit-student-marks" onclick="marks_edit(event)"></i></p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js" integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="{% static 'js/main.js' %}"></script> -->
+    <script src="{% static 'js/exam.js' %}"></script>
+{% endblock script %}
