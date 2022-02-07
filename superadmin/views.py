@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from student.models import student
 import superadmin
-from teacher.models import classSection, teacher
+from teacher.models import classSection, teacher,subject
 from .models import SuperAdmin, school
 import json
 
@@ -123,3 +123,18 @@ def infoAPI(request):
     school_json = json.dumps(list(school_dict))      
     # print(school_json)  
     return HttpResponse(school_json, content_type = "application/json")
+
+def classes(request):
+    teacherobj = teacher.objects.get(user=request.user)
+    school = teacherobj.school
+    try:
+        classTeacher = classSection.objects.get(teacher=request.user.id)
+    except:
+        classTeacher = None
+    try:
+        classes = subject.objects.filter(teacher=request.user.id)
+    except:
+        classes = None
+    print(classTeacher)
+    print(classes)
+    return render(request, 'classes.html', {'class': classTeacher, 'classes': classes, 'school': school})
