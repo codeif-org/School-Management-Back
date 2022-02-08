@@ -6,13 +6,21 @@
 {% block content %}
 <!-- Start attendance -->
 <section id="start-att">
+  
   <div class="component-back">
+    {% if class_qs_1 is not None %}
     <div>
       <h2>Create Exam</h2>
       <!-- <p>Class 9th</p> -->
     </div>
     <button class="btn btn-lg">Create</button>
+    {% else %} 
+  
+    <h2>You are not class teacher of any class.</h2>
+
+  {% endif %}
   </div>
+  
   <div class="exam-list-txt">
     <h1>LIST OF EXAMS</h1>
     <div class="exam-list-class-filter">

@@ -100,7 +100,10 @@ def teacherExamList(request):
     # print(exam_qs)
     
     # queryset exam_qs_1 for class teachers
-    class_qs_1 = classSection.objects.get(teacher=teacherobj)
+    try:
+        class_qs_1 = classSection.objects.get(teacher=teacherobj)
+    except:
+        class_qs_1 = None
     subject_qs_1  = subject.objects.filter(Class=class_qs_1)
     # print(subject_qs_1)
     exam_qs_1 = ExamHeldSubject.objects.filter(subject__in = subject_qs_1)
