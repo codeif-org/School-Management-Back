@@ -149,12 +149,12 @@ def createExam(request):
         # return redirect('teacherExamList')
     return render(request, 'createExam.html', {'classes': classes, 'subjects': subjects, 'school': school})
 
-def superadminMarksEdit(request,id):
+def superadminMarksEdit(request, id):
     user = request.user
     exam_held = ExamHeldSubject.objects.get(id=id)
     class_q = exam_held.subject.Class
     superadmin=SuperAdmin.objects.filter(user=user)
-    if  superadmin:
+    if superadmin:
         print("auth")    
         student_qs = student.objects.filter(Class=class_q).values()
         for student_q in student_qs:
