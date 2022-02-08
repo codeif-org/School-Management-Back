@@ -125,16 +125,19 @@ def infoAPI(request):
     return HttpResponse(school_json, content_type = "application/json")
 
 def classes(request):
-    teacherobj = teacher.objects.get(user=request.user)
-    school = teacherobj.school
-    try:
-        classTeacher = classSection.objects.get(teacher=request.user.id)
-    except:
-        classTeacher = None
-    try:
-        classes = subject.objects.filter(teacher=request.user.id)
-    except:
-        classes = None
-    print(classTeacher)
-    print(classes)
-    return render(request, 'classes.html', {'class': classTeacher, 'classes': classes, 'school': school})
+    admin_obj = SuperAdmin.objects.get(user = request.user)
+    school_obj = admin_obj.school
+    teacher_qs = teacher.objects.filter(school = school_obj)
+    class_qs = classSection.objects.filter(teacher__in = teacher_qs)
+    print(class_qs) 
+    # try:
+    #     classTeacher = classSection.objects.get(teacher=request.user.id)
+    # except:
+    #     classTeacher = None
+    # try:
+    #     classes = subject.objects.filter(teacher=request.user.id)
+    # except:
+    #     classes = None
+    # print(classTeacher)
+    # print(classes)
+    return render(request, 'classes.html', {'classes': class_qs})
