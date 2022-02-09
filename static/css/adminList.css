@@ -1,128 +1,134 @@
 #list-hero {
-    width: var(--center-width);
-    margin: auto;
-  }
-  
-  .list-hero {
-    flex-direction: column;
-    align-items: baseline;
-  }
-  
-  .list-hero-search {
-    width: 100%;
-  }
-  
-  .list-hero-search > p,
-  .list-hero-search > h2,
-  .list-hero-filter > p {
-    margin: 8px;
-  }
-  
-  .list-search-box {
-    display: flex;
-    align-items: center;
-  }
-  
-  .list-search-box > i {
-    font-size: 24px;
-    margin: 0px 10px;
-    background-color: var(--dark);
-    color: #fff;
-    padding: 8.5px;
-    border-radius: 8px;
-    transition: all 0.2s ease 0s;
-  }
-  
-  .list-search-box > i:hover {
-    cursor: pointer;
-    background-color: #fff;
-    color: var(--dark);
-  }
-  
+  width: var(--center-width);
+  margin: auto;
+}
+
+.list-hero {
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.list-hero-search {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.list-hero-search input{
+  margin: 10px;
+}
+
+.list-hero-search > p,
+.list-hero-search > h2,
+.list-hero-filter > p {
+  margin: 8px;
+}
+
+.list-search-box {
+  display: flex;
+  align-items: center;
+}
+
+.list-search-box > i {
+  font-size: 24px;
+  margin: 0px 10px;
+  background-color: var(--dark);
+  color: #fff;
+  padding: 8.5px;
+  border-radius: 8px;
+  transition: all 0.2s ease 0s;
+}
+
+.list-search-box > i:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: var(--dark);
+}
+
+input[type="text"] {
+  outline: none;
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+input[type="text"]:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+  width: 80%;
+}
+
+p {
+  font-size: 18px;
+}
+
+.list-hero-filter {
+  width: 100%;
+  margin: 8px 0px;
+  display: flex;
+}
+
+.list-hero-filter select {
+  width: auto;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--dark-grey);
+  border-radius: 8px;
+  transition: all 0.1s ease;
+}
+
+.list-hero-filter select:focus {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+}
+
+/* admin student list */
+#admin-stud-list {
+  width: var(--center-width);
+  margin: auto;
+  padding: 1em 0px;
+}
+
+.stud-list-elem {
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0.5em 0;
+  padding: 10px 16px;
+}
+
+.stud-list-elem:hover {
+  background-color: var(--dark-grey);
+  cursor: pointer;
+}
+
+.admin-stud-list h2 {
+  margin: 8px;
+  padding: 8px 0px;
+}
+
+.stud-list-elem-options {
+  display: none;
+}
+
+.active-block {
+  display: block;
+}
+
+.stud-list-elem-options button {
+  /* background-color: #fff; */
+  margin: 15px;
+}
+
+@media screen and (max-width: 800px) {
   input[type="text"] {
-    outline: none;
-    width: 30%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid var(--dark-grey);
-    border-radius: 8px;
-    transition: all 0.4s ease;
-  }
-  
-  input[type="text"]:focus {
-    border: 2px solid var(--dark);
-    border-radius: 8px;
     width: 80%;
   }
-  
-  p {
-    font-size: 18px;
-  }
-  
-  .list-hero-filter {
-    width: 100%;
-    margin: 8px 0px;
-    display: flex;
-  }
-  
-  .list-hero-filter select {
-    width: 90px;
-    outline: none;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid var(--dark-grey);
-    border-radius: 8px;
-    transition: all 0.1s ease;
-  }
-  
-  .list-hero-filter select:focus {
-    border: 2px solid var(--dark);
-    border-radius: 8px;
-  }
-  
-  /* admin student list */
-  #admin-stud-list {
-    width: var(--center-width);
-    margin: auto;
-    padding: 1em 0px;
-  }
-  
-  .stud-list-elem {
-    background-color: var(--light-grey);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 0.5em 0;
-    padding: 10px 16px;
-  }
-  
-  .stud-list-elem:hover {
-    background-color: var(--dark-grey);
-    cursor: pointer;
-  }
-  
-  .admin-stud-list h2 {
-    margin: 8px;
-    padding: 8px 0px;
-  }
-  
-  .stud-list-elem-options {
-    display: none;
-  }
-  
-  .active-block {
-    display: block;
-  }
-  
-  .stud-list-elem-options button {
-    /* background-color: #fff; */
-    margin: 15px;
-  }
-  
-  @media screen and (max-width: 800px){
-    input[type="text"]{
-      width: 80%;
-    }
-  }
+}
