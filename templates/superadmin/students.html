@@ -93,7 +93,7 @@
                   <th>Name</th>
                   <th>Father's Name</th>
                   <th>Class</th>
-                  {% comment %} <th>Fee Status</th> {% endcomment %}
+                  <th>Action</th>
                 </tr>
                 {% for student in students %}
                 <tr onclick="document.location = '#'" tabindex = {{forloop.counter}}>
@@ -101,7 +101,12 @@
                   <td> {{ student.fname }} </td>
                   <td> {{ student.fathername }} </td>
                   <td> {{ student.Class.Class }}{{ student.Class.section }} </td>
-                  {% comment %} <td>Paid</td> {% endcomment %}
+                  <td>
+                    <i alt="info" class="fa-solid fa-circle-info"></i>
+                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-a"></i>
+                    <i class="fa-solid fa-comment"></i>
+                  </td>
                 </tr>
                 {% endfor %}
               </table>
