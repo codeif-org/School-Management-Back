@@ -12,4 +12,5 @@ urlpatterns = [
     # path('notice/', notice_views.showNotice, name = 'notice'),
     path('info/', views.info, name = 'info'),
     path('api/schoolinfo/', views.infoAPI, name = 'infoAPI'),
+    path('classes/', views.classes, name='classes'),
 ]

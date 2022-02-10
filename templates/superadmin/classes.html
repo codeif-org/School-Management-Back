@@ -1,0 +1,46 @@
+{% extends 'adminhome.html' %}
+{% load static %}
+{% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/style.css' %}" />
+<link rel="stylesheet" href="{% static '/css/YourClasses.css' %}" />
+{% endblock extra-head %}
+{% block content %}
+<section id="main">
+  <!-- your classes heading -->
+  <div class="class-heading">
+    <span><i class="fas fa-angle-left"></i></span>
+    <h1>Your Classes</h1>
+  </div>
+
+  <!-- class teacher -->
+  {% comment %} {% if class is not None %}
+  <section class="class-teacher">
+    <div class="component-back">
+      <h2>You are class teacher of</h2>
+      <a href="{% url 'teacher:addStudent' class.id %}"
+        ><button class="btn btn-md">Class {{ class.Class }}th {{ class.section }} </button></a
+      >
+    </div>
+  </section>
+  {% else %} You are not class teacher of any class. {% endif %} {% endcomment %}
+
+  <!-- other classes -->
+
+  <section class="All-classes">
+    <div class="component-back">
+      <div class="all-class-heading"><h2>All classes</h2></div>
+      <div class="all-class-buttons">
+        {% for class in classes %}
+        <!-- here subject object are rendered -->
+        <a href="#"
+          ><button class="btn btn-md class-btn">
+            {{class.Class}} {{class.section}}
+            Class
+          </button></a
+        >
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock content %}
