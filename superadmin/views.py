@@ -96,7 +96,7 @@ def students(request):
 def teachers(request):
     admin = SuperAdmin.objects.get(user = request.user)
     school = admin.school
-    teachers = teacher.objects.filter(school = admin.school)
+    teachers = teacher.objects.filter()
     classes = classSection.objects.filter(teacher__in = teacher.objects.filter(school = admin.school))
     return render(request, 'teachers.html', {'teachers': teachers, 'classes': classes, 'school': school})
 
