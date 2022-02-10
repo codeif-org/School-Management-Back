@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block extra-head %}
+    <!-- css files -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/applyLeave.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/notice.css' %}" />
+{% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
+{% block content %}
+    <section id="main">
+         <!-- apply leave form -->
+
+      <section class="form">
+      <form method="POST" action="{% url 'attendance:applyLeave' %}">
+        {% csrf_token %}
+        <div class="menu-list">
+          <h2 class="heading">Apply leave</h2>
+        </div>
+        <section id="content-info">
+          <div class="content-info">
+            <div class="content-topic">
+              <label for="leave-date"><h2>leave Date From</h2></label>
+              <input name="date_from" type="date" name="leave-date" id="leave-date" required/>
+            </div>
+            <div class="content-topic">
+              <label for="leave-date"><h2>leave Date To</h2></label>
+              <input name="date_to" type="date" name="leave-date" id="leave-date" required/>
+            </div>
+            <div class="content-topic">
+              <label for="reason"><h2>Reason</h2></label>
+              <textarea name="reason" type="text" required> </textarea>
+            </div>
+            <div class="content-topic">
+              <label for="leave-application"><h2>Upload application</h2></label>
+              <input
+                type="file"
+                name="leave-application"
+                id="leave-application"
+              />
+            </div>
+            <button class="btn btn-black" type="submit">Apply</button>
+          </div>
+        </section>
+        </form>
+      </section>
+
+    </section>
+{% endblock content %}

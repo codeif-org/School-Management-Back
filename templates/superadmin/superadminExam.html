@@ -40,7 +40,7 @@
         <p>{{ current_exam.exam.date }}</p>
       </div>
       <div class="exam-data">
-        <a href="script:javascript.void(0)">
+        <a href="{% url 'exam:superadminmarksEdit' current_exam.id %}">
           <div class="exam-desc">
             <h3 class="text-underline">{{ current_exam.exam.name }}</h3>
             <p>

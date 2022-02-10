@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="{% static '/css/teacherExam.css' %}" />
     <link rel="stylesheet" href="{% static '/css/progress.css' %}" />
     <link rel="stylesheet" href="{% static '/css/adminList.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/studentList.css' %}" />
 {% endblock extra-head %}
 {% block content %}
-    <section id="main">
+    <!-- <section id="main">
         <section id="list-hero">
         <div class="menu-list list-hero">
           <div class="list-hero-search">
@@ -51,5 +52,71 @@
           {% endfor %}
         </div>
       </section>
-    </section>
+    </section> -->
+
+    <!-- new one -->
+    <section id="main">
+      <section id="list-hero">
+          <div class="menu-list list-hero">
+            <div class="list-hero-search">
+              <h2>Search Student:</h2>
+              <input
+                type="text"
+                id="search-add-no"
+                placeholder="Search Student by Admission Number..."
+                onkeyup="searchStud(event, 1)"
+              />
+              <input
+                type="text"
+                id="search-name"
+                placeholder="Search Student by Name..."
+                onkeyup="searchStud(event, 3)"
+              />
+              <input
+                type="text"
+                id="search-class"
+                placeholder="Search Student by Class..."
+                onkeyup="searchStud(event, 7)"
+              />
+            </div>
+          </div>
+        </section>
+  
+        <section id="admin-stud-list">
+          <div class="admin-stud-list">
+            <h2>Click on any student to view info:</h2>
+            <div class="student-table-list">
+              <table id="student-table">
+                <tr>
+                  <th>Add. No.</th>
+                  <th>Name</th>
+                  <th>Father's Name</th>
+                  <th>Class</th>
+                  <th>Action</th>
+                </tr>
+                {% for student in students %}
+                <tr onclick="document.location = '#'" tabindex = {{forloop.counter}}>
+                  <td>{{ student.add_no }}</td>
+                  <td> {{ student.fname }} </td>
+                  <td> {{ student.fathername }} </td>
+                  <td> {{ student.Class.Class }}{{ student.Class.section }} </td>
+                  <td>
+                    <i alt="info" class="fa-solid fa-circle-info"></i>
+                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-a"></i>
+                    <i class="fa-solid fa-comment"></i>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </section>
+  </section>
 {% endblock content %}
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js" integrity="sha512-Idr7xVNnMWCsgBQscTSCivBNWWH30oo/tzYORviOCrLKmBaRxRflm2miNhTFJNVmXvCtzgms5nlJF4az2hiGnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static '/js/adminStudents.js' %}"></script>
+<script src="{% static 'js/searchStudent.js' %}"></script>
+
+{% endblock script %}

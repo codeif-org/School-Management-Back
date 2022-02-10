@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block extra-head %}
+    <link rel="stylesheet" href="{% static '/css/homework.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %}
+{% block school-img %}{% endblock school-img %}
+{% block content %}
+    <section id="main">
+        <!-- Homework title -->
+      <section id="homework-head">
+        <div class="menu-list homework-head">
+          <div class="posted-cred">
+            <div>
+              <span>Posted on:</span> <br />
+              <span class="faded">{{ homework.homework.date }}</span>
+            </div>
+            <div class="right-align">
+              <span>Due Date:</span> <br />
+              <span class="faded">{{ homework.homework.due_date }}</span>
+            </div>
+          </div>
+          <h2>Topic:</h2>
+          <p>
+            {{ homework.homework.topic }}
+          </p>
+          <h2>Description:</h2>
+          <p>
+            {{ homework.homework.desc }}
+          </p>
+          <div class="posted-cred">
+            <div>
+              <span>Posted by:</span> <br />
+              <span class="faded">{{ homework.subject.teacher.fname }} {% if homework.subject.teacher.mname %}{{ homework.subject.teacher.mname }}{% endif %} {% if homework.subject.teacher.lname %} {{ homework.subject.teacher.mname }} {% endif %}</span>
+            </div>
+            <div class="right-align">
+              <span>Subject:</span> <br />
+              <span class="faded">{{ homework.subject.subject }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notice content -->
+      {% if submitted is False %}
+      <form method="POST">
+      {% csrf_token %}
+      <section id="content-info">
+        <div class="content-info">
+          <!-- <div class="content-topic">
+            <label for=""><h2>Topic</h2></label>
+            <input type="text" />
+          </div> -->
+          <div class="content-topic content-desc">
+            <label for=""><h2>Description</h2></label>
+            <textarea name="sub_desc" id="" cols="30" rows="10"></textarea>
+          </div>
+          <button class="btn btn-black" type="submit">Submit</button>
+        </div>
+      </section>
+      </form>
+
+      <!-- Notice content -->
+      {% else %}
+      <section id="content-info">
+        <div class="content-info">
+          <div class="content-topic content-desc submitted-hw">
+            <h1>Submitted Homework:</h1>
+            <p><span>Submitted Date:</span> {{ sub.sub_date }} </p>
+            <h2>Description</h2>
+            <p>{{ sub.sub_desc }}</p>
+          </div>
+        </div>
+      </section>
+      {% endif %}
+    </section>
+{% endblock content %}

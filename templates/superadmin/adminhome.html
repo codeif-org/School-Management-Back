@@ -70,7 +70,7 @@
               </a>
             </div>
             <div class="goto-item">
-              <a href="#">
+              <a href="{% url 'superadmin:classes' %}">
                 <div>
                   <img src="{% static '/img/class.png' %}" alt="" />
                   <h1>Classes</h1>
@@ -117,9 +117,18 @@
                 </div>
               </a>
             </div>
+            <div class="goto-item">
+              <a href="{% url 'logout' %}">
+                <div>
+                  <img src="{% static '/img/logout.png' %}" alt="" />
+                  <h1>Logout</h1>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
+
         {% endblock content %}
       <!-- BOTTOM NAVBAR -->
       {% block bottom-nav %}
@@ -153,6 +162,7 @@
           </div>
         </nav>
       </section>
+
       {% endblock bottom-nav %}
     </section>
     {% block script %}{% endblock script %}

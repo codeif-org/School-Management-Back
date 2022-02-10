@@ -1,0 +1,59 @@
+{% extends 'attendance.html' %} 
+{% load static %} 
+{% block extra-head %}
+<link rel="stylesheet" href="{% static '/css/style.css' %}" />
+<link rel="stylesheet" href="{% static '/css/attendance.css' %}" />
+<link rel="stylesheet" href="{% static '/css/notice.css' %}" />
+{% endblock extra-head %} 
+{% block content %}
+    <section id="main">
+        <div class="home-menu">
+        <div class="menu-list notice-list">
+          <div class="notice-list-info">
+            <p>{{ homework.homework.date.date }} | {{ homework.homework.date.time }}</p>
+            <p>
+              <span>{{ homework.subject.subject }} </span><br />
+              <span>Class {{ homework.Class.Class }} {% if homework.Class.section %}{{ homework.Class.section }}{% endif %}</span>
+            </p>
+          </div>
+          <h2>Topic : {{ homework.homework.topic }}</h2>
+          <p>
+            {{ homework.homework.desc }}
+          </p>
+          <div class="duedate-submit-btn duedate">
+            <p><span>Due On: </span><br /><span>{{ homework.homework.date.date }} | {{ homework.homework.date.time }}</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- student list with homework -->
+
+      <section>
+        <div class="student-list" >
+            {% for student in students %}
+          <div class="add-stud-list" >
+            <p>{{ forloop.counter }}. {{ student.student.fname }} {% if student.student.mname %} {{ student.student.mname }} {% endif %} {% if student.student.lname %} {{ student.student.lname }} {% endif %} | {{ student.student.roll_no }}</p>
+            <div class="homework-download">
+              <button class="btn btn-sm modal-btn" data-target=#"{{ student.id }}">View</button>
+              <p>Download Attachments</p>
+            </div>
+          </div>
+          <!-- Modal for homework -->
+
+      <div class="modal-bg" id="{{ student.id }}">
+          <div class="modal">
+              <div class="homework-modal">
+                <p> {{ forloop.counter }}. {{ student.student.fname }} {% if student.student.mname %} {{ student.student.mname }} {% endif %} {% if student.student.lname %} {{ student.student.lname }} {% endif %} | {{ student.student.roll_no }}</p>
+                <div class="answer">
+                    <h2>Description:</h2>
+                    <p> {{ student.sub_desc }} </p>
+                </div>
+                <p>Download Attachments</p>
+              </div>
+              <span class="modal-close"><i class="fas fa-times"></i></span>
+          </div>
+      </div>
+          {% endfor %}
+      </section>
+    </section>
+{% endblock content %}
